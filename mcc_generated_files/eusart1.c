@@ -138,10 +138,10 @@ void EUSART1_Write(uint8_t txData)
     TXREG1 = txData;    // Write the data byte to the USART.
 }
 
-char getch(void)
-{
-    return EUSART1_Read();
-}
+//char getch(void)
+//{
+  //  return EUSART1_Read();
+//}
 
 void putch(char txData)
 {
