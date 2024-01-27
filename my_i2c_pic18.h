@@ -1,12 +1,12 @@
 /* 
- * File:   my_i2c.h
+ * File:   my_i2c_pic18.h
  * Author: raphael.pereira
  *
- * Created on September 15, 2022, 11:41 AM
+ * Created on December 4, 2023, 12:01 PM
  */
 
-#ifndef MY_I2C_H
-#define	MY_I2C_H
+#ifndef MY_I2C_PIC18_H
+#define	MY_I2C_PIC18_H
 
 #ifdef	__cplusplus
 extern "C" {
@@ -15,7 +15,7 @@ extern "C" {
 #include <stdint.h>
 
 // Ported from: https://forum.microchip.com/s/topic/a5C3l000000MNpNEAW/t321653?comment=P-2424511
-    
+
 //--------------------Constants--------------------
 //Used for I2C2_M_RcvByte()
 #define I2C_M_ACK	0
@@ -37,39 +37,42 @@ extern "C" {
 #define I2C_Err_TimeoutHW	-101	//Timeout, unknown reason
 #define I2C_Err_CommFail	-102	//General communications failure
 #define I2C_Err_BadAddr		-103	//Bad device address or device stopped responding
+    
 
-
-//--------------------Structs--------------------
+//--------------------Structs----------------------
 //--------------------Variables--------------------
-extern uint16_t I2Cflags;
 //--------------------Functions--------------------
-extern void     I2C_HWini(void);
-extern void     I2C_ModuleStart(uint32_t);
-extern void     I2C_SWini(void);
-extern int16_t  I2C2_M_BusReset(void);
-extern void     I2C2_M_ClearErrors(void);
-extern int16_t  I2C2_M_Poll(uint8_t);
-extern int16_t  I2C2_M_Read(uint8_t, uint8_t, int16_t, char *);
-extern int16_t  I2C2_M_ReadByte(uint8_t);
-extern int16_t  I2C2_M_Read_Single(uint8_t DevAddr, uint8_t SubAddr, uint8_t *value);;
-extern int16_t  I2C2_M_RecoverBus(void);
-extern int16_t  I2C2_M_Restart(void);
-extern int16_t  I2C2_M_Start(void);
-extern int16_t  I2C2_M_Stop(void);
-extern int16_t  I2C2_M_Write(uint8_t, uint8_t, int16_t, char *);
-extern int16_t  I2C2_M_Write24(uint8_t, uint8_t, int16_t, char *);
-extern int16_t  I2C2_M_WriteByte(char);
-extern int16_t  I2C2_M_Write_Single(uint8_t DevAddr, uint8_t SubAddr, uint8_t value);
-extern void     I2C2_M_ClearBus();
+extern void I2C_HWini(void);
+extern void I2C_ModuleStart(uint32_t);
+extern void I2C_SWini(void);
+extern int16_t I2C2_M_BusReset(void);
+extern void I2C2_M_ClearErrors(void);
+extern int16_t I2C2_M_Poll(uint8_t);
+extern int16_t I2C2_M_Read(uint8_t, uint8_t, int16_t, char *);
+extern int16_t I2C2_M_ReadByte(uint8_t);
+extern int16_t I2C2_M_Read_Single(uint8_t DevAddr, uint8_t SubAddr, uint8_t* value);
+extern int16_t I2C2_M_RecoverBus(void);
+extern int16_t I2C2_M_Restart(void);
+extern int16_t I2C2_M_Start(void);
+extern int16_t I2C2_M_Stop(void);
+extern int16_t I2C2_M_Write(uint8_t, uint8_t, int16_t, char *);
+extern int16_t I2C2_M_Write24(uint8_t, uint8_t, int16_t, char *);
+extern int16_t I2C2_M_WriteByte(char);
+extern int16_t I2C2_M_Write_Single(uint8_t DevAddr, uint8_t SubAddr, uint8_t value);
+extern void I2C2_M_ClearBus();
+
+extern int16_t I2C_Mem_Write(uint8_t DevAddress, uint16_t MemAdress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+extern int16_t I2C_Mem_Read(uint8_t DevAddress, uint16_t MemAdress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
 
 //-------------------Macros-------------------
 #define SetI2C2BusDirty	I2Cflags |=  0x0001
 #define ClrI2C2BusDirty	I2Cflags &= ~0x0001
 #define IsI2C2BusDirty	(I2Cflags & 0x0001)
 
+
 #ifdef	__cplusplus
 }
 #endif
 
-#endif	/* MY_I2C_H */
+#endif	/* MY_I2C_PIC18_H */
 

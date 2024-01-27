@@ -42,16 +42,39 @@
 */
 
 #include "mcc_generated_files/mcc.h"
+#include "mcc_generated_files/pin_manager.h"
+#include "mcc_generated_files/tmr1.h"
 
+#include "millis.h"
+#include "at45dbxx.h"
+#include "my_i2c_pic18.h"
+
+
+extern AT45dbxx_t AT45dbxx;
+WAT45DBID_t myi_AT45dbxx;
 
 /*
                          Main application
  */
 void main(void)
 {
+    uint8_t valorestx[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    uint8_t valoresrx[254] = {0};
+    volatile uint8_t valor = 0;
+    volatile uint8_t valor2 = 0;
+    
     // Initialize the device
     SYSTEM_Initialize();
-
+    FLASH_CS_SetHigh();
+    
+    TMR1_SetInterruptHandler(increment_interrupt);
+    //INT0_SetInterruptHandler();
+    //INT1_SetInterruptHandler(Sleep_pic);
+    
+    RCONbits.SBOREN = 0;
+    
+    SPI1_Open(SPI1_DEFAULT);
+    
     // If using interrupts in PIC18 High/Low Priority Mode you need to enable the Global High and Low Interrupts
     // If using interrupts in PIC Mid-Range Compatibility Mode you need to enable the Global and Peripheral Interrupts
     // Use the following macros to:
@@ -68,11 +91,32 @@ void main(void)
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
     
+    uint32_t oldtime;
     
-
-    while (1)
+    oldtime = millis();
+    oldtime = millis();
+    oldtime = millis();
+    
+    valor = AT45dbxx_Init();
+    
+    valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
+    
+    valor = AT45dbxx_EraseChip();
+    
+    valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
+    
+    valor = AT45dbxx_WritePage(valorestx, 9, 0);
+    
+    valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
+    
+    //AT45dbxx_ChangePagesize(PAGESIZE_264BYTES);
+    valor = AT45dbxx_Init();
+    
+    NOP();
+    
+    while(1)
     {
-        // Add your application code
+        
     }
 }
 /**

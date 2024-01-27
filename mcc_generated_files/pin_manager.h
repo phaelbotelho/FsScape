@@ -65,6 +65,31 @@
 #define PULL_UP_ENABLED      1
 #define PULL_UP_DISABLED     0
 
+// get/set FLASH_CS aliases
+#define FLASH_CS_TRIS                 TRISCbits.TRISC0
+#define FLASH_CS_LAT                  LATCbits.LATC0
+#define FLASH_CS_PORT                 PORTCbits.RC0
+#define FLASH_CS_SetHigh()            do { LATCbits.LATC0 = 1; } while(0)
+#define FLASH_CS_SetLow()             do { LATCbits.LATC0 = 0; } while(0)
+#define FLASH_CS_Toggle()             do { LATCbits.LATC0 = ~LATCbits.LATC0; } while(0)
+#define FLASH_CS_GetValue()           PORTCbits.RC0
+#define FLASH_CS_SetDigitalInput()    do { TRISCbits.TRISC0 = 1; } while(0)
+#define FLASH_CS_SetDigitalOutput()   do { TRISCbits.TRISC0 = 0; } while(0)
+
+// get/set FLASH_RST aliases
+#define FLASH_RST_TRIS                 TRISCbits.TRISC2
+#define FLASH_RST_LAT                  LATCbits.LATC2
+#define FLASH_RST_PORT                 PORTCbits.RC2
+#define FLASH_RST_ANS                  ANSELCbits.ANSC2
+#define FLASH_RST_SetHigh()            do { LATCbits.LATC2 = 1; } while(0)
+#define FLASH_RST_SetLow()             do { LATCbits.LATC2 = 0; } while(0)
+#define FLASH_RST_Toggle()             do { LATCbits.LATC2 = ~LATCbits.LATC2; } while(0)
+#define FLASH_RST_GetValue()           PORTCbits.RC2
+#define FLASH_RST_SetDigitalInput()    do { TRISCbits.TRISC2 = 1; } while(0)
+#define FLASH_RST_SetDigitalOutput()   do { TRISCbits.TRISC2 = 0; } while(0)
+#define FLASH_RST_SetAnalogMode()      do { ANSELCbits.ANSC2 = 1; } while(0)
+#define FLASH_RST_SetDigitalMode()     do { ANSELCbits.ANSC2 = 0; } while(0)
+
 // get/set RC3 procedures
 #define RC3_SetHigh()            do { LATCbits.LATC3 = 1; } while(0)
 #define RC3_SetLow()             do { LATCbits.LATC3 = 0; } while(0)

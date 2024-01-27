@@ -58,7 +58,7 @@ void FcScape_csHIGH(void)
 
 void FcScape_SPI_Write(uint8_t *data, uint8_t len)
 {
-    HAL_SPI_Transmit(&W25Q_SPI, data, len, 2000);
+    //HAL_SPI_Transmit(&W25Q_SPI, data, len, 2000);
 }
 
 void FcScape_SPI_Read(uint8_t *data, uint32_t len)
