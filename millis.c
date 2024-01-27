@@ -9,6 +9,9 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+#include "mcc_generated_files/mcc.h"
+#include "mcc_generated_files/interrupt_manager.h"
+
 #include "millis.h"
 
 volatile uint8_t timer_fract = 0;
