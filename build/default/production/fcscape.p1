@@ -1,0 +1,79 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"42 fcscape.c
+[; ;fcscape.c: 42: int16_t FcScape_get_index_fromSRAM()
+[v _FcScape_get_index_fromSRAM `(s ~T0 @X0 1 ef1`*ul ]
+"43
+[; ;fcscape.c: 43: {
+{
+[e :U _FcScape_get_index_fromSRAM ]
+[v _ `*ul ~T0 @X0 1 r1 ]
+[f ]
+"45
+[; ;fcscape.c: 45: }
+[e :UE 12 ]
+}
+"47
+[; ;fcscape.c: 47: int16_t FcScape_set_index_fromSRAM()
+[v _FcScape_set_index_fromSRAM `(s ~T0 @X0 1 ef1`*ul ]
+"48
+[; ;fcscape.c: 48: {
+{
+[e :U _FcScape_set_index_fromSRAM ]
+[v _ `*ul ~T0 @X0 1 r1 ]
+[f ]
+"50
+[; ;fcscape.c: 50: }
+[e :UE 13 ]
+}
+"52
+[; ;fcscape.c: 52: int16_t FcScape_get_index_fromEEPROM()
+[v _FcScape_get_index_fromEEPROM `(s ~T0 @X0 1 ef1`*ul ]
+"53
+[; ;fcscape.c: 53: {
+{
+[e :U _FcScape_get_index_fromEEPROM ]
+[v _ `*ul ~T0 @X0 1 r1 ]
+[f ]
+"55
+[; ;fcscape.c: 55: }
+[e :UE 14 ]
+}
+"57
+[; ;fcscape.c: 57: int16_t FcScape_set_index_fromEEPROM()
+[v _FcScape_set_index_fromEEPROM `(s ~T0 @X0 1 ef1`*ul ]
+"58
+[; ;fcscape.c: 58: {
+{
+[e :U _FcScape_set_index_fromEEPROM ]
+[v _ `*ul ~T0 @X0 1 r1 ]
+[f ]
+"60
+[; ;fcscape.c: 60: }
+[e :UE 15 ]
+}
+"62
+[; ;fcscape.c: 62: int16_t FcScape_get_index_fromFLASH()
+[v _FcScape_get_index_fromFLASH `(s ~T0 @X0 1 ef1`*ul ]
+"63
+[; ;fcscape.c: 63: {
+{
+[e :U _FcScape_get_index_fromFLASH ]
+[v _ `*ul ~T0 @X0 1 r1 ]
+[f ]
+"65
+[; ;fcscape.c: 65: }
+[e :UE 16 ]
+}
+"68
+[; ;fcscape.c: 68: int16_t FcScape_get_index_auto()
+[v _FcScape_get_index_auto `(s ~T0 @X0 1 ef1`*ul ]
+"69
+[; ;fcscape.c: 69: {
+{
+[e :U _FcScape_get_index_auto ]
+[v _ `*ul ~T0 @X0 1 r1 ]
+[f ]
+"71
+[; ;fcscape.c: 71: }
+[e :UE 17 ]
+}
