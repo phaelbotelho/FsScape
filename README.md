@@ -1,4 +1,4 @@
-#FsScape (File sistem Scape)
+# FsScape (File system Scape)
 
 A lib to run out from the file systes when working with microcontrollers.
 
