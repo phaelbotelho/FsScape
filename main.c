@@ -44,6 +44,7 @@
 #include "mcc_generated_files/mcc.h"
 #include "mcc_generated_files/pin_manager.h"
 #include "mcc_generated_files/tmr1.h"
+#include "mcc_generated_files/spi1.h"
 
 #include "millis.h"
 #include "at45dbxx.h"
@@ -51,8 +52,8 @@
 #include "fsscape.h"
 
 
-extern AT45dbxx_t AT45dbxx;
-WAT45DBID_t myi_AT45dbxx;
+extern AT45dbxx_t AT45dbxx; // Global memory access
+WAT45DBID_t myi_AT45dbxx; // 
 
 /*
                          Main application
@@ -94,8 +95,6 @@ void main(void)
     
     uint32_t oldtime;
     
-    oldtime = millis();
-    oldtime = millis();
     oldtime = millis();
     
     valor = AT45dbxx_Init();

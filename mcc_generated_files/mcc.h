@@ -53,7 +53,7 @@
 #include <stdbool.h>
 #include <conio.h>
 #include "interrupt_manager.h"
-#include "spi1.h"
+#include "i2c1_master.h"
 #include "tmr1.h"
 #include "eusart1.h"
 

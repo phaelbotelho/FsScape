@@ -54,6 +54,7 @@
       <itemPath>my_i2c_pic18.c</itemPath>
       <itemPath>fsscape.c</itemPath>
       <itemPath>fsscape_io.c</itemPath>
+      <itemPath>millis.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

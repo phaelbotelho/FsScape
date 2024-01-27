@@ -1,4 +1,4 @@
-# 1 "fcscape.c"
+# 1 "fsscape.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,8 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "fcscape.c" 2
-# 14 "fcscape.c"
+# 1 "fsscape.c" 2
+# 14 "fsscape.c"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdio.h" 1 3
 
 
@@ -172,7 +172,7 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
-# 14 "fcscape.c" 2
+# 14 "fsscape.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdlib.h" 1 3
 # 21 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdlib.h" 3
@@ -236,7 +236,7 @@ typedef struct { unsigned int quot, rem; } udiv_t;
 typedef struct { unsigned long quot, rem; } uldiv_t;
 udiv_t udiv (unsigned int, unsigned int);
 uldiv_t uldiv (unsigned long, unsigned long);
-# 15 "fcscape.c" 2
+# 15 "fsscape.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdint.h" 3
@@ -322,19 +322,19 @@ typedef int32_t int_fast32_t;
 typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 145 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdint.h" 2 3
-# 16 "fcscape.c" 2
+# 16 "fsscape.c" 2
 
 
 
 
-# 1 "./fcscape.h" 1
-# 56 "./fcscape.h"
+# 1 "./fsscape.h" 1
+# 57 "./fsscape.h"
 typedef struct
 {
     uint32_t ui32long_address;
     uint32_t ui8Page;
     uint16_t ui8ByteOffset;
-}fcscape_Address_tag;
+}fsscape_Address_tag;
 
 
 typedef struct
@@ -343,7 +343,7 @@ typedef struct
  uint16_t ui16PageSize;
  uint16_t ui16Pages;
  uint8_t ui8Shift;
-}fcscape_MemoryStyle_tag;
+}fsscape_MemoryStyle_tag;
 
 
 typedef union {
@@ -354,45 +354,98 @@ typedef union {
         uint8_t ui8dummy;
     };
     uint32_t ui32jedecID;
-}fcscape_JEDECID_tag;
-# 20 "fcscape.c" 2
-# 33 "fcscape.c"
-int16_t FcScape_get_index_fromSRAM(uint32_t *address);
-int16_t FcScape_set_index_fromSRAM(uint32_t *address);
-int16_t FcScape_get_index_fromEEPROM(uint32_t *address);
-int16_t FcScape_set_index_fromEEPROM(uint32_t *address);
-int16_t FcScape_get_index_fromFLASH(uint32_t *address);
-int16_t FcScape_get_index_auto(uint32_t *address);
+}fsscape_JEDECID_tag;
+# 20 "fsscape.c" 2
+
+# 1 "./my_i2c_pic18.h" 1
+# 45 "./my_i2c_pic18.h"
+extern void I2C_HWini(void);
+extern void I2C_ModuleStart(uint32_t);
+extern void I2C_SWini(void);
+extern int16_t I2C2_M_BusReset(void);
+extern void I2C2_M_ClearErrors(void);
+extern int16_t I2C2_M_Poll(uint8_t);
+extern int16_t I2C2_M_Read(uint8_t, uint8_t, int16_t, char *);
+extern int16_t I2C2_M_ReadByte(uint8_t);
+extern int16_t I2C2_M_Read_Single(uint8_t DevAddr, uint8_t SubAddr, uint8_t* value);
+extern int16_t I2C2_M_RecoverBus(void);
+extern int16_t I2C2_M_Restart(void);
+extern int16_t I2C2_M_Start(void);
+extern int16_t I2C2_M_Stop(void);
+extern int16_t I2C2_M_Write(uint8_t, uint8_t, int16_t, char *);
+extern int16_t I2C2_M_Write24(uint8_t, uint8_t, int16_t, char *);
+extern int16_t I2C2_M_WriteByte(char);
+extern int16_t I2C2_M_Write_Single(uint8_t DevAddr, uint8_t SubAddr, uint8_t value);
+extern void I2C2_M_ClearBus();
+
+extern int16_t I2C_Mem_Write(uint8_t DevAddress, uint16_t MemAdress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+extern int16_t I2C_Mem_Read(uint8_t DevAddress, uint16_t MemAdress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+# 21 "fsscape.c" 2
 
 
 
-int16_t FcScape_get_index_fromSRAM()
+
+
+typedef enum
 {
-
-}
-
-int16_t FcScape_set_index_fromSRAM()
-{
-
-}
-
-int16_t FcScape_get_index_fromEEPROM()
-{
-
-}
-
-int16_t FcScape_set_index_fromEEPROM()
-{
-
-}
-
-int16_t FcScape_get_index_fromFLASH()
-{
-
-}
+    I2C,
+    SPI,
+    SERIAL,
+    PARALLEL,
+}FsScape_interface_style_tag;
 
 
-int16_t FcScape_get_index_auto()
-{
 
-}
+
+
+
+
+uint8_t FsScape_i2c_SRAM_addr = 0;
+uint8_t FsScape_i2c_EEPROM_addr = 0;
+uint8_t FsScape_i2c_FLASH_addr = 0;
+
+
+const FsScape_interface_style_tag FsScape_SRAM_interface_style = I2C;
+const FsScape_interface_style_tag FsScape_EEPROM_interface_style = I2C;
+const FsScape_interface_style_tag FsScape_FLASH_interface_style = SPI;
+
+
+
+
+
+int16_t FsScape_get_index_SRAM(fsscape_Address_tag *address);
+int16_t FsScape_set_index_SRAM(fsscape_Address_tag address_value);
+int16_t FsScape_get_index_addr_SRAM(fsscape_Address_tag *address);
+int16_t FsScape_set_index_addr_SRAM(fsscape_Address_tag address_value);
+
+int16_t FsScape_get_index_EEPROM(fsscape_Address_tag *address);
+int16_t FsScape_set_index_EEPROM(fsscape_Address_tag address_value);
+int16_t FsScape_get_index_addr_EEPROM(fsscape_Address_tag *address);
+int16_t FsScape_set_index_addr_EEPROM(fsscape_Address_tag address_value);
+
+int16_t FsScape_get_index_FLASH(fsscape_Address_tag *address);
+int16_t FsScape_set_index_FLASH(fsscape_Address_tag address_value);
+int16_t FsScape_get_index_addr_FLASH(fsscape_Address_tag *address);
+int16_t FsScape_set_index_addr_FLASH(fsscape_Address_tag address_value);
+
+int16_t FsScape_get_index_auto(fsscape_Address_tag *address);
+int16_t FsScape_set_index_auto(fsscape_Address_tag address_value);
+
+
+
+
+
+uint8_t FsScape_i2c_config_SRAM(uint8_t *i2cmodule, uint8_t address);
+uint8_t FsScape_get_i2c_addr_SRAM();
+void FsScape_set_i2c_addr_SRAM(uint8_t address);
+uint8_t FsScape_get_spi_config_SRAM(uint8_t *i2cmodule, uint8_t *CS_PIN, uint8_t CS_PIN_BIT);
+void FsScape_set_spi_addr_SRAM(uint8_t *CS_PIN, uint8_t CS_PIN_BIT);
+
+
+uint8_t FsScape_get_i2c_addr_EEPROM(uint8_t address);
+void FsScape_set_i2c_addr_EEPROM(uint8_t address);
+void FsScape_set_spi_addr_EEPROM(uint8_t *CS_PIN, uint8_t CS_PIN_BIT);
+
+uint8_t FsScape_get_i2c_addr_FLASH(uint8_t address);
+void FsScape_set_i2c_addr_FLASH(uint8_t address);
+void FsScape_set_spi_addr_FLASH(uint8_t *CS_PIN, uint8_t CS_PIN_BIT);

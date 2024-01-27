@@ -9421,9 +9421,9 @@ extern int16_t I2C_Mem_Read(uint8_t DevAddress, uint16_t MemAdress, uint16_t Mem
 # 1 "./mcc_generated_files/mcc.h" 1
 # 51 "./mcc_generated_files/mcc.h"
 # 1 "./mcc_generated_files/pin_manager.h" 1
-# 153 "./mcc_generated_files/pin_manager.h"
+# 151 "./mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
-# 165 "./mcc_generated_files/pin_manager.h"
+# 163 "./mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_IOC(void);
 # 51 "./mcc_generated_files/mcc.h" 2
 
@@ -9439,21 +9439,70 @@ void PIN_MANAGER_IOC(void);
 void INTERRUPT_Initialize (void);
 # 55 "./mcc_generated_files/mcc.h" 2
 
-# 1 "./mcc_generated_files/spi1.h" 1
-# 59 "./mcc_generated_files/spi1.h"
+# 1 "./mcc_generated_files/i2c1_master.h" 1
+# 58 "./mcc_generated_files/i2c1_master.h"
 typedef enum {
-    SPI1_DEFAULT
-} spi1_modes_t;
+    I2C1_NOERR,
+    I2C1_BUSY,
+    I2C1_FAIL
 
-void SPI1_Initialize(void);
-_Bool SPI1_Open(spi1_modes_t spi1UniqueConfiguration);
-void SPI1_Close(void);
-uint8_t SPI1_ExchangeByte(uint8_t data);
-void SPI1_ExchangeBlock(void *block, size_t blockSize);
-void SPI1_WriteBlock(void *block, size_t blockSize);
-void SPI1_ReadBlock(void *block, size_t blockSize);
-void SPI1_WriteByte(uint8_t byte);
-uint8_t SPI1_ReadByte(void);
+
+} i2c1_error_t;
+
+typedef enum
+{
+    I2C1_STOP=1,
+    I2C1_RESTART_READ,
+    I2C1_RESTART_WRITE,
+    I2C1_CONTINUE,
+    I2C1_RESET_LINK
+} i2c1_operations_t;
+
+typedef uint8_t i2c1_address_t;
+typedef i2c1_operations_t (*i2c1_callback_t)(void *funPtr);
+
+
+i2c1_operations_t I2C1_CallbackReturnStop(void *funPtr);
+i2c1_operations_t I2C1_CallbackReturnReset(void *funPtr);
+i2c1_operations_t I2C1_CallbackRestartWrite(void *funPtr);
+i2c1_operations_t I2C1_CallbackRestartRead(void *funPtr);
+
+
+
+
+
+
+void I2C1_Initialize(void);
+# 101 "./mcc_generated_files/i2c1_master.h"
+i2c1_error_t I2C1_Open(i2c1_address_t address);
+# 111 "./mcc_generated_files/i2c1_master.h"
+i2c1_error_t I2C1_Close(void);
+# 123 "./mcc_generated_files/i2c1_master.h"
+i2c1_error_t I2C1_MasterOperation(_Bool read);
+
+
+
+
+i2c1_error_t I2C1_MasterWrite(void);
+
+
+
+
+i2c1_error_t I2C1_MasterRead(void);
+# 142 "./mcc_generated_files/i2c1_master.h"
+void I2C1_SetTimeout(uint8_t timeOut);
+# 152 "./mcc_generated_files/i2c1_master.h"
+void I2C1_SetBuffer(void *buffer, size_t bufferSize);
+# 164 "./mcc_generated_files/i2c1_master.h"
+void I2C1_SetDataCompleteCallback(i2c1_callback_t cb, void *ptr);
+# 174 "./mcc_generated_files/i2c1_master.h"
+void I2C1_SetWriteCollisionCallback(i2c1_callback_t cb, void *ptr);
+# 184 "./mcc_generated_files/i2c1_master.h"
+void I2C1_SetAddressNackCallback(i2c1_callback_t cb, void *ptr);
+# 194 "./mcc_generated_files/i2c1_master.h"
+void I2C1_SetDataNackCallback(i2c1_callback_t cb, void *ptr);
+# 204 "./mcc_generated_files/i2c1_master.h"
+void I2C1_SetTimeoutCallback(i2c1_callback_t cb, void *ptr);
 # 56 "./mcc_generated_files/mcc.h" 2
 
 # 1 "./mcc_generated_files/tmr1.h" 1
@@ -9557,8 +9606,8 @@ void I2C_HWini(void)
 {
 
 
-    I2C_SCL_TRIS = 1;
-    I2C_SDA_TRIS = 1;
+    TRISCbits.TRISC3 = 1;
+    TRISCbits.TRISC4 = 1;
 }
 
 void I2C_ModuleStart(uint32_t clock_output)
@@ -9593,46 +9642,46 @@ int16_t I2C2_M_BusReset()
     int16_t i;
 
 
-    I2C_SCL_SetDigitalInput();
-    I2C_SDA_SetDigitalInput();
+    do { TRISCbits.TRISC3 = 1; } while(0);
+    do { TRISCbits.TRISC4 = 1; } while(0);
     _delay((unsigned long)((5)*(16000000/4000000.0)));
 
-    if(I2C_SCL_GetValue() == 0)
+    if(PORTCbits.RC3 == 0)
     {
         return -2;
     }
 
     i = 10;
 
-    I2C_SCL_SetDigitalOutput();
+    do { TRISCbits.TRISC3 = 0; } while(0);
     while(i > 0)
     {
-        if(I2C_SDA_GetValue() == 1)
+        if(PORTCbits.RC4 == 1)
         {
             break;
         }
-        I2C_SCL_SetLow();
+        do { LATCbits.LATC3 = 0; } while(0);
         _delay((unsigned long)((1)*(16000000/4000000.0)));
-        I2C_SCL_SetHigh();
+        do { LATCbits.LATC3 = 1; } while(0);
         _delay((unsigned long)((1)*(16000000/4000000.0)));
         i--;
     }
 
-    I2C_SCL_SetDigitalInput();
-    I2C_SDA_SetDigitalInput();
+    do { TRISCbits.TRISC3 = 1; } while(0);
+    do { TRISCbits.TRISC4 = 1; } while(0);
 
-    if(!I2C_SDA_GetValue() && !I2C_SCL_GetValue())
+    if(!PORTCbits.RC4 && !PORTCbits.RC3)
     {
         return -3;
     }
 
-    I2C_SDA_SetDigitalOutput();
-    I2C_SDA_SetLow();
+    do { TRISCbits.TRISC4 = 0; } while(0);
+    do { LATCbits.LATC4 = 0; } while(0);
     _delay((unsigned long)((1)*(16000000/4000000.0)));
-    I2C_SDA_SetHigh();
+    do { LATCbits.LATC4 = 1; } while(0);
     _delay((unsigned long)((1)*(16000000/4000000.0)));
-    I2C_SCL_SetDigitalInput();
-    I2C_SDA_SetDigitalInput();
+    do { TRISCbits.TRISC3 = 1; } while(0);
+    do { TRISCbits.TRISC4 = 1; } while(0);
     return 0;
 }
 # 211 "my_i2c_pic18.c"
@@ -10245,8 +10294,8 @@ void I2C2_M_ClearBus()
 
     for(i = 0; i < 8; i++)
     {
-        I2C_SCL_SetDigitalOutput();
-        I2C_SCL_SetDigitalInput();
+        do { TRISCbits.TRISC3 = 0; } while(0);
+        do { TRISCbits.TRISC3 = 1; } while(0);
     }
 }
 

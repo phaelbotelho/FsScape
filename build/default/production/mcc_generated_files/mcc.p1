@@ -2,11 +2,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "110 mcc_generated_files/interrupt_manager.h
 [; ;mcc_generated_files/interrupt_manager.h: 110: void INTERRUPT_Initialize (void);
 [v _INTERRUPT_Initialize `(v ~T0 @X0 0 ef ]
-"63 mcc_generated_files/spi1.h
-[; ;mcc_generated_files/spi1.h: 63: void SPI1_Initialize(void);
-[v _SPI1_Initialize `(v ~T0 @X0 0 ef ]
-"153 mcc_generated_files/pin_manager.h
-[; ;mcc_generated_files/pin_manager.h: 153: void PIN_MANAGER_Initialize (void);
+"89 mcc_generated_files/i2c1_master.h
+[; ;mcc_generated_files/i2c1_master.h: 89: void I2C1_Initialize(void);
+[v _I2C1_Initialize `(v ~T0 @X0 0 ef ]
+"151 mcc_generated_files/pin_manager.h
+[; ;mcc_generated_files/pin_manager.h: 151: void PIN_MANAGER_Initialize (void);
 [v _PIN_MANAGER_Initialize `(v ~T0 @X0 0 ef ]
 "86 mcc_generated_files/mcc.h
 [; ;mcc_generated_files/mcc.h: 86: void OSCILLATOR_Initialize(void);
@@ -773,8 +773,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;mcc_generated_files/mcc.c: 53:     INTERRUPT_Initialize();
 [e ( _INTERRUPT_Initialize ..  ]
 "54
-[; ;mcc_generated_files/mcc.c: 54:     SPI1_Initialize();
-[e ( _SPI1_Initialize ..  ]
+[; ;mcc_generated_files/mcc.c: 54:     I2C1_Initialize();
+[e ( _I2C1_Initialize ..  ]
 "55
 [; ;mcc_generated_files/mcc.c: 55:     PIN_MANAGER_Initialize();
 [e ( _PIN_MANAGER_Initialize ..  ]

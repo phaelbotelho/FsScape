@@ -1,0 +1,41 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"45 fsscape.c
+[; ;fsscape.c: 45: const FsScape_interface_style_tag FsScape_SRAM_interface_style = I2C;
+[c E581 0 1 2 3 .. ]
+[n E581 . I2C SPI SERIAL PARALLEL  ]
+"40 fsscape.c
+[; ;fsscape.c: 40: uint8_t FsScape_i2c_SRAM_addr = 0;
+[v _FsScape_i2c_SRAM_addr `uc ~T0 @X0 1 e ]
+[i _FsScape_i2c_SRAM_addr
+-> -> 0 `i `uc
+]
+"41
+[; ;fsscape.c: 41: uint8_t FsScape_i2c_EEPROM_addr = 0;
+[v _FsScape_i2c_EEPROM_addr `uc ~T0 @X0 1 e ]
+[i _FsScape_i2c_EEPROM_addr
+-> -> 0 `i `uc
+]
+"42
+[; ;fsscape.c: 42: uint8_t FsScape_i2c_FLASH_addr = 0;
+[v _FsScape_i2c_FLASH_addr `uc ~T0 @X0 1 e ]
+[i _FsScape_i2c_FLASH_addr
+-> -> 0 `i `uc
+]
+"45
+[; ;fsscape.c: 45: const FsScape_interface_style_tag FsScape_SRAM_interface_style = I2C;
+[v _FsScape_SRAM_interface_style `CE581 ~T0 @X0 1 e ]
+[i _FsScape_SRAM_interface_style
+. `E581 0
+]
+"46
+[; ;fsscape.c: 46: const FsScape_interface_style_tag FsScape_EEPROM_interface_style = I2C;
+[v _FsScape_EEPROM_interface_style `CE581 ~T0 @X0 1 e ]
+[i _FsScape_EEPROM_interface_style
+. `E581 0
+]
+"47
+[; ;fsscape.c: 47: const FsScape_interface_style_tag FsScape_FLASH_interface_style = SPI;
+[v _FsScape_FLASH_interface_style `CE581 ~T0 @X0 1 e ]
+[i _FsScape_FLASH_interface_style
+. `E581 1
+]

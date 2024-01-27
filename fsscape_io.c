@@ -48,12 +48,12 @@ void FsScape_ConfigureCS(uint16_t *CS_pin, uint16_t *CS_pin_bit)
 
 void FsScape_csLOW(void)
 {
-    FsScape_CS = 0;
+    //FsScape_CS = 0;
 }
 
 void FsScape_csHIGH(void)
 {
-    FsScape_CS = 1;
+    //FsScape_CS = 1;
 }
 
 void FsScape_SPI_Write(uint8_t *data, uint8_t len)
@@ -63,7 +63,7 @@ void FsScape_SPI_Write(uint8_t *data, uint8_t len)
 
 void FsScape_SPI_Read(uint8_t *data, uint32_t len)
 {
-    HAL_SPI_Receive(&W25Q_SPI, data, len, 5000);
+    //HAL_SPI_Receive(&W25Q_SPI, data, len, 5000);
 }
 
 /* -------------------------------------------------------------------------- */
