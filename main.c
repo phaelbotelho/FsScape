@@ -48,6 +48,7 @@
 #include "millis.h"
 #include "at45dbxx.h"
 #include "my_i2c_pic18.h"
+#include "fsscape.h"
 
 
 extern AT45dbxx_t AT45dbxx;

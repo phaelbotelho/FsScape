@@ -1,12 +1,12 @@
 /* 
- * File:   fcscape.h
+ * File:   fsscape.h
  * Author: raphael.pereira
  *
  * Created on January 26, 2024, 3:00 PM
  */
 
-#ifndef FCSCAPE_H
-#define	FCSCAPE_H
+#ifndef FSSCAPE_H
+#define	FSSCAPE_H
 
 #ifdef	__cplusplus
 extern "C" {
@@ -58,7 +58,7 @@ typedef struct
     uint32_t ui32long_address;  // long address can accept memories of 4.29 GBytes.
     uint32_t ui8Page;       // Can handle device with 4,294,967,295 pages.
     uint16_t ui8ByteOffset; // To accept pages with size other than 256/264 bytes.
-}fcscape_Address_tag;
+}fsscape_Address_tag;
 
 // Struct to access the characteristics of the detected memory.
 typedef struct
@@ -67,7 +67,7 @@ typedef struct
 	uint16_t	ui16PageSize;
 	uint16_t	ui16Pages;
 	uint8_t		ui8Shift;
-}fcscape_MemoryStyle_tag;
+}fsscape_MemoryStyle_tag;
 
 // Struct to access the memory JEDEC ID.
 typedef union {
@@ -78,7 +78,7 @@ typedef union {
         uint8_t ui8dummy;
     };
     uint32_t ui32jedecID;
-}fcscape_JEDECID_tag;
+}fsscape_JEDECID_tag;
 /* -------------------------------------------------------------------------- */
 
 
@@ -87,5 +87,5 @@ typedef union {
 }
 #endif
 
-#endif	/* FCSCAPE_H */
+#endif	/* FSSCAPE_H */
 
