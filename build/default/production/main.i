@@ -9656,6 +9656,11 @@ typedef union {
     };
     uint32_t ui32jedecID;
 }fsscape_JEDECID_tag;
+
+typedef union {
+    uint8_t ui8addr[4];
+    uint32_t ui32addr;
+}fsscape_SRAM_index_addr_tag;
 # 52 "main.c" 2
 
 
@@ -9672,6 +9677,8 @@ void main(void)
     uint8_t valoresrx[254] = {0};
     volatile uint8_t valor = 0;
     volatile uint8_t valor2 = 0;
+    volatile int16_t bus_reset;
+    volatile uint8_t temp = 0;
 
 
     SYSTEM_Initialize();
@@ -9682,14 +9689,7 @@ void main(void)
 
 
     RCONbits.SBOREN = 0;
-
-    SPI1_Open(SPI1_DEFAULT);
-
-
-
-
-
-
+# 87 "main.c"
     (INTCONbits.GIE = 1);
 
 
@@ -9705,23 +9705,21 @@ void main(void)
 
     oldtime = millis();
 
-    valor = AT45dbxx_Init();
-
-    valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
-
-    valor = AT45dbxx_EraseChip();
-
-    valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
-
-    valor = AT45dbxx_WritePage(valorestx, 9, 0);
-
-    valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
+    I2C_HWini();
+    I2C_ModuleStart(400000UL);
+    bus_reset = I2C2_M_BusReset();
+    printf("Init i2c bus_reset: %i\n", bus_reset);
 
 
-    valor = AT45dbxx_Init();
-
-    __nop();
-
+    if(I2C2_M_Poll(0xDE) == 0)
+    {
+        printf("O sistema identificou a memoria SRAM!!!");
+    }
+    else
+    {
+        printf("Ha algo de errado com a memoria SRAM!!!");
+    }
+# 136 "main.c"
     while(1)
     {
 

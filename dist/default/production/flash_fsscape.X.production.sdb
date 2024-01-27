@@ -62,12 +62,8 @@ I2C1_DATA_NACK 3
 I2C1_TIMEOUT 4
 I2C1_NULL 5
 ]
-"78 C:\Users\Raphael\Desktop\flash_fsscape.X\main.c
-[e E6201 . `uc
-SPI1_DEFAULT 0
-]
 "45 C:\Users\Raphael\Desktop\flash_fsscape.X\fsscape.c
-[e E581 . `uc
+[e E585 . `uc
 I2C 0
 SPI 1
 SERIAL 2
@@ -77,16 +73,22 @@ PARALLEL 3
 [v _AT45dbxx_ReadStatus AT45dbxx_ReadStatus `(uc  1 e 1 0 ]
 "129
 [v _AT45dbxx_WaitBusy AT45dbxx_WaitBusy `(uc  1 e 1 0 ]
-"173
-[v _AT45dbxx_Init AT45dbxx_Init `(a  1 e 1 0 ]
-"289
-[v _AT45dbxx_EraseChip AT45dbxx_EraseChip `(uc  1 e 1 0 ]
-"340
-[v _AT45dbxx_WritePage AT45dbxx_WritePage `(uc  1 e 1 0 ]
-"366
-[v _AT45dbxx_ReadPage AT45dbxx_ReadPage `(uc  1 e 1 0 ]
 "7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\__lldiv.c
 [v ___lldiv __lldiv `(ul  1 e 4 0 ]
+"1 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\abs.c
+[v _abs abs `(i  1 e 2 0 ]
+"7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+"152 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\doprnt.c
+[v _pad pad `(v  1 s 1 pad ]
+"470
+[v _dtoa dtoa `(v  1 s 1 dtoa ]
+"1048
+[v _vfpfcnvrt vfpfcnvrt `(v  1 s 1 vfpfcnvrt ]
+"1546
+[v _vfprintf vfprintf `(i  1 e 2 0 ]
 "4 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\fleq.c
 [v ___fleq __fleq `(b  1 e 0 0 ]
 "62 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\float.c
@@ -99,6 +101,10 @@ PARALLEL 3
 [v ___ftmul __ftmul `(f  1 e 4 0 ]
 "19 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\ftsub.c
 [v ___ftsub __ftsub `(f  1 e 4 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\nf_fputc.c
+[v _fputc fputc `(i  1 e 2 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\nf_fputs.c
+[v _fputs fputs `(i  1 e 2 0 ]
 "5 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\printf.c
 [v _printf printf `(i  1 e 2 0 ]
 "10 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\sprcadd.c
@@ -119,6 +125,8 @@ PARALLEL 3
 [v _EUSART1_Initialize EUSART1_Initialize `(v  1 e 1 0 ]
 "132
 [v _EUSART1_Write EUSART1_Write `(v  1 e 1 0 ]
+"146
+[v _putch putch `(v  1 e 1 0 ]
 "153
 [v _EUSART1_DefaultFramingErrorHandler EUSART1_DefaultFramingErrorHandler `(v  1 e 1 0 ]
 "155
@@ -247,9 +255,7 @@ PARALLEL 3
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
 "55 C:\Users\Raphael\Desktop\flash_fsscape.X\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
-"72 C:\Users\Raphael\Desktop\flash_fsscape.X\mcc_generated_files/spi1.c
-[v _SPI1_Open SPI1_Open `(a  1 e 1 0 ]
-"92
+"92 C:\Users\Raphael\Desktop\flash_fsscape.X\mcc_generated_files/spi1.c
 [v _SPI1_ExchangeByte SPI1_ExchangeByte `(uc  1 e 1 0 ]
 "100
 [v _SPI1_ExchangeBlock SPI1_ExchangeBlock `(v  1 e 1 0 ]
@@ -271,10 +277,16 @@ PARALLEL 3
 [v _millis millis `(ul  1 e 4 0 ]
 "57
 [v _increment_interrupt increment_interrupt `(v  1 e 1 0 ]
-"102 C:\Users\Raphael\Desktop\flash_fsscape.X\my_i2c_pic18.c
+"56 C:\Users\Raphael\Desktop\flash_fsscape.X\my_i2c_pic18.c
+[v _I2C_HWini I2C_HWini `(v  1 e 1 0 ]
+"64
+[v _I2C_ModuleStart I2C_ModuleStart `(v  1 e 1 0 ]
+"102
 [v _I2C2_M_BusReset I2C2_M_BusReset `(s  1 e 2 0 ]
 "211
 [v _I2C2_M_ClearErrors I2C2_M_ClearErrors `(v  1 e 1 0 ]
+"227
+[v _I2C2_M_Poll I2C2_M_Poll `(s  1 e 2 0 ]
 "364
 [v _I2C2_M_ReadByte I2C2_M_ReadByte `(s  1 e 2 0 ]
 "488
@@ -287,9 +299,13 @@ PARALLEL 3
 [v _I2C2_M_Stop I2C2_M_Stop `(s  1 e 2 0 ]
 "751
 [v _I2C2_M_WriteByte I2C2_M_WriteByte `(s  1 e 2 0 ]
-[s S2027 . 6 `uc 1 FlashSize_MBit 1 0 `us 1 PageSize 2 1 `us 1 Pages 2 3 `uc 1 Shift 1 5 ]
+"860
+[v _I2C_Mem_Write I2C_Mem_Write `(s  1 e 2 0 ]
+"921
+[v _I2C_Mem_Read I2C_Mem_Read `(s  1 e 2 0 ]
+[s S2025 . 6 `uc 1 FlashSize_MBit 1 0 `us 1 PageSize 2 1 `us 1 Pages 2 3 `uc 1 Shift 1 5 ]
 "62 C:\Users\Raphael\Desktop\flash_fsscape.X\at45dbxx.c
-[v _AT45dbxx AT45dbxx `S2027  1 e 6 0 ]
+[v _AT45dbxx AT45dbxx `S2025  1 e 6 0 ]
 "52 C:/Users/Raphael/.mchp_packs/Microchip/PIC18F-K_DFP/1.13.292/xc8\pic\include\proc\pic18f26k22.h
 [v _ANSELA ANSELA `VEuc  1 e 1 @3896 ]
 "97
@@ -308,7 +324,7 @@ PARALLEL 3
 `uc 1 RC7 1 0 :1:7 
 ]
 "6919
-[s S2153 . 1 `uc 1 T1OSO 1 0 :1:0 
+[s S2151 . 1 `uc 1 T1OSO 1 0 :1:0 
 `uc 1 T1OSI 1 0 :1:1 
 `uc 1 T5CKI 1 0 :1:2 
 `uc 1 SCK 1 0 :1:3 
@@ -317,7 +333,7 @@ PARALLEL 3
 `uc 1 TX 1 0 :1:6 
 `uc 1 RX 1 0 :1:7 
 ]
-[s S2162 . 1 `uc 1 P2B 1 0 :1:0 
+[s S2160 . 1 `uc 1 P2B 1 0 :1:0 
 `uc 1 P2A 1 0 :1:1 
 `uc 1 P1A 1 0 :1:2 
 `uc 1 SCL 1 0 :1:3 
@@ -326,7 +342,7 @@ PARALLEL 3
 `uc 1 CK 1 0 :1:6 
 `uc 1 DT 1 0 :1:7 
 ]
-[s S2171 . 1 `uc 1 T1CKI 1 0 :1:0 
+[s S2169 . 1 `uc 1 T1CKI 1 0 :1:0 
 `uc 1 CCP2 1 0 :1:1 
 `uc 1 CCP1 1 0 :1:2 
 `uc 1 SCK1 1 0 :1:3 
@@ -335,7 +351,7 @@ PARALLEL 3
 `uc 1 TX1 1 0 :1:6 
 `uc 1 RX1 1 0 :1:7 
 ]
-[s S2180 . 1 `uc 1 T3CKI 1 0 :1:0 
+[s S2178 . 1 `uc 1 T3CKI 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 CTPLS 1 0 :1:2 
 `uc 1 SCL1 1 0 :1:3 
@@ -344,7 +360,7 @@ PARALLEL 3
 `uc 1 CK1 1 0 :1:6 
 `uc 1 DT1 1 0 :1:7 
 ]
-[s S2189 . 1 `uc 1 T3G 1 0 :1:0 
+[s S2187 . 1 `uc 1 T3G 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 AN14 1 0 :1:2 
 `uc 1 AN15 1 0 :1:3 
@@ -353,19 +369,19 @@ PARALLEL 3
 `uc 1 AN18 1 0 :1:6 
 `uc 1 AN19 1 0 :1:7 
 ]
-[s S2198 . 1 `uc 1 . 1 0 :6:0 
+[s S2196 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 CCP3 1 0 :1:6 
 `uc 1 P3B 1 0 :1:7 
 ]
-[s S2202 . 1 `uc 1 . 1 0 :6:0 
+[s S2200 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 P3A 1 0 :1:6 
 ]
-[s S2205 . 1 `uc 1 . 1 0 :1:0 
+[s S2203 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 PA2 1 0 :1:1 
 `uc 1 PA1 1 0 :1:2 
 ]
-[u S2209 . 1 `S744 1 . 1 0 `S2153 1 . 1 0 `S2162 1 . 1 0 `S2171 1 . 1 0 `S2180 1 . 1 0 `S2189 1 . 1 0 `S2198 1 . 1 0 `S2202 1 . 1 0 `S2205 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES2209  1 e 1 @3970 ]
+[u S2207 . 1 `S744 1 . 1 0 `S2151 1 . 1 0 `S2160 1 . 1 0 `S2169 1 . 1 0 `S2178 1 . 1 0 `S2187 1 . 1 0 `S2196 1 . 1 0 `S2200 1 . 1 0 `S2203 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES2207  1 e 1 @3970 ]
 "7244
 [v _LATA LATA `VEuc  1 e 1 @3977 ]
 "7356
@@ -838,6 +854,13 @@ PARALLEL 3
 ]
 [u S251 . 1 `S229 1 . 1 0 `S238 1 . 1 0 `S247 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES251  1 e 1 @4082 ]
+"118 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\doprnt.c
+[v _prec prec `i  1 s 2 prec ]
+[v _width width `i  1 s 2 width ]
+"119
+[v _flags flags `uc  1 s 1 flags ]
+"144
+[v _dbuf dbuf `[32]uc  1 s 32 dbuf ]
 [s S296 . 1 `uc 1 perr 1 0 :1:0 
 `uc 1 ferr 1 0 :1:1 
 `uc 1 oerr 1 0 :1:2 
@@ -884,14 +907,152 @@ PARALLEL 3
 "64
 [v main@valoresrx valoresrx `[254]uc  1 a 254 0 ]
 "63
-[v main@valorestx valorestx `[11]uc  1 a 11 0 ]
-"65
-[v main@valor valor `VEuc  1 a 1 20 ]
+[v main@valorestx valorestx `[11]uc  1 a 11 74 ]
+"67
+[v main@bus_reset bus_reset `VEs  1 a 2 2 ]
+"68
+[v main@temp temp `VEuc  1 a 1 1 ]
 "66
-[v main@valor2 valor2 `VEuc  1 a 1 19 ]
+[v main@valor2 valor2 `VEuc  1 a 1 0 ]
+"65
+[v main@valor valor `VEuc  1 a 1 85 ]
 "62
-[v main@F6357 F6357 `[11]uc  1 s 11 F6357 ]
-"121
+[v main@F6361 F6361 `[11]uc  1 s 11 F6361 ]
+"140
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\printf.c
+[v _printf printf `(i  1 e 2 0 ]
+{
+"8
+[v printf@ap ap `[1]*.39v  1 a 2 72 ]
+"5
+[v printf@fmt fmt `*.32Cuc  1 p 2 68 ]
+"13
+} 0
+"1546 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\doprnt.c
+[v _vfprintf vfprintf `(i  1 e 2 0 ]
+{
+"1549
+[v vfprintf@cfmt cfmt `*.32uc  1 a 2 66 ]
+[s S3311 _IO_FILE 0 ]
+"1546
+[v vfprintf@fp fp `*.2S3311  1 p 2 60 ]
+[v vfprintf@fmt fmt `*.32Cuc  1 p 2 62 ]
+[v vfprintf@ap ap `*.39*.39v  1 p 2 64 ]
+"1569
+} 0
+"1048
+[v _vfpfcnvrt vfpfcnvrt `(v  1 s 1 vfpfcnvrt ]
+{
+[u S3329 . 4 `i 1 sint 2 0 `ui 1 uint 2 0 `*.2v 1 vp 3 0 `d 1 f 4 0 ]
+"1059
+[v vfpfcnvrt@convarg convarg `S3329  1 a 4 54 ]
+"1050
+[v vfpfcnvrt@cp cp `*.32uc  1 a 2 58 ]
+[s S3311 _IO_FILE 0 ]
+"1048
+[v vfpfcnvrt@fp fp `*.2S3311  1 p 2 46 ]
+[v vfpfcnvrt@fmt fmt `*.39*.32uc  1 p 2 48 ]
+[v vfpfcnvrt@ap ap `*.39*.39v  1 p 2 50 ]
+"1543
+} 0
+"470
+[v _dtoa dtoa `(v  1 s 1 dtoa ]
+{
+"473
+[v dtoa@i i `i  1 a 2 44 ]
+[v dtoa@w w `i  1 a 2 41 ]
+[v dtoa@p p `i  1 a 2 39 ]
+"472
+[v dtoa@s s `uc  1 a 1 43 ]
+[s S3311 _IO_FILE 0 ]
+"470
+[v dtoa@fp fp `*.2S3311  1 p 2 33 ]
+[v dtoa@d d `i  1 p 2 35 ]
+"527
+} 0
+"152
+[v _pad pad `(v  1 s 1 pad ]
+{
+"154
+[v pad@w w `i  1 a 2 31 ]
+[v pad@i i `i  1 a 2 29 ]
+[s S3311 _IO_FILE 0 ]
+"152
+[v pad@fp fp `*.2S3311  1 p 2 22 ]
+[v pad@buf buf `*.39uc  1 p 2 24 ]
+[v pad@p p `i  1 p 2 26 ]
+"183
+} 0
+"8 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\nf_fputs.c
+[v _fputs fputs `(i  1 e 2 0 ]
+{
+"11
+[v fputs@i i `i  1 a 2 20 ]
+"10
+[v fputs@c c `uc  1 a 1 19 ]
+"8
+[v fputs@s s `*.39Cuc  1 p 2 15 ]
+[u S3290 . 3 `*.2uc 1 buffer 3 0 `*.2Cuc 1 source 3 0 ]
+[s S3293 _IO_FILE 12 `S3290 1 . 3 0 `i 1 count 2 3 `[3]uc 1 ungetbuf 3 5 `i 1 ungetcnt 2 8 `i 1 limit 2 10 ]
+[v fputs@fp fp `*.2S3293  1 p 2 17 ]
+"19
+} 0
+"8 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\nf_fputc.c
+[v _fputc fputc `(i  1 e 2 0 ]
+{
+[v fputc@c c `i  1 p 2 6 ]
+[u S3290 . 3 `*.2uc 1 buffer 3 0 `*.2Cuc 1 source 3 0 ]
+[s S3293 _IO_FILE 12 `S3290 1 . 3 0 `i 1 count 2 3 `[3]uc 1 ungetbuf 3 5 `i 1 ungetcnt 2 8 `i 1 limit 2 10 ]
+[v fputc@fp fp `*.2S3293  1 p 2 8 ]
+"24
+} 0
+"146 C:\Users\Raphael\Desktop\flash_fsscape.X\mcc_generated_files/eusart1.c
+[v _putch putch `(v  1 e 1 0 ]
+{
+[v putch@txData txData `uc  1 a 1 wreg ]
+[v putch@txData txData `uc  1 a 1 wreg ]
+"148
+[v putch@txData txData `uc  1 a 1 5 ]
+"149
+} 0
+"132
+[v _EUSART1_Write EUSART1_Write `(v  1 e 1 0 ]
+{
+[v EUSART1_Write@txData txData `uc  1 a 1 wreg ]
+[v EUSART1_Write@txData txData `uc  1 a 1 wreg ]
+[v EUSART1_Write@txData txData `uc  1 a 1 4 ]
+"139
+} 0
+"1 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\abs.c
+[v _abs abs `(i  1 e 2 0 ]
+{
+[v abs@a a `i  1 p 2 10 ]
+"4
+} 0
+"7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+{
+"10
+[v ___awmod@sign sign `uc  1 a 1 9 ]
+[v ___awmod@counter counter `uc  1 a 1 8 ]
+"7
+[v ___awmod@dividend dividend `i  1 p 2 4 ]
+[v ___awmod@divisor divisor `i  1 p 2 6 ]
+"34
+} 0
+"7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"10
+[v ___awdiv@quotient quotient `i  1 a 2 10 ]
+"11
+[v ___awdiv@sign sign `uc  1 a 1 9 ]
+[v ___awdiv@counter counter `uc  1 a 1 8 ]
+"7
+[v ___awdiv@dividend dividend `i  1 p 2 4 ]
+[v ___awdiv@divisor divisor `i  1 p 2 6 ]
+"41
 } 0
 "39 C:\Users\Raphael\Desktop\flash_fsscape.X\millis.c
 [v _millis millis `(ul  1 e 4 0 ]
@@ -959,70 +1120,87 @@ PARALLEL 3
 [v EUSART1_SetErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 4 ]
 "176
 } 0
-"72 C:\Users\Raphael\Desktop\flash_fsscape.X\mcc_generated_files/spi1.c
-[v _SPI1_Open SPI1_Open `(a  1 e 1 0 ]
+"64 C:\Users\Raphael\Desktop\flash_fsscape.X\my_i2c_pic18.c
+[v _I2C_ModuleStart I2C_ModuleStart `(v  1 e 1 0 ]
 {
-[v SPI1_Open@spi1UniqueConfiguration spi1UniqueConfiguration `E358  1 a 1 wreg ]
-[v SPI1_Open@spi1UniqueConfiguration spi1UniqueConfiguration `E358  1 a 1 wreg ]
-"74
-[v SPI1_Open@spi1UniqueConfiguration spi1UniqueConfiguration `E358  1 a 1 5 ]
-"85
+[v I2C_ModuleStart@clock_output clock_output `ul  1 p 4 17 ]
+"83
 } 0
-"340 C:\Users\Raphael\Desktop\flash_fsscape.X\at45dbxx.c
-[v _AT45dbxx_WritePage AT45dbxx_WritePage `(uc  1 e 1 0 ]
+"7 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
 {
-[v AT45dbxx_WritePage@Data Data `*.39uc  1 p 2 10 ]
-[v AT45dbxx_WritePage@len len `us  1 p 2 12 ]
-[v AT45dbxx_WritePage@page page `us  1 p 2 14 ]
-"363
+"10
+[v ___lldiv@quotient quotient `ul  1 a 4 12 ]
+"11
+[v ___lldiv@counter counter `uc  1 a 1 16 ]
+"7
+[v ___lldiv@dividend dividend `ul  1 p 4 4 ]
+[v ___lldiv@divisor divisor `ul  1 p 4 8 ]
+"30
 } 0
-"366
-[v _AT45dbxx_ReadPage AT45dbxx_ReadPage `(uc  1 e 1 0 ]
+"56 C:\Users\Raphael\Desktop\flash_fsscape.X\my_i2c_pic18.c
+[v _I2C_HWini I2C_HWini `(v  1 e 1 0 ]
 {
-[v AT45dbxx_ReadPage@Data Data `*.39uc  1 p 2 10 ]
-[v AT45dbxx_ReadPage@len len `us  1 p 2 12 ]
-[v AT45dbxx_ReadPage@page page `us  1 p 2 14 ]
-"391
+"62
 } 0
-"100 C:\Users\Raphael\Desktop\flash_fsscape.X\mcc_generated_files/spi1.c
-[v _SPI1_ExchangeBlock SPI1_ExchangeBlock `(v  1 e 1 0 ]
+"227
+[v _I2C2_M_Poll I2C2_M_Poll `(s  1 e 2 0 ]
 {
+[v I2C2_M_Poll@DevAddr DevAddr `uc  1 a 1 wreg ]
+"229
+[v I2C2_M_Poll@retval retval `i  1 a 2 16 ]
+"230
+[v I2C2_M_Poll@SlaveAddr SlaveAddr `uc  1 a 1 15 ]
+"227
+[v I2C2_M_Poll@DevAddr DevAddr `uc  1 a 1 wreg ]
+"232
+[v I2C2_M_Poll@DevAddr DevAddr `uc  1 a 1 14 ]
+"267
+} 0
+"751
+[v _I2C2_M_WriteByte I2C2_M_WriteByte `(s  1 e 2 0 ]
+{
+[v I2C2_M_WriteByte@cData cData `uc  1 a 1 wreg ]
+"753
+[v I2C2_M_WriteByte@t t `s  1 a 2 7 ]
+"751
+[v I2C2_M_WriteByte@cData cData `uc  1 a 1 wreg ]
+"755
+[v I2C2_M_WriteByte@cData cData `uc  1 a 1 6 ]
+"785
+} 0
+"594
+[v _I2C2_M_Stop I2C2_M_Stop `(s  1 e 2 0 ]
+{
+"596
+[v I2C2_M_Stop@t t `s  1 a 2 6 ]
+"617
+} 0
+"548
+[v _I2C2_M_Start I2C2_M_Start `(s  1 e 2 0 ]
+{
+"550
+[v I2C2_M_Start@t t `s  1 a 2 6 ]
+"586
+} 0
+"488
+[v _I2C2_M_RecoverBus I2C2_M_RecoverBus `(s  1 e 2 0 ]
+{
+"490
+[v I2C2_M_RecoverBus@status status `s  1 a 2 10 ]
+"508
+} 0
 "102
-[v SPI1_ExchangeBlock@data data `*.39uc  1 a 2 8 ]
-"100
-[v SPI1_ExchangeBlock@block block `*.39v  1 p 2 4 ]
-[v SPI1_ExchangeBlock@blockSize blockSize `ui  1 p 2 6 ]
-"110
-} 0
-"173 C:\Users\Raphael\Desktop\flash_fsscape.X\at45dbxx.c
-[v _AT45dbxx_Init AT45dbxx_Init `(a  1 e 1 0 ]
+[v _I2C2_M_BusReset I2C2_M_BusReset `(s  1 e 2 0 ]
 {
-"182
-[v AT45dbxx_Init@Temp2 Temp2 `uc  1 a 1 10 ]
-[v AT45dbxx_Init@Temp0 Temp0 `uc  1 a 1 9 ]
-[v AT45dbxx_Init@Temp1 Temp1 `uc  1 a 1 8 ]
-"286
+"104
+[v I2C2_M_BusReset@i i `s  1 a 2 6 ]
+"148
 } 0
-"118
-[v _AT45dbxx_ReadStatus AT45dbxx_ReadStatus `(uc  1 e 1 0 ]
+"211
+[v _I2C2_M_ClearErrors I2C2_M_ClearErrors `(v  1 e 1 0 ]
 {
-"120
-[v AT45dbxx_ReadStatus@status status `uc  1 a 1 5 ]
-"126
-} 0
-"289
-[v _AT45dbxx_EraseChip AT45dbxx_EraseChip `(uc  1 e 1 0 ]
-{
-"311
-} 0
-"92 C:\Users\Raphael\Desktop\flash_fsscape.X\mcc_generated_files/spi1.c
-[v _SPI1_ExchangeByte SPI1_ExchangeByte `(uc  1 e 1 0 ]
-{
-[v SPI1_ExchangeByte@data data `uc  1 a 1 wreg ]
-[v SPI1_ExchangeByte@data data `uc  1 a 1 wreg ]
-"94
-[v SPI1_ExchangeByte@data data `uc  1 a 1 4 ]
-"98
+"216
 } 0
 "58 C:\Users\Raphael\Desktop\flash_fsscape.X\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `IIH(v  1 e 1 0 ]

@@ -871,9 +871,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;at45dbxx.c: 131:     uint8_t status;
 [v _status `uc ~T0 @X0 1 a ]
 "132
-[; ;at45dbxx.c: 132:     uint8_t timeout = 0;
-[v _timeout `uc ~T0 @X0 1 a ]
-[e = _timeout -> -> 0 `i `uc ]
+[; ;at45dbxx.c: 132:     uint16_t timeout = 0;
+[v _timeout `us ~T0 @X0 1 a ]
+[e = _timeout -> -> 0 `i `us ]
 "133
 [; ;at45dbxx.c: 133:     do { LATCbits.LATC0 = 0; } while(0);
 [e :U 853 ]
@@ -926,10 +926,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 864 ]
 "145
 [; ;at45dbxx.c: 145:         timeout++;
-[e ++ _timeout -> -> 1 `i `uc ]
+[e ++ _timeout -> -> 1 `i `us ]
 "147
 [; ;at45dbxx.c: 147:         if(timeout > 10000)
-[e $ ! > -> _timeout `i -> 10000 `i 866  ]
+[e $ ! > -> _timeout `ui -> -> 10000 `i `ui 866  ]
 "148
 [; ;at45dbxx.c: 148:         {
 {

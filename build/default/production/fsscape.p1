@@ -1,8 +1,18 @@
 Version 4.0 HI-TECH Software Intermediate Code
 "45 fsscape.c
 [; ;fsscape.c: 45: const FsScape_interface_style_tag FsScape_SRAM_interface_style = I2C;
-[c E581 0 1 2 3 .. ]
-[n E581 . I2C SPI SERIAL PARALLEL  ]
+[c E585 0 1 2 3 .. ]
+[n E585 . I2C SPI SERIAL PARALLEL  ]
+"84 ./fsscape.h
+[; ;./fsscape.h: 84: typedef union {
+[u S12 `uc -> 4 `i `ul 1 ]
+[n S12 . ui8addr ui32addr ]
+"65 ./my_i2c_pic18.h
+[; ;./my_i2c_pic18.h: 65: extern int16_t I2C_Mem_Read(uint8_t DevAddress, uint16_t MemAdress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+[v _I2C_Mem_Read `(s ~T0 @X0 0 ef6`uc`us`us`*uc`us`ul ]
+"64
+[; ;./my_i2c_pic18.h: 64: extern int16_t I2C_Mem_Write(uint8_t DevAddress, uint16_t MemAdress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+[v _I2C_Mem_Write `(s ~T0 @X0 0 ef6`uc`us`us`*uc`us`ul ]
 "40 fsscape.c
 [; ;fsscape.c: 40: uint8_t FsScape_i2c_SRAM_addr = 0;
 [v _FsScape_i2c_SRAM_addr `uc ~T0 @X0 1 e ]
@@ -23,19 +33,93 @@ Version 4.0 HI-TECH Software Intermediate Code
 ]
 "45
 [; ;fsscape.c: 45: const FsScape_interface_style_tag FsScape_SRAM_interface_style = I2C;
-[v _FsScape_SRAM_interface_style `CE581 ~T0 @X0 1 e ]
+[v _FsScape_SRAM_interface_style `CE585 ~T0 @X0 1 e ]
 [i _FsScape_SRAM_interface_style
-. `E581 0
+. `E585 0
 ]
 "46
 [; ;fsscape.c: 46: const FsScape_interface_style_tag FsScape_EEPROM_interface_style = I2C;
-[v _FsScape_EEPROM_interface_style `CE581 ~T0 @X0 1 e ]
+[v _FsScape_EEPROM_interface_style `CE585 ~T0 @X0 1 e ]
 [i _FsScape_EEPROM_interface_style
-. `E581 0
+. `E585 0
 ]
 "47
 [; ;fsscape.c: 47: const FsScape_interface_style_tag FsScape_FLASH_interface_style = SPI;
-[v _FsScape_FLASH_interface_style `CE581 ~T0 @X0 1 e ]
+[v _FsScape_FLASH_interface_style `CE585 ~T0 @X0 1 e ]
 [i _FsScape_FLASH_interface_style
-. `E581 1
+. `E585 1
 ]
+"49
+[; ;fsscape.c: 49: fsscape_SRAM_index_addr_tag fsscape_SRAM_index_addr;
+[v _fsscape_SRAM_index_addr `S12 ~T0 @X0 1 e ]
+"98
+[; ;fsscape.c: 98: int16_t FsScape_get_index_SRAM(fsscape_SRAM_index_addr_tag *address)
+[v _FsScape_get_index_SRAM `(s ~T0 @X0 1 ef1`*S12 ]
+"99
+[; ;fsscape.c: 99: {
+{
+[e :U _FsScape_get_index_SRAM ]
+"98
+[; ;fsscape.c: 98: int16_t FsScape_get_index_SRAM(fsscape_SRAM_index_addr_tag *address)
+[v _address `*S12 ~T0 @X0 1 r1 ]
+"99
+[; ;fsscape.c: 99: {
+[f ]
+"100
+[; ;fsscape.c: 100:     return I2C_Mem_Read(0xDE, 0x21, 1, address->ui8addr, 4, 0);
+[e ) ( _I2C_Mem_Read (4 , , , , , -> -> 222 `i `uc -> -> 33 `i `us -> -> 1 `i `us &U . *U _address 0 -> -> 4 `i `us -> -> -> 0 `i `l `ul ]
+[e $UE 13  ]
+"101
+[; ;fsscape.c: 101: }
+[e :UE 13 ]
+}
+"103
+[; ;fsscape.c: 103: int16_t FsScape_set_index_SRAM(fsscape_SRAM_index_addr_tag address_value)
+[v _FsScape_set_index_SRAM `(s ~T0 @X0 1 ef1`S12 ]
+"104
+[; ;fsscape.c: 104: {
+{
+[e :U _FsScape_set_index_SRAM ]
+"103
+[; ;fsscape.c: 103: int16_t FsScape_set_index_SRAM(fsscape_SRAM_index_addr_tag address_value)
+[v _address_value `S12 ~T0 @X0 1 r1 ]
+"104
+[; ;fsscape.c: 104: {
+[f ]
+"105
+[; ;fsscape.c: 105:     return I2C_Mem_Write(0xDE, 0x21, 1, address_value.ui8addr, 4, 0);
+[e ) ( _I2C_Mem_Write (4 , , , , , -> -> 222 `i `uc -> -> 33 `i `us -> -> 1 `i `us &U . _address_value 0 -> -> 4 `i `us -> -> -> 0 `i `l `ul ]
+[e $UE 14  ]
+"106
+[; ;fsscape.c: 106: }
+[e :UE 14 ]
+}
+"108
+[; ;fsscape.c: 108: int8_t FsScape_get_index_addr_SRAM()
+[v _FsScape_get_index_addr_SRAM `(c ~T0 @X0 1 ef ]
+"109
+[; ;fsscape.c: 109: {
+{
+[e :U _FsScape_get_index_addr_SRAM ]
+[f ]
+"111
+[; ;fsscape.c: 111: }
+[e :UE 15 ]
+}
+"113
+[; ;fsscape.c: 113: int16_t FsScape_set_index_addr_SRAM(uint8_t address_value)
+[v _FsScape_set_index_addr_SRAM `(s ~T0 @X0 1 ef1`uc ]
+"114
+[; ;fsscape.c: 114: {
+{
+[e :U _FsScape_set_index_addr_SRAM ]
+"113
+[; ;fsscape.c: 113: int16_t FsScape_set_index_addr_SRAM(uint8_t address_value)
+[v _address_value `uc ~T0 @X0 1 r1 ]
+"114
+[; ;fsscape.c: 114: {
+[f ]
+"116
+[; ;fsscape.c: 116: }
+[e :UE 16 ]
+}

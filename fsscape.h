@@ -80,8 +80,16 @@ typedef union {
     };
     uint32_t ui32jedecID;
 }fsscape_JEDECID_tag;
+
+typedef union {
+    uint8_t ui8addr[4];
+    uint32_t ui32addr;
+}fsscape_SRAM_index_addr_tag;
 /* -------------------------------------------------------------------------- */
 
+/* ------------------------------# DEFINES #--------------------------------- */
+#define FSSCAPE_SRAM_I2C_ADDR 0xDE
+#define FSSCAPE_SRAM_IDX_ADDR 0x21
 
 
 #ifdef	__cplusplus

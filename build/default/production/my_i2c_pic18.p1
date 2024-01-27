@@ -3408,6 +3408,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "988
 [; ;my_i2c_pic18.c: 988:         {
 {
+"989
+[; ;my_i2c_pic18.c: 989:             pData[i] = (uint8_t)retval;
+[e = *U + _pData * -> _i `x -> -> # *U _pData `i `x -> _retval `uc ]
 "990
 [; ;my_i2c_pic18.c: 990:         } else
 }

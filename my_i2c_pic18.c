@@ -986,7 +986,7 @@ int16_t I2C_Mem_Read(uint8_t DevAddress, uint16_t MemAdress, uint16_t MemAddSize
         }
         if(retval >= 0)
         {
-            //pData[i] = retval;
+            pData[i] = (uint8_t)retval;
         } else
         {//Error while reading uint8_t.  Close connection and set error flag.
             I2C2_M_Stop();

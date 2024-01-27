@@ -64,6 +64,8 @@ void main(void)
     uint8_t valoresrx[254] = {0};
     volatile uint8_t valor = 0;
     volatile uint8_t valor2 = 0;
+    volatile int16_t bus_reset;
+    volatile uint8_t temp = 0;
     
     // Initialize the device
     SYSTEM_Initialize();
@@ -75,7 +77,7 @@ void main(void)
     
     RCONbits.SBOREN = 0;
     
-    SPI1_Open(SPI1_DEFAULT);
+    //SPI1_Open(SPI1_DEFAULT);
     
     // If using interrupts in PIC18 High/Low Priority Mode you need to enable the Global High and Low Interrupts
     // If using interrupts in PIC Mid-Range Compatibility Mode you need to enable the Global and Peripheral Interrupts
@@ -97,7 +99,24 @@ void main(void)
     
     oldtime = millis();
     
-    valor = AT45dbxx_Init();
+    I2C_HWini();
+    I2C_ModuleStart(400000UL); // Init I2C module with 100kHz.
+    bus_reset = I2C2_M_BusReset();
+    printf("Init i2c bus_reset: %i\n", bus_reset);
+    
+    
+    if(I2C2_M_Poll(FSSCAPE_SRAM_I2C_ADDR) == I2C_ACK)
+    {
+        printf("O sistema identificou a memoria SRAM!!!");
+    }
+    else
+    {
+        printf("Ha algo de errado com a memoria SRAM!!!");
+    }
+    
+     
+    
+    /*valor = AT45dbxx_Init();
     
     valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
     
@@ -112,7 +131,7 @@ void main(void)
     //AT45dbxx_ChangePagesize(PAGESIZE_264BYTES);
     valor = AT45dbxx_Init();
     
-    NOP();
+    NOP();*/
     
     while(1)
     {

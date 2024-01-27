@@ -9681,7 +9681,7 @@ uint8_t AT45dbxx_ReadStatus(void)
 uint8_t AT45dbxx_WaitBusy(void)
 {
     uint8_t status;
-    uint8_t timeout = 0;
+    uint16_t timeout = 0;
     do { LATCbits.LATC0 = 0; } while(0);
     status = SPI1_ExchangeByte(0xd7);
     status = SPI1_ExchangeByte(0x00);

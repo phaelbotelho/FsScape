@@ -33,7 +33,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "21 ./millis.h
 [; ;./millis.h: 21: void increment_interrupt();
 [v _increment_interrupt `(v ~T0 @X0 0 e? ]
-[v F6363 `(v ~T0 @X0 0 tf ]
+[v F6369 `(v ~T0 @X0 0 tf ]
 "15037 C:/Users/Raphael/.mchp_packs/Microchip/PIC18F-K_DFP/1.13.292/xc8\pic\include\proc\pic18f26k22.h
 [; ;C:/Users/Raphael/.mchp_packs/Microchip/PIC18F-K_DFP/1.13.292/xc8\pic\include\proc\pic18f26k22.h: 15037:     struct {
 [s S728 :1 `uc 1 ]
@@ -69,14 +69,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "15074
 [; ;C:/Users/Raphael/.mchp_packs/Microchip/PIC18F-K_DFP/1.13.292/xc8\pic\include\proc\pic18f26k22.h: 15074: extern volatile RCONbits_t RCONbits __attribute__((address(0xFD0)));
 [v _RCONbits `VS727 ~T0 @X0 0 e@4048 ]
-"78 main.c
-[; ;main.c: 78:     SPI1_Open(SPI1_DEFAULT);
-[c E6201 0 .. ]
-[n E6201 . SPI1_DEFAULT  ]
-"64 ./mcc_generated_files/spi1.h
-[; ;./mcc_generated_files/spi1.h: 64: _Bool SPI1_Open(spi1_modes_t spi1UniqueConfiguration);
-[v _SPI1_Open `(a ~T0 @X0 0 ef1`E6201 ]
-"16135 C:/Users/Raphael/.mchp_packs/Microchip/PIC18F-K_DFP/1.13.292/xc8\pic\include\proc\pic18f26k22.h
+"16135
 [; ;C:/Users/Raphael/.mchp_packs/Microchip/PIC18F-K_DFP/1.13.292/xc8\pic\include\proc\pic18f26k22.h: 16135:     struct {
 [s S801 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S801 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
@@ -98,21 +91,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "17 ./millis.h
 [; ;./millis.h: 17: uint32_t millis();
 [v _millis `(ul ~T0 @X0 0 e? ]
-"145 ./at45dbxx.h
-[; ;./at45dbxx.h: 145:     _Bool AT45dbxx_Init(void);
-[v _AT45dbxx_Init `(a ~T0 @X0 0 ef ]
-"155
-[; ;./at45dbxx.h: 155:     uint8_t AT45dbxx_ReadPage(uint8_t* Data, uint16_t len, uint16_t page);
-[v _AT45dbxx_ReadPage `(uc ~T0 @X0 0 ef3`*uc`us`us ]
-"152
-[; ;./at45dbxx.h: 152:     uint8_t AT45dbxx_EraseChip(void);
-[v _AT45dbxx_EraseChip `(uc ~T0 @X0 0 ef ]
-"154
-[; ;./at45dbxx.h: 154:     uint8_t AT45dbxx_WritePage(uint8_t *Data, uint16_t len, uint16_t page);
-[v _AT45dbxx_WritePage `(uc ~T0 @X0 0 ef3`*uc`us`us ]
-"8 C:\Program Files\Microchip\xc8\v2.41\pic\include\builtins.h
-[v ___nop `(v ~T0 @X0 0 ef ]
-[p i ___nop ]
+"45 ./my_i2c_pic18.h
+[; ;./my_i2c_pic18.h: 45: extern void I2C_HWini(void);
+[v _I2C_HWini `(v ~T0 @X0 0 ef ]
+"46
+[; ;./my_i2c_pic18.h: 46: extern void I2C_ModuleStart(uint32_t);
+[v _I2C_ModuleStart `(v ~T0 @X0 0 ef1`ul ]
+"48
+[; ;./my_i2c_pic18.h: 48: extern int16_t I2C2_M_BusReset(void);
+[v _I2C2_M_BusReset `(s ~T0 @X0 0 ef ]
+"107 C:\Program Files\Microchip\xc8\v2.41\pic\include\c99\stdio.h
+[; ;C:\Program Files\Microchip\xc8\v2.41\pic\include\c99\stdio.h: 107: int printf(const char *restrict, ...);
+[v _printf `(i ~T0 @X0 0 ev`*Cuc ]
+"50 ./my_i2c_pic18.h
+[; ;./my_i2c_pic18.h: 50: extern int16_t I2C2_M_Poll(uint8_t);
+[v _I2C2_M_Poll `(s ~T0 @X0 0 ef1`uc ]
 "54 C:/Users/Raphael/.mchp_packs/Microchip/PIC18F-K_DFP/1.13.292/xc8\pic\include\proc\pic18f26k22.h
 [; ;C:/Users/Raphael/.mchp_packs/Microchip/PIC18F-K_DFP/1.13.292/xc8\pic\include\proc\pic18f26k22.h: 54: __asm("ANSELA equ 0F38h");
 [; <" ANSELA equ 0F38h ;# ">
@@ -860,8 +853,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [e :U _main ]
 [f ]
-[v F6357 `uc ~T0 @X0 -> 11 `i s ]
-[i F6357
+[v F6361 `uc ~T0 @X0 -> 11 `i s ]
+[i F6361
 :U ..
 "63
 [; ;main.c: 63:     uint8_t valorestx[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -879,9 +872,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 [v _valorestx `uc ~T0 @X0 -> 11 `i a ]
-[e = _valorestx F6357 ]
-[v F6359 `uc ~T0 @X0 -> 254 `i s ]
-[i F6359
+[e = _valorestx F6361 ]
+[v F6363 `uc ~T0 @X0 -> 254 `i s ]
+[i F6363
 :U ..
 "64
 [; ;main.c: 64:     uint8_t valoresrx[254] = {0};
@@ -889,7 +882,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 [v _valoresrx `uc ~T0 @X0 -> 254 `i a ]
-[e = _valoresrx F6359 ]
+[e = _valoresrx F6363 ]
 "65
 [; ;main.c: 65:     volatile uint8_t valor = 0;
 [v _valor `Vuc ~T0 @X0 1 a ]
@@ -898,74 +891,96 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 66:     volatile uint8_t valor2 = 0;
 [v _valor2 `Vuc ~T0 @X0 1 a ]
 [e = _valor2 -> -> 0 `i `uc ]
-"69
-[; ;main.c: 69:     SYSTEM_Initialize();
+"67
+[; ;main.c: 67:     volatile int16_t bus_reset;
+[v _bus_reset `Vs ~T0 @X0 1 a ]
+"68
+[; ;main.c: 68:     volatile uint8_t temp = 0;
+[v _temp `Vuc ~T0 @X0 1 a ]
+[e = _temp -> -> 0 `i `uc ]
+"71
+[; ;main.c: 71:     SYSTEM_Initialize();
 [e ( _SYSTEM_Initialize ..  ]
-"70
-[; ;main.c: 70:     do { LATCbits.LATC0 = 1; } while(0);
-[e :U 843 ]
+"72
+[; ;main.c: 72:     do { LATCbits.LATC0 = 1; } while(0);
+[e :U 844 ]
 {
 [e = . . _LATCbits 0 0 -> -> 1 `i `uc ]
 }
-[e :U 842 ]
-"72
-[; ;main.c: 72:     TMR1_SetInterruptHandler(increment_interrupt);
-[e ( _TMR1_SetInterruptHandler (1 -> &U _increment_interrupt `*F6363 ]
-"76
-[; ;main.c: 76:     RCONbits.SBOREN = 0;
-[e = . . _RCONbits 5 6 -> -> 0 `i `uc ]
+[e :U 843 ]
+"74
+[; ;main.c: 74:     TMR1_SetInterruptHandler(increment_interrupt);
+[e ( _TMR1_SetInterruptHandler (1 -> &U _increment_interrupt `*F6369 ]
 "78
-[; ;main.c: 78:     SPI1_Open(SPI1_DEFAULT);
-[e ( _SPI1_Open (1 . `E6201 0 ]
-"85
-[; ;main.c: 85:     (INTCONbits.GIE = 1);
+[; ;main.c: 78:     RCONbits.SBOREN = 0;
+[e = . . _RCONbits 5 6 -> -> 0 `i `uc ]
+"87
+[; ;main.c: 87:     (INTCONbits.GIE = 1);
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-"91
-[; ;main.c: 91:     (INTCONbits.PEIE = 1);
+"93
+[; ;main.c: 93:     (INTCONbits.PEIE = 1);
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-"96
-[; ;main.c: 96:     uint32_t oldtime;
-[v _oldtime `ul ~T0 @X0 1 a ]
 "98
-[; ;main.c: 98:     oldtime = millis();
-[e = _oldtime ( _millis ..  ]
+[; ;main.c: 98:     uint32_t oldtime;
+[v _oldtime `ul ~T0 @X0 1 a ]
 "100
-[; ;main.c: 100:     valor = AT45dbxx_Init();
-[e = _valor -> ( _AT45dbxx_Init ..  `uc ]
+[; ;main.c: 100:     oldtime = millis();
+[e = _oldtime ( _millis ..  ]
 "102
-[; ;main.c: 102:     valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
-[e = _valor ( _AT45dbxx_ReadPage (3 , , &U _valoresrx -> -> 25 `i `us -> -> 0 `i `us ]
+[; ;main.c: 102:     I2C_HWini();
+[e ( _I2C_HWini ..  ]
+"103
+[; ;main.c: 103:     I2C_ModuleStart(400000UL);
+[e ( _I2C_ModuleStart (1 -> 400000 `ul ]
 "104
-[; ;main.c: 104:     valor = AT45dbxx_EraseChip();
-[e = _valor ( _AT45dbxx_EraseChip ..  ]
-"106
-[; ;main.c: 106:     valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
-[e = _valor ( _AT45dbxx_ReadPage (3 , , &U _valoresrx -> -> 25 `i `us -> -> 0 `i `us ]
+[; ;main.c: 104:     bus_reset = I2C2_M_BusReset();
+[e = _bus_reset ( _I2C2_M_BusReset ..  ]
+"105
+[; ;main.c: 105:     printf("Init i2c bus_reset: %i\n", bus_reset);
+[e ( _printf , (. :s 1C -> _bus_reset `i ]
 "108
-[; ;main.c: 108:     valor = AT45dbxx_WritePage(valorestx, 9, 0);
-[e = _valor ( _AT45dbxx_WritePage (3 , , &U _valorestx -> -> 9 `i `us -> -> 0 `i `us ]
-"110
-[; ;main.c: 110:     valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
-[e = _valor ( _AT45dbxx_ReadPage (3 , , &U _valoresrx -> -> 25 `i `us -> -> 0 `i `us ]
-"113
-[; ;main.c: 113:     valor = AT45dbxx_Init();
-[e = _valor -> ( _AT45dbxx_Init ..  `uc ]
-"115
-[; ;main.c: 115:     __nop();
-[e ( ___nop ..  ]
-"117
-[; ;main.c: 117:     while(1)
-[e :U 845 ]
-"118
-[; ;main.c: 118:     {
+[; ;main.c: 108:     if(I2C2_M_Poll(0xDE) == 0)
+[e $ ! == -> ( _I2C2_M_Poll (1 -> -> 222 `i `uc `i -> 0 `i 845  ]
+"109
+[; ;main.c: 109:     {
 {
-"120
-[; ;main.c: 120:     }
+"110
+[; ;main.c: 110:         printf("O sistema identificou a memoria SRAM!!!");
+[e ( _printf :s 2C ]
+"111
+[; ;main.c: 111:     }
 }
-[e :U 844 ]
-[e $U 845  ]
+[e $U 846  ]
+"112
+[; ;main.c: 112:     else
+[e :U 845 ]
+"113
+[; ;main.c: 113:     {
+{
+"114
+[; ;main.c: 114:         printf("Ha algo de errado com a memoria SRAM!!!");
+[e ( _printf :s 3C ]
+"115
+[; ;main.c: 115:     }
+}
 [e :U 846 ]
-"121
-[; ;main.c: 121: }
-[e :UE 840 ]
+"136
+[; ;main.c: 136:     while(1)
+[e :U 848 ]
+"137
+[; ;main.c: 137:     {
+{
+"139
+[; ;main.c: 139:     }
 }
+[e :U 847 ]
+[e $U 848  ]
+[e :U 849 ]
+"140
+[; ;main.c: 140: }
+[e :UE 841 ]
+}
+[p f _printf 8388736 ]
+[a 2C 79 32 115 105 115 116 101 109 97 32 105 100 101 110 116 105 102 105 99 111 117 32 97 32 109 101 109 111 114 105 97 32 83 82 65 77 33 33 33 0 ]
+[a 3C 72 97 32 97 108 103 111 32 100 101 32 101 114 114 97 100 111 32 99 111 109 32 97 32 109 101 109 111 114 105 97 32 83 82 65 77 33 33 33 0 ]
+[a 1C 73 110 105 116 32 105 50 99 32 98 117 115 95 114 101 115 101 116 58 32 37 105 10 0 ]

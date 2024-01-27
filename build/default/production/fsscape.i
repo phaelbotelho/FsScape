@@ -355,6 +355,11 @@ typedef union {
     };
     uint32_t ui32jedecID;
 }fsscape_JEDECID_tag;
+
+typedef union {
+    uint8_t ui8addr[4];
+    uint32_t ui32addr;
+}fsscape_SRAM_index_addr_tag;
 # 20 "fsscape.c" 2
 
 # 1 "./my_i2c_pic18.h" 1
@@ -409,14 +414,16 @@ const FsScape_interface_style_tag FsScape_SRAM_interface_style = I2C;
 const FsScape_interface_style_tag FsScape_EEPROM_interface_style = I2C;
 const FsScape_interface_style_tag FsScape_FLASH_interface_style = SPI;
 
+fsscape_SRAM_index_addr_tag fsscape_SRAM_index_addr;
 
 
 
 
-int16_t FsScape_get_index_SRAM(fsscape_Address_tag *address);
-int16_t FsScape_set_index_SRAM(fsscape_Address_tag address_value);
-int16_t FsScape_get_index_addr_SRAM(fsscape_Address_tag *address);
-int16_t FsScape_set_index_addr_SRAM(fsscape_Address_tag address_value);
+
+int16_t FsScape_get_index_SRAM(fsscape_SRAM_index_addr_tag *address);
+int16_t FsScape_set_index_SRAM(fsscape_SRAM_index_addr_tag address_value);
+int8_t FsScape_get_index_addr_SRAM();
+int16_t FsScape_set_index_addr_SRAM(uint8_t address_value);
 
 int16_t FsScape_get_index_EEPROM(fsscape_Address_tag *address);
 int16_t FsScape_set_index_EEPROM(fsscape_Address_tag address_value);
@@ -429,23 +436,23 @@ int16_t FsScape_get_index_addr_FLASH(fsscape_Address_tag *address);
 int16_t FsScape_set_index_addr_FLASH(fsscape_Address_tag address_value);
 
 int16_t FsScape_get_index_auto(fsscape_Address_tag *address);
-int16_t FsScape_set_index_auto(fsscape_Address_tag address_value);
+# 98 "fsscape.c"
+int16_t FsScape_get_index_SRAM(fsscape_SRAM_index_addr_tag *address)
+{
+    return I2C_Mem_Read(0xDE, 0x21, 1, address->ui8addr, 4, 0);
+}
 
+int16_t FsScape_set_index_SRAM(fsscape_SRAM_index_addr_tag address_value)
+{
+    return I2C_Mem_Write(0xDE, 0x21, 1, address_value.ui8addr, 4, 0);
+}
 
+int8_t FsScape_get_index_addr_SRAM()
+{
 
+}
 
+int16_t FsScape_set_index_addr_SRAM(uint8_t address_value)
+{
 
-uint8_t FsScape_i2c_config_SRAM(uint8_t *i2cmodule, uint8_t address);
-uint8_t FsScape_get_i2c_addr_SRAM();
-void FsScape_set_i2c_addr_SRAM(uint8_t address);
-uint8_t FsScape_get_spi_config_SRAM(uint8_t *i2cmodule, uint8_t *CS_PIN, uint8_t CS_PIN_BIT);
-void FsScape_set_spi_addr_SRAM(uint8_t *CS_PIN, uint8_t CS_PIN_BIT);
-
-
-uint8_t FsScape_get_i2c_addr_EEPROM(uint8_t address);
-void FsScape_set_i2c_addr_EEPROM(uint8_t address);
-void FsScape_set_spi_addr_EEPROM(uint8_t *CS_PIN, uint8_t CS_PIN_BIT);
-
-uint8_t FsScape_get_i2c_addr_FLASH(uint8_t address);
-void FsScape_set_i2c_addr_FLASH(uint8_t address);
-void FsScape_set_spi_addr_FLASH(uint8_t *CS_PIN, uint8_t CS_PIN_BIT);
+}
