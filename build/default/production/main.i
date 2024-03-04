@@ -9680,6 +9680,7 @@ void main(void)
     volatile uint8_t valor2 = 0;
     volatile int16_t bus_reset;
     volatile uint8_t temp = 0;
+    volatile uint8_t temp2 = 0;
 
 
     SYSTEM_Initialize();
@@ -9690,7 +9691,7 @@ void main(void)
 
 
     RCONbits.SBOREN = 0;
-# 87 "main.c"
+# 88 "main.c"
     (INTCONbits.GIE = 1);
 
 
@@ -9728,7 +9729,7 @@ void main(void)
     {
         printf("Ha algo de errado com a memoria SRAM!!!\n");
     }
-# 141 "main.c"
+# 142 "main.c"
     printf("Verificando o ponteiro de enderecamento...\n");
     FsScape_get_index_SRAM(&adressme);
     printf("O ponteiro encontrado foi: %lu\n", adressme);
@@ -9744,7 +9745,7 @@ void main(void)
     printf("O ponteiro encontrado foi: 0x%lX\n", adressme);
 
     I2C_ModuleStop();
-# 175 "main.c"
+# 176 "main.c"
     do { TRISCbits.TRISC4 = 1; } while(0);
     do { TRISCbits.TRISC3 = 0; } while(0);
     do { TRISCbits.TRISC5 = 0; } while(0);

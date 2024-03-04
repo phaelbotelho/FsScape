@@ -33,7 +33,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "21 ./millis.h
 [; ;./millis.h: 21: void increment_interrupt();
 [v _increment_interrupt `(v ~T0 @X0 0 e? ]
-[v F6370 `(v ~T0 @X0 0 tf ]
+[v F6371 `(v ~T0 @X0 0 tf ]
 "15037 C:/Users/Raphael/.mchp_packs/Microchip/PIC18F-K_DFP/1.13.292/xc8\pic\include\proc\pic18f26k22.h
 [; ;C:/Users/Raphael/.mchp_packs/Microchip/PIC18F-K_DFP/1.13.292/xc8\pic\include\proc\pic18f26k22.h: 15037:     struct {
 [s S728 :1 `uc 1 ]
@@ -110,11 +110,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "51
 [; ;./my_i2c_pic18.h: 51: extern int16_t I2C2_M_Poll(uint8_t);
 [v _I2C2_M_Poll `(s ~T0 @X0 0 ef1`uc ]
-"142 main.c
-[; ;main.c: 142:     FsScape_get_index_SRAM(&adressme);
+"143 main.c
+[; ;main.c: 143:     FsScape_get_index_SRAM(&adressme);
 [v _FsScape_get_index_SRAM `(i ~T0 @X0 0 e? ]
-"148
-[; ;main.c: 148:     FsScape_set_index_SRAM(adressme);
+"149
+[; ;main.c: 149:     FsScape_set_index_SRAM(adressme);
 [v _FsScape_set_index_SRAM `(i ~T0 @X0 0 e? ]
 "47 ./my_i2c_pic18.h
 [; ;./my_i2c_pic18.h: 47: void I2C_ModuleStop();
@@ -137,8 +137,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "63 ./mcc_generated_files/spi1.h
 [; ;./mcc_generated_files/spi1.h: 63: void SPI1_Initialize(void);
 [v _SPI1_Initialize `(v ~T0 @X0 0 ef ]
-"180 main.c
-[; ;main.c: 180:     SPI1_Open(SPI1_DEFAULT);
+"181 main.c
+[; ;main.c: 181:     SPI1_Open(SPI1_DEFAULT);
 [c E6201 0 .. ]
 [n E6201 . SPI1_DEFAULT  ]
 "64 ./mcc_generated_files/spi1.h
@@ -952,177 +952,181 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 68:     volatile uint8_t temp = 0;
 [v _temp `Vuc ~T0 @X0 1 a ]
 [e = _temp -> -> 0 `i `uc ]
-"71
-[; ;main.c: 71:     SYSTEM_Initialize();
-[e ( _SYSTEM_Initialize ..  ]
+"69
+[; ;main.c: 69:     volatile uint8_t temp2 = 0;
+[v _temp2 `Vuc ~T0 @X0 1 a ]
+[e = _temp2 -> -> 0 `i `uc ]
 "72
-[; ;main.c: 72:     do { LATCbits.LATC0 = 1; } while(0);
+[; ;main.c: 72:     SYSTEM_Initialize();
+[e ( _SYSTEM_Initialize ..  ]
+"73
+[; ;main.c: 73:     do { LATCbits.LATC0 = 1; } while(0);
 [e :U 844 ]
 {
 [e = . . _LATCbits 0 0 -> -> 1 `i `uc ]
 }
 [e :U 843 ]
-"74
-[; ;main.c: 74:     TMR1_SetInterruptHandler(increment_interrupt);
-[e ( _TMR1_SetInterruptHandler (1 -> &U _increment_interrupt `*F6370 ]
-"78
-[; ;main.c: 78:     RCONbits.SBOREN = 0;
+"75
+[; ;main.c: 75:     TMR1_SetInterruptHandler(increment_interrupt);
+[e ( _TMR1_SetInterruptHandler (1 -> &U _increment_interrupt `*F6371 ]
+"79
+[; ;main.c: 79:     RCONbits.SBOREN = 0;
 [e = . . _RCONbits 5 6 -> -> 0 `i `uc ]
-"87
-[; ;main.c: 87:     (INTCONbits.GIE = 1);
+"88
+[; ;main.c: 88:     (INTCONbits.GIE = 1);
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-"93
-[; ;main.c: 93:     (INTCONbits.PEIE = 1);
+"94
+[; ;main.c: 94:     (INTCONbits.PEIE = 1);
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-"98
-[; ;main.c: 98:     uint32_t oldtime;
-[v _oldtime `ul ~T0 @X0 1 a ]
 "99
-[; ;main.c: 99:     fsscape_SRAM_index_addr_tag endereco_atual;
+[; ;main.c: 99:     uint32_t oldtime;
+[v _oldtime `ul ~T0 @X0 1 a ]
+"100
+[; ;main.c: 100:     fsscape_SRAM_index_addr_tag endereco_atual;
 [v _endereco_atual `S840 ~T0 @X0 1 a ]
-"101
-[; ;main.c: 101:     endereco_atual.ui32addr = 0;
-[e = . _endereco_atual 1 -> -> -> 0 `i `l `ul ]
 "102
-[; ;main.c: 102:     uint8_t teste[4];
-[v _teste `uc ~T0 @X0 -> 4 `i a ]
+[; ;main.c: 102:     endereco_atual.ui32addr = 0;
+[e = . _endereco_atual 1 -> -> -> 0 `i `l `ul ]
 "103
-[; ;main.c: 103:     uint32_t adressme = 0;
+[; ;main.c: 103:     uint8_t teste[4];
+[v _teste `uc ~T0 @X0 -> 4 `i a ]
+"104
+[; ;main.c: 104:     uint32_t adressme = 0;
 [v _adressme `ul ~T0 @X0 1 a ]
 [e = _adressme -> -> -> 0 `i `l `ul ]
-"105
-[; ;main.c: 105:     oldtime = millis();
+"106
+[; ;main.c: 106:     oldtime = millis();
 [e = _oldtime ( _millis ..  ]
-"107
-[; ;main.c: 107:     printf("Sistema Iniciado\n");
+"108
+[; ;main.c: 108:     printf("Sistema Iniciado\n");
 [e ( _printf :s 1C ]
-"110
-[; ;main.c: 110:     I2C_HWini();
-[e ( _I2C_HWini ..  ]
 "111
-[; ;main.c: 111:     I2C_ModuleStart(400000UL);
-[e ( _I2C_ModuleStart (1 -> 400000 `ul ]
+[; ;main.c: 111:     I2C_HWini();
+[e ( _I2C_HWini ..  ]
 "112
-[; ;main.c: 112:     bus_reset = I2C2_M_BusReset();
-[e = _bus_reset ( _I2C2_M_BusReset ..  ]
+[; ;main.c: 112:     I2C_ModuleStart(400000UL);
+[e ( _I2C_ModuleStart (1 -> 400000 `ul ]
 "113
-[; ;main.c: 113:     printf("Init i2c bus_reset: %i\n", bus_reset);
+[; ;main.c: 113:     bus_reset = I2C2_M_BusReset();
+[e = _bus_reset ( _I2C2_M_BusReset ..  ]
+"114
+[; ;main.c: 114:     printf("Init i2c bus_reset: %i\n", bus_reset);
 [e ( _printf , (. :s 2C -> _bus_reset `i ]
-"116
-[; ;main.c: 116:     if(I2C2_M_Poll(0xDE) == 0)
-[e $ ! == -> ( _I2C2_M_Poll (1 -> -> 222 `i `uc `i -> 0 `i 845  ]
 "117
-[; ;main.c: 117:     {
-{
+[; ;main.c: 117:     if(I2C2_M_Poll(0xDE) == 0)
+[e $ ! == -> ( _I2C2_M_Poll (1 -> -> 222 `i `uc `i -> 0 `i 845  ]
 "118
-[; ;main.c: 118:         printf("O sistema identificou a memoria SRAM!!!\n");
-[e ( _printf :s 3C ]
+[; ;main.c: 118:     {
+{
 "119
-[; ;main.c: 119:     }
+[; ;main.c: 119:         printf("O sistema identificou a memoria SRAM!!!\n");
+[e ( _printf :s 3C ]
+"120
+[; ;main.c: 120:     }
 }
 [e $U 846  ]
-"120
-[; ;main.c: 120:     else
-[e :U 845 ]
 "121
-[; ;main.c: 121:     {
-{
+[; ;main.c: 121:     else
+[e :U 845 ]
 "122
-[; ;main.c: 122:         printf("Ha algo de errado com a memoria SRAM!!!\n");
-[e ( _printf :s 4C ]
+[; ;main.c: 122:     {
+{
 "123
-[; ;main.c: 123:     }
+[; ;main.c: 123:         printf("Ha algo de errado com a memoria SRAM!!!\n");
+[e ( _printf :s 4C ]
+"124
+[; ;main.c: 124:     }
 }
 [e :U 846 ]
-"141
-[; ;main.c: 141:     printf("Verificando o ponteiro de enderecamento...\n");
-[e ( _printf :s 5C ]
 "142
-[; ;main.c: 142:     FsScape_get_index_SRAM(&adressme);
-[e ( _FsScape_get_index_SRAM &U _adressme ]
+[; ;main.c: 142:     printf("Verificando o ponteiro de enderecamento...\n");
+[e ( _printf :s 5C ]
 "143
-[; ;main.c: 143:     printf("O ponteiro encontrado foi: %lu\n", adressme);
-[e ( _printf , (. :s 6C _adressme ]
-"146
-[; ;main.c: 146:     printf("Alterando o endereço para: 0x12345678\n");
-[e ( _printf :s 7C ]
-"147
-[; ;main.c: 147:     adressme = 0x12345678;
-[e = _adressme -> -> 305419896 `l `ul ]
-"148
-[; ;main.c: 148:     FsScape_set_index_SRAM(adressme);
-[e ( _FsScape_set_index_SRAM _adressme ]
-"151
-[; ;main.c: 151:     printf("Verificando o novo ponteiro\n");
-[e ( _printf :s 8C ]
-"152
-[; ;main.c: 152:     FsScape_get_index_SRAM(&adressme);
+[; ;main.c: 143:     FsScape_get_index_SRAM(&adressme);
 [e ( _FsScape_get_index_SRAM &U _adressme ]
+"144
+[; ;main.c: 144:     printf("O ponteiro encontrado foi: %lu\n", adressme);
+[e ( _printf , (. :s 6C _adressme ]
+"147
+[; ;main.c: 147:     printf("Alterando o endereço para: 0x12345678\n");
+[e ( _printf :s 7C ]
+"148
+[; ;main.c: 148:     adressme = 0x12345678;
+[e = _adressme -> -> 305419896 `l `ul ]
+"149
+[; ;main.c: 149:     FsScape_set_index_SRAM(adressme);
+[e ( _FsScape_set_index_SRAM _adressme ]
+"152
+[; ;main.c: 152:     printf("Verificando o novo ponteiro\n");
+[e ( _printf :s 8C ]
 "153
-[; ;main.c: 153:     printf("O ponteiro encontrado foi: 0x%lX\n", adressme);
+[; ;main.c: 153:     FsScape_get_index_SRAM(&adressme);
+[e ( _FsScape_get_index_SRAM &U _adressme ]
+"154
+[; ;main.c: 154:     printf("O ponteiro encontrado foi: 0x%lX\n", adressme);
 [e ( _printf , (. :s 9C _adressme ]
-"155
-[; ;main.c: 155:     I2C_ModuleStop();
+"156
+[; ;main.c: 156:     I2C_ModuleStop();
 [e ( _I2C_ModuleStop ..  ]
-"175
-[; ;main.c: 175:     do { TRISCbits.TRISC4 = 1; } while(0);
+"176
+[; ;main.c: 176:     do { TRISCbits.TRISC4 = 1; } while(0);
 [e :U 849 ]
 {
 [e = . . _TRISCbits 0 4 -> -> 1 `i `uc ]
 }
 [e :U 848 ]
-"176
-[; ;main.c: 176:     do { TRISCbits.TRISC3 = 0; } while(0);
+"177
+[; ;main.c: 177:     do { TRISCbits.TRISC3 = 0; } while(0);
 [e :U 852 ]
 {
 [e = . . _TRISCbits 0 3 -> -> 0 `i `uc ]
 }
 [e :U 851 ]
-"177
-[; ;main.c: 177:     do { TRISCbits.TRISC5 = 0; } while(0);
+"178
+[; ;main.c: 178:     do { TRISCbits.TRISC5 = 0; } while(0);
 [e :U 855 ]
 {
 [e = . . _TRISCbits 0 5 -> -> 0 `i `uc ]
 }
 [e :U 854 ]
-"179
-[; ;main.c: 179:     SPI1_Initialize();
-[e ( _SPI1_Initialize ..  ]
 "180
-[; ;main.c: 180:     SPI1_Open(SPI1_DEFAULT);
+[; ;main.c: 180:     SPI1_Initialize();
+[e ( _SPI1_Initialize ..  ]
+"181
+[; ;main.c: 181:     SPI1_Open(SPI1_DEFAULT);
 [e ( _SPI1_Open (1 . `E6201 0 ]
-"182
-[; ;main.c: 182:     valor = AT45dbxx_Init();
+"183
+[; ;main.c: 183:     valor = AT45dbxx_Init();
 [e = _valor -> ( _AT45dbxx_Init ..  `uc ]
-"184
-[; ;main.c: 184:     printf("Memory Found with JEDECID: Total size:%iMbit, Page size: %iBytes, N. pages: %i, Shift: %i\n", AT45dbxx.FlashSize_MBit, AT45dbxx.PageSize, AT45dbxx.Pages, AT45dbxx.Shift);
+"185
+[; ;main.c: 185:     printf("Memory Found with JEDECID: Total size:%iMbit, Page size: %iBytes, N. pages: %i, Shift: %i\n", AT45dbxx.FlashSize_MBit, AT45dbxx.PageSize, AT45dbxx.Pages, AT45dbxx.Shift);
 [e ( _printf , , , , (. :s 10C -> . _AT45dbxx 0 `i -> . _AT45dbxx 1 `ui -> . _AT45dbxx 2 `ui -> . _AT45dbxx 3 `i ]
-"187
-[; ;main.c: 187:     valor = AT45dbxx_WritePage(valorestx, 9, 0);
-[e = _valor ( _AT45dbxx_WritePage (3 , , &U _valorestx -> -> 9 `i `us -> -> 0 `i `us ]
 "188
-[; ;main.c: 188:     valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
+[; ;main.c: 188:     valor = AT45dbxx_WritePage(valorestx, 9, 0);
+[e = _valor ( _AT45dbxx_WritePage (3 , , &U _valorestx -> -> 9 `i `us -> -> 0 `i `us ]
+"189
+[; ;main.c: 189:     valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
 [e = _valor ( _AT45dbxx_ReadPage (3 , , &U _valoresrx -> -> 25 `i `us -> -> 0 `i `us ]
-"190
-[; ;main.c: 190:     printf("Leitura de buffer: %s\n", valoresrx);
-[e ( _printf , (. :s 11C &U _valoresrx ]
 "191
-[; ;main.c: 191:     printf("Fim do programa");
+[; ;main.c: 191:     printf("Leitura de buffer: %s\n", valoresrx);
+[e ( _printf , (. :s 11C &U _valoresrx ]
+"192
+[; ;main.c: 192:     printf("Fim do programa");
 [e ( _printf :s 12C ]
-"193
-[; ;main.c: 193:     while(1)
-[e :U 857 ]
 "194
-[; ;main.c: 194:     {
+[; ;main.c: 194:     while(1)
+[e :U 857 ]
+"195
+[; ;main.c: 195:     {
 {
-"196
-[; ;main.c: 196:     }
+"197
+[; ;main.c: 197:     }
 }
 [e :U 856 ]
 [e $U 857  ]
 [e :U 858 ]
-"197
-[; ;main.c: 197: }
+"198
+[; ;main.c: 198: }
 [e :UE 841 ]
 }
 [p f _printf 10749072 ]

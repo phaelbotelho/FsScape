@@ -66,6 +66,7 @@ void main(void)
     volatile uint8_t valor2 = 0;
     volatile int16_t bus_reset;
     volatile uint8_t temp = 0;
+    volatile uint8_t temp2 = 0;
     
     // Initialize the device
     SYSTEM_Initialize();
@@ -142,6 +143,7 @@ void main(void)
     FsScape_get_index_SRAM(&adressme);
     printf("O ponteiro encontrado foi: %lu\n", adressme);
     
+    printf("O ponteiro encontrado foi: %lu\n", adressme);
     
     printf("Alterando o endereço para: 0x12345678\n");
     adressme = 0x12345678;
