@@ -44,6 +44,7 @@ extern "C" {
 //--------------------Functions--------------------
 extern void I2C_HWini(void);
 extern void I2C_ModuleStart(uint32_t);
+void I2C_ModuleStop();
 extern void I2C_SWini(void);
 extern int16_t I2C2_M_BusReset(void);
 extern void I2C2_M_ClearErrors(void);

@@ -118,6 +118,20 @@
 #define I2C_SDA_SetAnalogMode()      do { ANSELCbits.ANSC4 = 1; } while(0)
 #define I2C_SDA_SetDigitalMode()     do { ANSELCbits.ANSC4 = 0; } while(0)
 
+// get/set SPI_SDO aliases
+#define SPI_SDO_TRIS                 TRISCbits.TRISC5
+#define SPI_SDO_LAT                  LATCbits.LATC5
+#define SPI_SDO_PORT                 PORTCbits.RC5
+#define SPI_SDO_ANS                  ANSELCbits.ANSC5
+#define SPI_SDO_SetHigh()            do { LATCbits.LATC5 = 1; } while(0)
+#define SPI_SDO_SetLow()             do { LATCbits.LATC5 = 0; } while(0)
+#define SPI_SDO_Toggle()             do { LATCbits.LATC5 = ~LATCbits.LATC5; } while(0)
+#define SPI_SDO_GetValue()           PORTCbits.RC5
+#define SPI_SDO_SetDigitalInput()    do { TRISCbits.TRISC5 = 1; } while(0)
+#define SPI_SDO_SetDigitalOutput()   do { TRISCbits.TRISC5 = 0; } while(0)
+#define SPI_SDO_SetAnalogMode()      do { ANSELCbits.ANSC5 = 1; } while(0)
+#define SPI_SDO_SetDigitalMode()     do { ANSELCbits.ANSC5 = 0; } while(0)
+
 // get/set RC6 procedures
 #define RC6_SetHigh()            do { LATCbits.LATC6 = 1; } while(0)
 #define RC6_SetLow()             do { LATCbits.LATC6 = 0; } while(0)

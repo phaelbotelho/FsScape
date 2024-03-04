@@ -31,6 +31,7 @@ uint16_t I2Cflags;
 //----------------Function Prototypes-------------------
 void I2C_HWini(void);
 void I2C_ModuleStart(uint32_t clock_output);
+void I2C_ModuleStop();
 void I2C_SWini(void);
 int16_t I2C2_M_BusReset(void);
 void I2C2_M_ClearErrors(void);
@@ -63,23 +64,28 @@ void I2C_HWini(void)
 
 void I2C_ModuleStart(uint32_t clock_output)
 {
-    SSPSTAT &= 0x3F; // Power on state
-    SSPCON2 = 0x00; // Power on state
+    SSP1STAT &= 0x3F; // Power on state
+    SSP1CON2 = 0x00; // Power on state
     
     // Control slew rate according the speed.
     if(clock_output == 400000UL)
     {
-        SSPSTAT |= 0b00000000; // Slew rate on.
+        SSP1STAT |= 0b00000000; // Slew rate on.
     }
     else
     {
-        SSPSTAT |= 0b10000000; // Slew rate off.
+        SSP1STAT |= 0b10000000; // Slew rate off.
     }
     
-    SSPCON1 = 0b00001000; // Select serial mode.
-    SSPADD = (uint8_t) ((uint32_t)CLOCK_PeripheralFrequencyGet() / (uint32_t)clock_output) - 1; // Clock = FOSC/(4 * (SSPADD + 1)) Therefore SSPADD = (FCY/FSCL) -1.
+    SSP1CON1 = 0b00001000; // Select serial mode.
+    SSP1ADD = (uint8_t) ((uint32_t)CLOCK_PeripheralFrequencyGet() / (uint32_t)clock_output) - 1; // Clock = FOSC/(4 * (SSP1ADD + 1)) Therefore SSP1ADD = (FCY/FSCL) -1.
     
-    SSPCON1 |= 0b00100000; // Enable synchronous serial port
+    SSP1CON1 |= 0b00100000; // Enable synchronous serial port
+}
+
+void I2C_ModuleStop()
+{
+    SSP1CON1bits.SSPEN = 0; // Disable the MSSP module.
 }
 
 void I2C_SWini(void)
@@ -210,9 +216,9 @@ int16_t I2C2_M_BusReset()
 //Clear any errors that may have occurred
 void I2C2_M_ClearErrors()
 {
-    SSPCON2bits.RCEN = 0; //Cancel receive request
-    SSPCON1bits.WCOL = 0; //Clear write-collision flag
-    PIR2bits.BCLIF = 0; //Clear bus-collision flag
+    SSP1CON2bits.RCEN1 = 0; //Cancel receive request
+    SSP1CON1bits.WCOL1 = 0; //Clear write-collision flag
+    PIR2bits.BCL1IF = 0; //Clear bus-collision flag
 }
 
 //Poll an I2C device to see if it is alive
@@ -367,16 +373,16 @@ int16_t I2C2_M_ReadByte(uint8_t ACKflag)
 
     if(ACKflag == I2C_M_NACK) //Set state in preparation for TX below
     {
-        SSPCON2bits.ACKDT = 1; //NACK
+        SSP1CON2bits.ACKDT1 = 1; //NACK
     } else
     {
-        SSPCON2bits.ACKDT = 0; //ACK
+        SSP1CON2bits.ACKDT1 = 0; //ACK
     }
 
-    SSPCON2bits.RCEN = 1; //Start receive
+    SSP1CON2bits.RCEN1 = 1; //Start receive
     t = 0; //Timeout is processor speed dependent.  @(4*8Mhz=16MIPS) and 8 bits, I expect <=320.
     //We could wait for RCEN to be cleared, but are really interested in incoming uint8_t, so look for I2C2STAT.RBF
-    while(!SSPSTATbits.BF) //HW cleared when receive complete
+    while(!SSP1STATbits.BF1) //HW cleared when receive complete
     {
         t++;
         if(t > 8000)
@@ -389,9 +395,9 @@ int16_t I2C2_M_ReadByte(uint8_t ACKflag)
 
     //As the master we must ACK or NACK every uint8_t, so slave knows if it will send another uint8_t.
     //We have set the bit above, just need to send it
-    SSPCON2bits.ACKEN = 1; //Send ACK bit now
+    SSP1CON2bits.ACKEN1 = 1; //Send ACK bit now
     t = 0; //Timeout is processor speed dependent.  @(4*8Mhz=16MIPS), I expect <=40.
-    while(SSPCON2bits.ACKEN) //HW cleared when complete
+    while(SSP1CON2bits.ACKEN1) //HW cleared when complete
     {
         t++;
         if(t > 1000)
@@ -400,13 +406,13 @@ int16_t I2C2_M_ReadByte(uint8_t ACKflag)
             return I2C_Err_SCL_low;
         }
     }//Tested: t=4
-    if(SSPCON1bits.SSPOV) //If an overflow occurred, it means we received a new uint8_t before reading last one
+    if(SSP1CON1bits.SSPOV1) //If an overflow occurred, it means we received a new uint8_t before reading last one
     {
-        SSPCON1bits.SSPOV = 0;
+        SSP1CON1bits.SSPOV1 = 0;
         return I2C_Err_Overflow;
     }
 
-    return SSPBUF; //Reading this register clears RBF
+    return SSP1BUF; //Reading this register clears RBF
 }
 
 //High level function.  Reads single byte from target into buffer
@@ -495,14 +501,14 @@ int16_t I2C2_M_RecoverBus()
 
     //Level 2: reset devices on I2C network
     //Disable I2C so we can toggle pins
-    SSPCON1bits.SSPEN = 0;
+    SSP1CON1bits.SSPEN1 = 0;
     status = I2C2_M_BusReset();
     if(status > 0)
     {//Fatal I2C error, nothing we can do about it
         return I2C_Err_Hardware;
     }
     //That worked, bring I2C back online
-    SSPCON1bits.SSPEN = 1;
+    SSP1CON1bits.SSPEN1 = 1;
 
     return I2C_OK;
 }
@@ -517,9 +523,9 @@ int16_t I2C2_M_Restart()
 {
     int16_t t;
 
-    SSPCON2bits.RSEN = 1; //Initiate restart condition
+    SSP1CON2bits.RSEN1 = 1; //Initiate restart condition
     t = 0; //Timeout is processor speed dependent.  @(4*8Mhz=32Mhz;16MIPS), I expect <=40.
-    while(SSPCON2bits.RSEN) //HW cleared when complete
+    while(SSP1CON2bits.RSEN1) //HW cleared when complete
     {
         t++;
         if(t > 1000)
@@ -529,9 +535,9 @@ int16_t I2C2_M_Restart()
         }
     }//Tested: t=5
 
-    if(PIR2bits.BCLIF)
+    if(PIR2bits.BCL1IF)
     {//SDA stuck low
-        PIR2bits.BCLIF = 0; //Clear error to regain control of I2C
+        PIR2bits.BCL1IF = 0; //Clear error to regain control of I2C
         return I2C_Err_BCL;
     }
 
@@ -549,23 +555,23 @@ int16_t I2C2_M_Start()
 {
     int16_t t;
 
-    SSPCON2bits.SEN = 1; //Initiate Start condition
+    SSP1CON2bits.SEN1 = 1; //Initiate Start condition
     Nop();
-    if(PIR2bits.BCLIF)
+    if(PIR2bits.BCL1IF)
     {//SCL or SDA stuck low
-        SSPCON2bits.SEN = 0; //Cancel request (will still be set if we had previous BCL)
-        PIR2bits.BCLIF = 0; //Clear error to regain control of I2C
+        SSP1CON2bits.SEN1 = 0; //Cancel request (will still be set if we had previous BCL)
+        PIR2bits.BCL1IF = 0; //Clear error to regain control of I2C
         return I2C_Err_BCL;
     }
-    if(SSPCON1bits.WCOL)
+    if(SSP1CON1bits.WCOL1)
     {//Not sure how this happens but it occurred once, so trap here
-        SSPCON2bits.SEN = 0; //Clear just in case set
-        SSPCON1bits.WCOL = 0; //Clear error
+        SSP1CON2bits.SEN1 = 0; //Clear just in case set
+        SSP1CON1bits.WCOL1 = 0; //Clear error
         return I2C_Err_IWCOL;
     }
 
     t = 0; //Timeout is processor speed dependent.  @(4*8Mhz=32Mhz;16MIPS), I expect <=40.
-    while(SSPCON2bits.SEN) //HW cleared when complete
+    while(SSP1CON2bits.SEN1) //HW cleared when complete
     {
         t++;
         if(t > 1000)
@@ -576,9 +582,9 @@ int16_t I2C2_M_Start()
 
     //If a second start request is issued after first one, the I2C module will instead:
     //generate a stop request, clear SEN, and flag BCL.  Test for BCL here.
-    if(PIR2bits.BCLIF)
+    if(PIR2bits.BCL1IF)
     {
-        PIR2bits.BCLIF = 0; //Clear error to regain control of I2C
+        PIR2bits.BCL1IF = 0; //Clear error to regain control of I2C
         return I2C_Err_BCL;
     }
 
@@ -595,16 +601,16 @@ int16_t I2C2_M_Stop()
 {
     int16_t t;
 
-    SSPCON2bits.PEN = 1; //Initiate stop condition
+    SSP1CON2bits.PEN1 = 1; //Initiate stop condition
     Nop();
-    if(PIR2bits.BCLIF)
+    if(PIR2bits.BCL1IF)
     {//Not sure if this can ever happen here
-        PIR2bits.BCLIF = 0; //Clear error
+        PIR2bits.BCL1IF = 0; //Clear error
         return I2C_Err_BCL; //Will need to reset I2C interface.
     }
 
     t = 0; //Timeout is processor speed dependent.  @(4*8Mhz=16MIPS), I expect <=40.
-    while(SSPCON2bits.PEN) //HW cleared when complete
+    while(SSP1CON2bits.PEN1) //HW cleared when complete
     {
         t++;
         if(t > 1000)
@@ -752,16 +758,16 @@ int16_t I2C2_M_WriteByte(char cData)
 {
     int16_t t;
 
-    if(SSPSTATbits.R_NOT_W) //Is there already a uint8_t waiting to send?
+    if(SSP1STATbits.R_NOT_W) //Is there already a uint8_t waiting to send?
     {
         return I2C_Err_TBF;
     }
 
-    SSPBUF = cData; //Send uint8_t
+    SSP1BUF = cData; //Send uint8_t
     //Transmission takes several clock cycles to complete.  As a result we won't see BCL error for a while.
     t = 0; //Timeout is processor speed dependent.  @(4*8Mhz=32Mhz;16MIPS) and 8 bits, I expect <=320.
 
-    while(SSPSTATbits.BF) //HW cleared when TX complete
+    while(SSP1STATbits.BF1) //HW cleared when TX complete
     {
         t++;
 
@@ -771,14 +777,14 @@ int16_t I2C2_M_WriteByte(char cData)
         }
     }//Testing: t=31
 
-    if(PIR2bits.BCLIF)
+    if(PIR2bits.BCL1IF)
     {
-        PIR2bits.BCLIF = 0; //Clear error to regain control of I2C
+        PIR2bits.BCL1IF = 0; //Clear error to regain control of I2C
         return I2C_Err_BCL;
     }
 
     //Done, now how did slave respond?
-    if(SSPCON2bits.ACKSTAT) //1=NACK
+    if(SSP1CON2bits.ACKSTAT1) //1=NACK
         return I2C_Err_NAK; //  NACK
     else
         return I2C_ACK; //  ACK
@@ -1002,3 +1008,4 @@ int16_t I2C_Mem_Read(uint8_t DevAddress, uint16_t MemAdress, uint16_t MemAddSize
     }
     return I2C_OK; //Success
 }
+

@@ -96,9 +96,17 @@ void main(void)
     //INTERRUPT_PeripheralInterruptDisable();
     
     uint32_t oldtime;
+    fsscape_SRAM_index_addr_tag endereco_atual;
+    
+    endereco_atual.ui32addr = 0;
+    uint8_t teste[4];
+    uint32_t adressme = 0;
     
     oldtime = millis();
     
+    printf("Sistema Iniciado\n");
+    
+#if 1
     I2C_HWini();
     I2C_ModuleStart(400000UL); // Init I2C module with 100kHz.
     bus_reset = I2C2_M_BusReset();
@@ -107,14 +115,45 @@ void main(void)
     
     if(I2C2_M_Poll(FSSCAPE_SRAM_I2C_ADDR) == I2C_ACK)
     {
-        printf("O sistema identificou a memoria SRAM!!!");
+        printf("O sistema identificou a memoria SRAM!!!\n");
     }
     else
     {
-        printf("Ha algo de errado com a memoria SRAM!!!");
+        printf("Ha algo de errado com a memoria SRAM!!!\n");
     }
     
-     
+    
+    
+    //I2C2_M_Write_Single(0xDE, 0x20, 1);
+    /*I2C2_M_Read_Single(0xDE, 0x20, &valor2);
+    printf("Valor do Endereco 0x20: %i\n", valor2);
+    //I2C2_M_Write_Single(0xDE, 0x21, 2);
+    I2C2_M_Read_Single(0xDE, 0x21, &valor2);
+    printf("Valor do Endereco 0x21: %i\n", valor2);
+    //I2C2_M_Write_Single(0xDE, 0x22, 3);
+    I2C2_M_Read_Single(0xDE, 0x22, &valor2);
+    printf("Valor do Endereco 0x22: %i\n", valor2);
+    //I2C2_M_Write_Single(0xDE, 0x23, 4);
+    I2C2_M_Read_Single(0xDE, 0x23, &valor2);
+    printf("Valor do Endereco 0x23: %i\n", valor2);*/
+    
+    
+    printf("Verificando o ponteiro de enderecamento...\n");
+    FsScape_get_index_SRAM(&adressme);
+    printf("O ponteiro encontrado foi: %lu\n", adressme);
+    
+    
+    printf("Alterando o endereço para: 0x12345678\n");
+    adressme = 0x12345678;
+    FsScape_set_index_SRAM(adressme);
+    
+    
+    printf("Verificando o novo ponteiro\n");
+    FsScape_get_index_SRAM(&adressme);
+    printf("O ponteiro encontrado foi: 0x%lX\n", adressme);
+    
+    I2C_ModuleStop();
+#endif
     
     /*valor = AT45dbxx_Init();
     
@@ -132,6 +171,24 @@ void main(void)
     valor = AT45dbxx_Init();
     
     NOP();*/
+    
+    I2C_SDA_SetDigitalInput();
+    I2C_SCL_SetDigitalOutput();
+    SPI_SDO_SetDigitalOutput();
+    
+    SPI1_Initialize();
+    SPI1_Open(SPI1_DEFAULT);
+    
+    valor = AT45dbxx_Init();
+    
+    printf("Memory Found with JEDECID: Total size:%iMbit, Page size: %iBytes, N. pages: %i, Shift: %i\n", AT45dbxx.FlashSize_MBit, AT45dbxx.PageSize, AT45dbxx.Pages, AT45dbxx.Shift);
+    
+    //valor = AT45dbxx_EraseChip();
+    valor = AT45dbxx_WritePage(valorestx, 9, 0);
+    valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
+    
+    printf("Leitura de buffer: %s\n", valoresrx);
+    printf("Fim do programa");
     
     while(1)
     {

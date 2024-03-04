@@ -52,8 +52,8 @@ fsscape_SRAM_index_addr_tag fsscape_SRAM_index_addr;
 
 /* ----------------------------# PROTOTYPES #-------------------------------- */
 // Interact with the SRAM
-int16_t FsScape_get_index_SRAM(fsscape_SRAM_index_addr_tag *address);
-int16_t FsScape_set_index_SRAM(fsscape_SRAM_index_addr_tag address_value);
+int16_t FsScape_get_index_SRAM(uint32_t *address);
+int16_t FsScape_set_index_SRAM(uint32_t address_value);
 int8_t FsScape_get_index_addr_SRAM();
 int16_t FsScape_set_index_addr_SRAM(uint8_t address_value);
 // Interact with the EEPROM
@@ -95,14 +95,28 @@ void FsScape_set_spi_addr_FLASH(uint8_t *CS_PIN, uint8_t CS_PIN_BIT);
 //I2C_Mem_Write(uint8_t DevAddress, uint16_t MemAdress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
 //I2C_Mem_Read(uint8_t DevAddress, uint16_t MemAdress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
 
-int16_t FsScape_get_index_SRAM(fsscape_SRAM_index_addr_tag *address)
+int16_t FsScape_get_index_SRAM(uint32_t *address)
 {
-    return I2C_Mem_Read(FSSCAPE_SRAM_I2C_ADDR, FSSCAPE_SRAM_IDX_ADDR, 1, address->ui8addr, 4, 0);
+    int16_t value = 0;
+    uint8_t _address[4];
+    
+    value = I2C_Mem_Read(FSSCAPE_SRAM_I2C_ADDR, FSSCAPE_SRAM_IDX_ADDR, 1, _address, 4, 0);
+    
+    address = _address[3] | (_address[2] << 8 ) | (_address[1] << 16) | (_address[0] << 24);
+    
+    return value;    
 }
 
-int16_t FsScape_set_index_SRAM(fsscape_SRAM_index_addr_tag address_value)
+int16_t FsScape_set_index_SRAM(uint32_t address_value)
 {
-    return I2C_Mem_Write(FSSCAPE_SRAM_I2C_ADDR, FSSCAPE_SRAM_IDX_ADDR, 1, address_value.ui8addr, 4, 0);
+    uint8_t _address[4];
+    
+    _address[0] = (uint8_t)(address_value);
+    _address[1] = (uint8_t)(address_value >> 8);
+    _address[2] = (uint8_t)(address_value >> 16);
+    _address[3] = (uint8_t)(address_value >> 24);
+    
+    return I2C_Mem_Write(FSSCAPE_SRAM_I2C_ADDR, FSSCAPE_SRAM_IDX_ADDR, 1, _address, 4, 0);
 }
 
 int8_t FsScape_get_index_addr_SRAM()

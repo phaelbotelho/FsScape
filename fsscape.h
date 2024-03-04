@@ -89,7 +89,7 @@ typedef union {
 
 /* ------------------------------# DEFINES #--------------------------------- */
 #define FSSCAPE_SRAM_I2C_ADDR 0xDE
-#define FSSCAPE_SRAM_IDX_ADDR 0x21
+#define FSSCAPE_SRAM_IDX_ADDR 0x20
 
 
 #ifdef	__cplusplus
