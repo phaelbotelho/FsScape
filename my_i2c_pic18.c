@@ -58,8 +58,8 @@ void I2C_HWini(void)
 {
     //-----Set pin drive modes-----
     //I2C - drive outputs so we can manually clear lines
-    I2C_SCL_TRIS = 1; //Start with bus in idle mode - both lines high
-    I2C_SDA_TRIS = 1;
+    I2C1_SCL_TRIS = 1; //Start with bus in idle mode - both lines high
+    I2C1_SDA_TRIS = 1;
 }
 
 void I2C_ModuleStart(uint32_t clock_output)
@@ -110,46 +110,46 @@ int16_t I2C2_M_BusReset()
     int16_t i;
     
     //Start with lines high - sets SCL high if not already there
-    I2C_SCL_SetDigitalInput();
-    I2C_SDA_SetDigitalInput();
+    I2C1_SCL_SetDigitalInput();
+    I2C1_SDA_SetDigitalInput();
     __delay_us(5); //Need 5uS delay
     
-    if(I2C_SCL_GetValue() == 0) //Read if line actually went high
+    if(I2C1_SCL_GetValue() == 0) //Read if line actually went high
     {
         return I2C_Err_SCL_low; //SCL stuck low - is the pullup resistor loaded?
     }
     //SCL ok, toggle until SDA goes high.
     i = 10;
     
-    I2C_SCL_SetDigitalOutput();
+    I2C1_SCL_SetDigitalOutput();
     while(i > 0)
     {
-        if(I2C_SDA_GetValue() == 1) //If SDA is high, then we are done
+        if(I2C1_SDA_GetValue() == 1) //If SDA is high, then we are done
         {
             break;
         }
-        I2C_SCL_SetLow(); //SCL low
+        I2C1_SCL_SetLow(); //SCL low
         __delay_us(1); //Need 5uS delay
-        I2C_SCL_SetHigh(); //SCL high
+        I2C1_SCL_SetHigh(); //SCL high
         __delay_us(1); //Need 5uS delay
         i--;
     }
     
-    I2C_SCL_SetDigitalInput();
-    I2C_SDA_SetDigitalInput();
+    I2C1_SCL_SetDigitalInput();
+    I2C1_SDA_SetDigitalInput();
     
-    if(!I2C_SDA_GetValue() && !I2C_SCL_GetValue()) //We are ok if SCL and SDA high
+    if(!I2C1_SDA_GetValue() && !I2C1_SCL_GetValue()) //We are ok if SCL and SDA high
     {
         return I2C_Err_SDA_low;
     }
     
-    I2C_SDA_SetDigitalOutput();
-    I2C_SDA_SetLow(); //SDA LOW while SCL HIGH -> START
+    I2C1_SDA_SetDigitalOutput();
+    I2C1_SDA_SetLow(); //SDA LOW while SCL HIGH -> START
     __delay_us(1); //Need 5uS delay
-    I2C_SDA_SetHigh(); //SDA HIGH while SCL HIGH -> STOP
+    I2C1_SDA_SetHigh(); //SDA HIGH while SCL HIGH -> STOP
     __delay_us(1); //Need 5uS delay
-    I2C_SCL_SetDigitalInput();
-    I2C_SDA_SetDigitalInput();
+    I2C1_SCL_SetDigitalInput();
+    I2C1_SDA_SetDigitalInput();
     return I2C_OK;
 }
 
@@ -858,8 +858,8 @@ void I2C2_M_ClearBus()
     
     for(i = 0; i < 8; i++)
     {
-        I2C_SCL_SetDigitalOutput();
-        I2C_SCL_SetDigitalInput();
+        I2C1_SCL_SetDigitalOutput();
+        I2C1_SCL_SetDigitalInput();
     }
 }
 

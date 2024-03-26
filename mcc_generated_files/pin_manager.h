@@ -65,72 +65,118 @@
 #define PULL_UP_ENABLED      1
 #define PULL_UP_DISABLED     0
 
-// get/set FLASH_CS aliases
-#define FLASH_CS_TRIS                 TRISCbits.TRISC0
-#define FLASH_CS_LAT                  LATCbits.LATC0
-#define FLASH_CS_PORT                 PORTCbits.RC0
-#define FLASH_CS_SetHigh()            do { LATCbits.LATC0 = 1; } while(0)
-#define FLASH_CS_SetLow()             do { LATCbits.LATC0 = 0; } while(0)
-#define FLASH_CS_Toggle()             do { LATCbits.LATC0 = ~LATCbits.LATC0; } while(0)
-#define FLASH_CS_GetValue()           PORTCbits.RC0
-#define FLASH_CS_SetDigitalInput()    do { TRISCbits.TRISC0 = 1; } while(0)
-#define FLASH_CS_SetDigitalOutput()   do { TRISCbits.TRISC0 = 0; } while(0)
+// get/set SPI2_SCK aliases
+#define SPI2_SCK_TRIS                 TRISBbits.TRISB1
+#define SPI2_SCK_LAT                  LATBbits.LATB1
+#define SPI2_SCK_PORT                 PORTBbits.RB1
+#define SPI2_SCK_WPU                  WPUBbits.WPUB1
+#define SPI2_SCK_ANS                  ANSELBbits.ANSB1
+#define SPI2_SCK_SetHigh()            do { LATBbits.LATB1 = 1; } while(0)
+#define SPI2_SCK_SetLow()             do { LATBbits.LATB1 = 0; } while(0)
+#define SPI2_SCK_Toggle()             do { LATBbits.LATB1 = ~LATBbits.LATB1; } while(0)
+#define SPI2_SCK_GetValue()           PORTBbits.RB1
+#define SPI2_SCK_SetDigitalInput()    do { TRISBbits.TRISB1 = 1; } while(0)
+#define SPI2_SCK_SetDigitalOutput()   do { TRISBbits.TRISB1 = 0; } while(0)
+#define SPI2_SCK_SetPullup()          do { WPUBbits.WPUB1 = 1; } while(0)
+#define SPI2_SCK_ResetPullup()        do { WPUBbits.WPUB1 = 0; } while(0)
+#define SPI2_SCK_SetAnalogMode()      do { ANSELBbits.ANSB1 = 1; } while(0)
+#define SPI2_SCK_SetDigitalMode()     do { ANSELBbits.ANSB1 = 0; } while(0)
+
+// get/set SPI2_MISO aliases
+#define SPI2_MISO_TRIS                 TRISBbits.TRISB2
+#define SPI2_MISO_LAT                  LATBbits.LATB2
+#define SPI2_MISO_PORT                 PORTBbits.RB2
+#define SPI2_MISO_WPU                  WPUBbits.WPUB2
+#define SPI2_MISO_ANS                  ANSELBbits.ANSB2
+#define SPI2_MISO_SetHigh()            do { LATBbits.LATB2 = 1; } while(0)
+#define SPI2_MISO_SetLow()             do { LATBbits.LATB2 = 0; } while(0)
+#define SPI2_MISO_Toggle()             do { LATBbits.LATB2 = ~LATBbits.LATB2; } while(0)
+#define SPI2_MISO_GetValue()           PORTBbits.RB2
+#define SPI2_MISO_SetDigitalInput()    do { TRISBbits.TRISB2 = 1; } while(0)
+#define SPI2_MISO_SetDigitalOutput()   do { TRISBbits.TRISB2 = 0; } while(0)
+#define SPI2_MISO_SetPullup()          do { WPUBbits.WPUB2 = 1; } while(0)
+#define SPI2_MISO_ResetPullup()        do { WPUBbits.WPUB2 = 0; } while(0)
+#define SPI2_MISO_SetAnalogMode()      do { ANSELBbits.ANSB2 = 1; } while(0)
+#define SPI2_MISO_SetDigitalMode()     do { ANSELBbits.ANSB2 = 0; } while(0)
+
+// get/set SPI2_MOSI aliases
+#define SPI2_MOSI_TRIS                 TRISBbits.TRISB3
+#define SPI2_MOSI_LAT                  LATBbits.LATB3
+#define SPI2_MOSI_PORT                 PORTBbits.RB3
+#define SPI2_MOSI_WPU                  WPUBbits.WPUB3
+#define SPI2_MOSI_ANS                  ANSELBbits.ANSB3
+#define SPI2_MOSI_SetHigh()            do { LATBbits.LATB3 = 1; } while(0)
+#define SPI2_MOSI_SetLow()             do { LATBbits.LATB3 = 0; } while(0)
+#define SPI2_MOSI_Toggle()             do { LATBbits.LATB3 = ~LATBbits.LATB3; } while(0)
+#define SPI2_MOSI_GetValue()           PORTBbits.RB3
+#define SPI2_MOSI_SetDigitalInput()    do { TRISBbits.TRISB3 = 1; } while(0)
+#define SPI2_MOSI_SetDigitalOutput()   do { TRISBbits.TRISB3 = 0; } while(0)
+#define SPI2_MOSI_SetPullup()          do { WPUBbits.WPUB3 = 1; } while(0)
+#define SPI2_MOSI_ResetPullup()        do { WPUBbits.WPUB3 = 0; } while(0)
+#define SPI2_MOSI_SetAnalogMode()      do { ANSELBbits.ANSB3 = 1; } while(0)
+#define SPI2_MOSI_SetDigitalMode()     do { ANSELBbits.ANSB3 = 0; } while(0)
 
 // get/set FLASH_RST aliases
-#define FLASH_RST_TRIS                 TRISCbits.TRISC2
-#define FLASH_RST_LAT                  LATCbits.LATC2
-#define FLASH_RST_PORT                 PORTCbits.RC2
-#define FLASH_RST_ANS                  ANSELCbits.ANSC2
-#define FLASH_RST_SetHigh()            do { LATCbits.LATC2 = 1; } while(0)
-#define FLASH_RST_SetLow()             do { LATCbits.LATC2 = 0; } while(0)
-#define FLASH_RST_Toggle()             do { LATCbits.LATC2 = ~LATCbits.LATC2; } while(0)
-#define FLASH_RST_GetValue()           PORTCbits.RC2
-#define FLASH_RST_SetDigitalInput()    do { TRISCbits.TRISC2 = 1; } while(0)
-#define FLASH_RST_SetDigitalOutput()   do { TRISCbits.TRISC2 = 0; } while(0)
-#define FLASH_RST_SetAnalogMode()      do { ANSELCbits.ANSC2 = 1; } while(0)
-#define FLASH_RST_SetDigitalMode()     do { ANSELCbits.ANSC2 = 0; } while(0)
+#define FLASH_RST_TRIS                 TRISBbits.TRISB4
+#define FLASH_RST_LAT                  LATBbits.LATB4
+#define FLASH_RST_PORT                 PORTBbits.RB4
+#define FLASH_RST_WPU                  WPUBbits.WPUB4
+#define FLASH_RST_ANS                  ANSELBbits.ANSB4
+#define FLASH_RST_SetHigh()            do { LATBbits.LATB4 = 1; } while(0)
+#define FLASH_RST_SetLow()             do { LATBbits.LATB4 = 0; } while(0)
+#define FLASH_RST_Toggle()             do { LATBbits.LATB4 = ~LATBbits.LATB4; } while(0)
+#define FLASH_RST_GetValue()           PORTBbits.RB4
+#define FLASH_RST_SetDigitalInput()    do { TRISBbits.TRISB4 = 1; } while(0)
+#define FLASH_RST_SetDigitalOutput()   do { TRISBbits.TRISB4 = 0; } while(0)
+#define FLASH_RST_SetPullup()          do { WPUBbits.WPUB4 = 1; } while(0)
+#define FLASH_RST_ResetPullup()        do { WPUBbits.WPUB4 = 0; } while(0)
+#define FLASH_RST_SetAnalogMode()      do { ANSELBbits.ANSB4 = 1; } while(0)
+#define FLASH_RST_SetDigitalMode()     do { ANSELBbits.ANSB4 = 0; } while(0)
 
-// get/set I2C_SCL aliases
-#define I2C_SCL_TRIS                 TRISCbits.TRISC3
-#define I2C_SCL_LAT                  LATCbits.LATC3
-#define I2C_SCL_PORT                 PORTCbits.RC3
-#define I2C_SCL_ANS                  ANSELCbits.ANSC3
-#define I2C_SCL_SetHigh()            do { LATCbits.LATC3 = 1; } while(0)
-#define I2C_SCL_SetLow()             do { LATCbits.LATC3 = 0; } while(0)
-#define I2C_SCL_Toggle()             do { LATCbits.LATC3 = ~LATCbits.LATC3; } while(0)
-#define I2C_SCL_GetValue()           PORTCbits.RC3
-#define I2C_SCL_SetDigitalInput()    do { TRISCbits.TRISC3 = 1; } while(0)
-#define I2C_SCL_SetDigitalOutput()   do { TRISCbits.TRISC3 = 0; } while(0)
-#define I2C_SCL_SetAnalogMode()      do { ANSELCbits.ANSC3 = 1; } while(0)
-#define I2C_SCL_SetDigitalMode()     do { ANSELCbits.ANSC3 = 0; } while(0)
+// get/set FLASH_CS aliases
+#define FLASH_CS_TRIS                 TRISBbits.TRISB5
+#define FLASH_CS_LAT                  LATBbits.LATB5
+#define FLASH_CS_PORT                 PORTBbits.RB5
+#define FLASH_CS_WPU                  WPUBbits.WPUB5
+#define FLASH_CS_ANS                  ANSELBbits.ANSB5
+#define FLASH_CS_SetHigh()            do { LATBbits.LATB5 = 1; } while(0)
+#define FLASH_CS_SetLow()             do { LATBbits.LATB5 = 0; } while(0)
+#define FLASH_CS_Toggle()             do { LATBbits.LATB5 = ~LATBbits.LATB5; } while(0)
+#define FLASH_CS_GetValue()           PORTBbits.RB5
+#define FLASH_CS_SetDigitalInput()    do { TRISBbits.TRISB5 = 1; } while(0)
+#define FLASH_CS_SetDigitalOutput()   do { TRISBbits.TRISB5 = 0; } while(0)
+#define FLASH_CS_SetPullup()          do { WPUBbits.WPUB5 = 1; } while(0)
+#define FLASH_CS_ResetPullup()        do { WPUBbits.WPUB5 = 0; } while(0)
+#define FLASH_CS_SetAnalogMode()      do { ANSELBbits.ANSB5 = 1; } while(0)
+#define FLASH_CS_SetDigitalMode()     do { ANSELBbits.ANSB5 = 0; } while(0)
 
-// get/set I2C_SDA aliases
-#define I2C_SDA_TRIS                 TRISCbits.TRISC4
-#define I2C_SDA_LAT                  LATCbits.LATC4
-#define I2C_SDA_PORT                 PORTCbits.RC4
-#define I2C_SDA_ANS                  ANSELCbits.ANSC4
-#define I2C_SDA_SetHigh()            do { LATCbits.LATC4 = 1; } while(0)
-#define I2C_SDA_SetLow()             do { LATCbits.LATC4 = 0; } while(0)
-#define I2C_SDA_Toggle()             do { LATCbits.LATC4 = ~LATCbits.LATC4; } while(0)
-#define I2C_SDA_GetValue()           PORTCbits.RC4
-#define I2C_SDA_SetDigitalInput()    do { TRISCbits.TRISC4 = 1; } while(0)
-#define I2C_SDA_SetDigitalOutput()   do { TRISCbits.TRISC4 = 0; } while(0)
-#define I2C_SDA_SetAnalogMode()      do { ANSELCbits.ANSC4 = 1; } while(0)
-#define I2C_SDA_SetDigitalMode()     do { ANSELCbits.ANSC4 = 0; } while(0)
+// get/set I2C1_SCL aliases
+#define I2C1_SCL_TRIS                 TRISCbits.TRISC3
+#define I2C1_SCL_LAT                  LATCbits.LATC3
+#define I2C1_SCL_PORT                 PORTCbits.RC3
+#define I2C1_SCL_ANS                  ANSELCbits.ANSC3
+#define I2C1_SCL_SetHigh()            do { LATCbits.LATC3 = 1; } while(0)
+#define I2C1_SCL_SetLow()             do { LATCbits.LATC3 = 0; } while(0)
+#define I2C1_SCL_Toggle()             do { LATCbits.LATC3 = ~LATCbits.LATC3; } while(0)
+#define I2C1_SCL_GetValue()           PORTCbits.RC3
+#define I2C1_SCL_SetDigitalInput()    do { TRISCbits.TRISC3 = 1; } while(0)
+#define I2C1_SCL_SetDigitalOutput()   do { TRISCbits.TRISC3 = 0; } while(0)
+#define I2C1_SCL_SetAnalogMode()      do { ANSELCbits.ANSC3 = 1; } while(0)
+#define I2C1_SCL_SetDigitalMode()     do { ANSELCbits.ANSC3 = 0; } while(0)
 
-// get/set SPI_SDO aliases
-#define SPI_SDO_TRIS                 TRISCbits.TRISC5
-#define SPI_SDO_LAT                  LATCbits.LATC5
-#define SPI_SDO_PORT                 PORTCbits.RC5
-#define SPI_SDO_ANS                  ANSELCbits.ANSC5
-#define SPI_SDO_SetHigh()            do { LATCbits.LATC5 = 1; } while(0)
-#define SPI_SDO_SetLow()             do { LATCbits.LATC5 = 0; } while(0)
-#define SPI_SDO_Toggle()             do { LATCbits.LATC5 = ~LATCbits.LATC5; } while(0)
-#define SPI_SDO_GetValue()           PORTCbits.RC5
-#define SPI_SDO_SetDigitalInput()    do { TRISCbits.TRISC5 = 1; } while(0)
-#define SPI_SDO_SetDigitalOutput()   do { TRISCbits.TRISC5 = 0; } while(0)
-#define SPI_SDO_SetAnalogMode()      do { ANSELCbits.ANSC5 = 1; } while(0)
-#define SPI_SDO_SetDigitalMode()     do { ANSELCbits.ANSC5 = 0; } while(0)
+// get/set I2C1_SDA aliases
+#define I2C1_SDA_TRIS                 TRISCbits.TRISC4
+#define I2C1_SDA_LAT                  LATCbits.LATC4
+#define I2C1_SDA_PORT                 PORTCbits.RC4
+#define I2C1_SDA_ANS                  ANSELCbits.ANSC4
+#define I2C1_SDA_SetHigh()            do { LATCbits.LATC4 = 1; } while(0)
+#define I2C1_SDA_SetLow()             do { LATCbits.LATC4 = 0; } while(0)
+#define I2C1_SDA_Toggle()             do { LATCbits.LATC4 = ~LATCbits.LATC4; } while(0)
+#define I2C1_SDA_GetValue()           PORTCbits.RC4
+#define I2C1_SDA_SetDigitalInput()    do { TRISCbits.TRISC4 = 1; } while(0)
+#define I2C1_SDA_SetDigitalOutput()   do { TRISCbits.TRISC4 = 0; } while(0)
+#define I2C1_SDA_SetAnalogMode()      do { ANSELCbits.ANSC4 = 1; } while(0)
+#define I2C1_SDA_SetDigitalMode()     do { ANSELCbits.ANSC4 = 0; } while(0)
 
 // get/set RC6 procedures
 #define RC6_SetHigh()            do { LATCbits.LATC6 = 1; } while(0)

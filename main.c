@@ -60,7 +60,8 @@ WAT45DBID_t myi_AT45dbxx; //
  */
 void main(void)
 {
-    uint8_t valorestx[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    //uint8_t valorestx[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    char valorestx[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k'};
     uint8_t valoresrx[254] = {0};
     volatile uint8_t valor = 0;
     volatile uint8_t valor2 = 0;
@@ -107,7 +108,7 @@ void main(void)
     
     printf("Sistema Iniciado\n");
     
-#if 1
+#if 0
     I2C_HWini();
     I2C_ModuleStart(400000UL); // Init I2C module with 100kHz.
     bus_reset = I2C2_M_BusReset();
@@ -143,8 +144,6 @@ void main(void)
     FsScape_get_index_SRAM(&adressme);
     printf("O ponteiro encontrado foi: %lu\n", adressme);
     
-    printf("O ponteiro encontrado foi: %lu\n", adressme);
-    
     printf("Alterando o endereço para: 0x12345678\n");
     adressme = 0x12345678;
     FsScape_set_index_SRAM(adressme);
@@ -157,40 +156,29 @@ void main(void)
     I2C_ModuleStop();
 #endif
     
-    /*valor = AT45dbxx_Init();
+#if 1
     
-    valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
+    char aux[30] = {0};
+    char oi[30] = {"ola mundo"};
     
-    valor = AT45dbxx_EraseChip();
-    
-    valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
-    
-    valor = AT45dbxx_WritePage(valorestx, 9, 0);
-    
-    valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
-    
-    //AT45dbxx_ChangePagesize(PAGESIZE_264BYTES);
-    valor = AT45dbxx_Init();
-    
-    NOP();*/
-    
-    I2C_SDA_SetDigitalInput();
-    I2C_SCL_SetDigitalOutput();
-    SPI_SDO_SetDigitalOutput();
-    
-    SPI1_Initialize();
-    SPI1_Open(SPI1_DEFAULT);
+    SPI2_Initialize();
+    SPI2_Open(SPI1_DEFAULT);
     
     valor = AT45dbxx_Init();
     
     printf("Memory Found with JEDECID: Total size:%iMbit, Page size: %iBytes, N. pages: %i, Shift: %i\n", AT45dbxx.FlashSize_MBit, AT45dbxx.PageSize, AT45dbxx.Pages, AT45dbxx.Shift);
     
     //valor = AT45dbxx_EraseChip();
-    valor = AT45dbxx_WritePage(valorestx, 9, 0);
-    valor = AT45dbxx_ReadPage(valoresrx, 25, 0);
+    //valor = AT45dbxx_EraseChip();
+    //valor = AT45dbxx_EraseChip();
+    //valor = AT45dbxx_WritePage(valorestx, 11, 0);
+    valor = AT45dbxx_ReadPage(valoresrx, 11, 0);
     
-    printf("Leitura de buffer: %s\n", valoresrx);
+    sprintf(aux, "%s", valoresrx);
+    
+    printf("Leitura de buffer: %s\n", aux);
     printf("Fim do programa");
+#endif
     
     while(1)
     {

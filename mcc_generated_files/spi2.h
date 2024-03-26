@@ -1,21 +1,21 @@
 /**
-  @Generated PIC10 / PIC12 / PIC16 / PIC18 MCUs Header File
+  SPI2 Generated Driver API Header File
 
-  @Company:
+  @Company
     Microchip Technology Inc.
 
-  @File Name:
-    mcc.h
+  @File Name
+    spi2.h
 
-  @Summary:
-    This is the mcc.h file generated using PIC10 / PIC12 / PIC16 / PIC18 MCUs
+  @Summary
+    This is the generated header file for the SPI2 driver using PIC10 / PIC12 / PIC16 / PIC18 MCUs
 
-  @Description:
-    This header file provides implementations for driver APIs for all modules selected in the GUI.
+  @Description
+    This header file provides APIs for driver for SPI2.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.81.8
         Device            :  PIC18F26K22
-        Driver Version    :  2.00
+        Driver Version    :  1.0.0
     The generated drivers are tested against the following:
         Compiler          :  XC8 2.36 and above or later
         MPLAB             :  MPLAB X 6.00
@@ -44,49 +44,30 @@
     SOFTWARE.
 */
 
-#ifndef MCC_H
-#define	MCC_H
-#include <xc.h>
-#include "device_config.h"
-#include "pin_manager.h"
+#ifndef SPI2_H
+#define SPI2_H
+
+/**
+  Section: Included Files
+*/
+
+#include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include <conio.h>
-#include "interrupt_manager.h"
-#include "spi2.h"
-#include "i2c1_master.h"
-#include "tmr1.h"
-#include "eusart1.h"
 
+/* SPI interfaces */
+typedef enum { 
+    SPI2_DEFAULT
+} spi2_modes_t;
 
+void SPI2_Initialize(void);
+bool SPI2_Open(spi2_modes_t spi2UniqueConfiguration);
+void SPI2_Close(void);
+uint8_t SPI2_ExchangeByte(uint8_t data);
+void SPI2_ExchangeBlock(void *block, size_t blockSize);
+void SPI2_WriteBlock(void *block, size_t blockSize);
+void SPI2_ReadBlock(void *block, size_t blockSize);
+void SPI2_WriteByte(uint8_t byte);
+uint8_t SPI2_ReadByte(void);
 
-/**
- * @Param
-    none
- * @Returns
-    none
- * @Description
-    Initializes the device to the default states configured in the
- *                  MCC GUI
- * @Example
-    SYSTEM_Initialize(void);
- */
-void SYSTEM_Initialize(void);
-
-/**
- * @Param
-    none
- * @Returns
-    none
- * @Description
-    Initializes the oscillator to the default states configured in the
- *                  MCC GUI
- * @Example
-    OSCILLATOR_Initialize(void);
- */
-void OSCILLATOR_Initialize(void);
-
-#endif	/* MCC_H */
-/**
- End of File
-*/
+#endif //SPI2_H

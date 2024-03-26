@@ -111,7 +111,8 @@ extern "C" {
     
 #define DEVICE_ID_JEDEC 0x1F2400 // For a 4Mbit memory chip.
     
-#define AT45dbxx_WAIT_TIMEOUT 10000
+//#define AT45dbxx_WAIT_TIMEOUT 17000 // Max according datasheet.
+#define AT45dbxx_WAIT_TIMEOUT 5000 // Typ according datasheet.
     
     
 #define PAGESIZE_256BYTES 0xA6

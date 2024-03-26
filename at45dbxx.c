@@ -12,7 +12,7 @@
 
 #include "mcc_generated_files/mcc.h"
 #include "mcc_generated_files/pin_manager.h"
-#include "mcc_generated_files/spi1.h"
+#include "mcc_generated_files/spi2.h"
 
 #include "at45dbxx.h"
 #include "millis.h"
@@ -94,7 +94,7 @@ void AT45DB_Reset(void)
     tData[3] = 0x00; // Send the command to Reset
 
     FLASH_CS_SetLow();
-    SPI1_WriteBlock(tData, 4); // Just send data.
+    SPI2_WriteBlock(tData, 4); // Just send data.
     __delay_ms(1);
     FLASH_CS_SetHigh();
 }
@@ -106,8 +106,8 @@ void AT45DB_Reset(void)
     volatile uint8_t rData[5];
     
     FLASH_CS_SetLow();
-    rData[0] = SPI1_ExchangeByte(AT45DB_RDDEVID); // Send the command to Read JEDEC ID
-    SPI1_ReadBlock(rData, 5); // Just receive data.
+    rData[0] = SPI2_ExchangeByte(AT45DB_RDDEVID); // Send the command to Read JEDEC ID
+    SPI2_ReadBlock(rData, 5); // Just receive data.
     FLASH_CS_SetHigh();
     
     my_AT45dbxx->jedecID = ((uint32_t)(rData[3]) << 24 |(uint32_t)(rData[2]) << 16 | (uint32_t)(rData[1]) << 8 | (uint32_t)(rData[0]));
@@ -119,8 +119,8 @@ uint8_t AT45dbxx_ReadStatus(void)
 {
     uint8_t status = 0;
     FLASH_CS_SetLow();
-    status = SPI1_ExchangeByte(0xd7);
-    status = SPI1_ExchangeByte(0x00);
+    status = SPI2_ExchangeByte(0xd7);
+    status = SPI2_ExchangeByte(0x00);
     FLASH_CS_SetHigh();
     return status;
 }
@@ -131,16 +131,16 @@ uint8_t AT45dbxx_WaitBusy(void)
     uint8_t status;
     uint16_t timeout = 0;
     FLASH_CS_SetLow();
-    status = SPI1_ExchangeByte(0xd7);
-    status = SPI1_ExchangeByte(0x00);
+    status = SPI2_ExchangeByte(0xd7);
+    status = SPI2_ExchangeByte(0x00);
     FLASH_CS_SetHigh();
     
     while(((status & 0x80) == 0))
     {
         __delay_ms(1);
         FLASH_CS_SetLow();
-        status = SPI1_ExchangeByte(0xd7);
-        status = SPI1_ExchangeByte(0x00);
+        status = SPI2_ExchangeByte(0xd7);
+        status = SPI2_ExchangeByte(0x00);
         FLASH_CS_SetHigh();
         timeout++;
         
@@ -157,7 +157,7 @@ uint8_t AT45dbxx_WaitBusy(void)
 void AT45dbxx_Resume(void)
 {
     FLASH_CS_SetLow();
-    SPI1_WriteByte(AT45DB_RESUME);
+    SPI2_WriteByte(AT45DB_RESUME);
     FLASH_CS_SetHigh();
 }
 //################################################################################################################
@@ -165,7 +165,7 @@ void AT45dbxx_Resume(void)
 void AT45dbxx_PowerDown(void)
 {
     FLASH_CS_SetLow();
-    SPI1_WriteByte(AT45DB_PWRDOWN);
+    SPI2_WriteByte(AT45DB_PWRDOWN);
     FLASH_CS_SetHigh();
 }
 //################################################################################################################
@@ -186,9 +186,9 @@ bool AT45dbxx_Init(void)
 #endif
     
     FLASH_CS_SetLow();
-    Temp0 = SPI1_ExchangeByte(AT45DB_RDDEVID); // Dummy read.
-    Temp0 = SPI1_ExchangeByte(0xa5);
-    Temp1 = SPI1_ExchangeByte(0xa5);
+    Temp0 = SPI2_ExchangeByte(AT45DB_RDDEVID); // Dummy read.
+    Temp0 = SPI2_ExchangeByte(0xa5);
+    Temp1 = SPI2_ExchangeByte(0xa5);
     FLASH_CS_SetHigh();
 
     Temp2 = AT45dbxx_ReadStatus();
@@ -288,24 +288,24 @@ bool AT45dbxx_Init(void)
 
 uint8_t AT45dbxx_EraseChip(void)
 {
-    /*AT45dbxx_Resume();
+    //AT45dbxx_Resume();
     
     if(AT45dbxx_WaitBusy())
     {
         return true;
-    }*/
+    }
     
     FLASH_CS_SetLow();
-    SPI1_ExchangeByte(0xc7);
-    SPI1_ExchangeByte(0x94);
-    SPI1_ExchangeByte(0x80);
-    SPI1_ExchangeByte(0x9a);
+    SPI2_ExchangeByte(0xc7);
+    SPI2_ExchangeByte(0x94);
+    SPI2_ExchangeByte(0x80);
+    SPI2_ExchangeByte(0x9a);
     FLASH_CS_SetHigh();
     
-    /*if(AT45dbxx_WaitBusy())
+    if(AT45dbxx_WaitBusy())
     {
         return true;
-    }*/
+    }
     
     return false;
 }
@@ -316,16 +316,17 @@ uint8_t AT45dbxx_ErasePage(uint16_t page)
     page = page << AT45dbxx.Shift;
 
     //AT45dbxx_Resume();
+    
     if(AT45dbxx_WaitBusy())
     {
         return true;
     }
 
     FLASH_CS_SetLow();
-    SPI1_ExchangeByte(AT45DB_PGERASE);
-    SPI1_ExchangeByte((page >> 16) & 0xff);
-    SPI1_ExchangeByte((page >> 8) & 0xff);
-    SPI1_ExchangeByte(page & 0xff);
+    SPI2_ExchangeByte(AT45DB_PGERASE);
+    SPI2_ExchangeByte((page >> 16) & 0xff);
+    SPI2_ExchangeByte((page >> 8) & 0xff);
+    SPI2_ExchangeByte(page & 0xff);
     FLASH_CS_SetHigh();
 
     if(AT45dbxx_WaitBusy())
@@ -340,24 +341,26 @@ uint8_t AT45dbxx_ErasePage(uint16_t page)
 uint8_t AT45dbxx_WritePage(uint8_t *Data, uint16_t len, uint16_t page)
 {
     page = page << AT45dbxx.Shift;
+    
     //AT45dbxx_Resume();
-    /*if(AT45dbxx_WaitBusy())
+    
+    if(AT45dbxx_WaitBusy())
     {
         return true;
-    }*/
+    } 
     
     FLASH_CS_SetLow();
-    SPI1_ExchangeByte(AT45DB_MNTHRUBF1);
-    SPI1_ExchangeByte((page >> 16) & 0xff);
-    SPI1_ExchangeByte((page >> 8) & 0xff);
-    SPI1_ExchangeByte(page & 0xff);
-    SPI1_ExchangeBlock(Data, len);
+    SPI2_ExchangeByte(AT45DB_MNTHRUBF1);
+    SPI2_ExchangeByte((page >> 16) & 0xff);
+    SPI2_ExchangeByte((page >> 8) & 0xff);
+    SPI2_ExchangeByte(page & 0xff);
+    SPI2_ExchangeBlock(Data, len);
     FLASH_CS_SetHigh();
     
-    /*if(AT45dbxx_WaitBusy())
+    if(AT45dbxx_WaitBusy())
     {
         return true;
-    }*/
+    }
     
     return false;
 }
@@ -372,19 +375,20 @@ uint8_t AT45dbxx_ReadPage(uint8_t* Data, uint16_t len, uint16_t page)
         len = AT45dbxx.PageSize;
     }
     
-    /*AT45dbxx_Resume();
+    //AT45dbxx_Resume();
+    
     if(AT45dbxx_WaitBusy())
     {
         return true;
-    }*/
+    }
     
     FLASH_CS_SetLow();
-    SPI1_ExchangeByte(AT45DB_RDARRAYHF);
-    SPI1_ExchangeByte((page >> 16) & 0xff);
-    SPI1_ExchangeByte((page >> 8) & 0xff);
-    SPI1_ExchangeByte(page & 0xff);
-    SPI1_ExchangeByte(0);
-    SPI1_ExchangeBlock(Data, len);
+    SPI2_ExchangeByte(AT45DB_RDARRAYHF);
+    SPI2_ExchangeByte((page >> 16) & 0xff);
+    SPI2_ExchangeByte((page >> 8) & 0xff);
+    SPI2_ExchangeByte(page & 0xff);
+    SPI2_ExchangeByte(0);
+    SPI2_ExchangeBlock(Data, len);
     FLASH_CS_SetHigh();
     
     return false;
@@ -421,7 +425,7 @@ uint8_t AT45dbxx_ChangePagesize(uint8_t _pagesize)
     tData[3] = _pagesize; // Send the command to Reset
 
     FLASH_CS_SetLow();
-    SPI1_WriteBlock(tData, 4); // Just send data.
+    SPI2_WriteBlock(tData, 4); // Just send data.
     FLASH_CS_SetHigh();
 }
 //################################################################################################################
