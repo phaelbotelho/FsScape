@@ -102,13 +102,18 @@ void main(void)
     
     endereco_atual.ui32addr = 0;
     uint8_t teste[4];
-    uint32_t adressme = 0;
+    volatile uint32_t adressme = 0;
+    volatile uint32_t adressme2 = 0;
+    volatile uint32_t adressme3 = 0;
+    volatile uint32_t check1 = 0;
+    volatile uint32_t check2 = 0;
+    volatile uint32_t check3 = 0;
     
     oldtime = millis();
     
     printf("Sistema Iniciado\n");
     
-#if 0
+#if 1
     I2C_HWini();
     I2C_ModuleStart(400000UL); // Init I2C module with 100kHz.
     bus_reset = I2C2_M_BusReset();
@@ -139,24 +144,38 @@ void main(void)
     I2C2_M_Read_Single(0xDE, 0x23, &valor2);
     printf("Valor do Endereco 0x23: %i\n", valor2);*/
     
+    /*printf("Limpando o ponteiro de enderecamento...\n");
+    FsScape_set_index_SRAM(0x00000000);*/
     
     printf("Verificando o ponteiro de enderecamento...\n");
     FsScape_get_index_SRAM(&adressme);
-    printf("O ponteiro encontrado foi: %lu\n", adressme);
+    printf("O ponteiro encontrado foi: 0x%lX\n", adressme);
     
-    printf("Alterando o endereço para: 0x12345678\n");
-    adressme = 0x12345678;
-    FsScape_set_index_SRAM(adressme);
+    printf("Alterando o endereço para: 0x12564789\n");
+    adressme3 = 0x12564789;
+    FsScape_set_index_SRAM(adressme3);
     
     
     printf("Verificando o novo ponteiro\n");
-    FsScape_get_index_SRAM(&adressme);
-    printf("O ponteiro encontrado foi: 0x%lX\n", adressme);
+    FsScape_get_index_SRAM(&adressme2);
+    printf("O ponteiro encontrado foi: 0x%lX\n", adressme2);
+    
+    
+    
+    printf("Alterando o crc para: 0x12564789\n");
+    check1 = 0x12564789;
+    FsScape_set_index_crc_SRAM(check1);
+    
+    printf("Verificando o novo crc\n");
+    FsScape_get_index_crc_SRAM(&check2);
+    printf("O crc encontrado foi: 0x%lX\n", check2);
+    
+    
     
     I2C_ModuleStop();
 #endif
     
-#if 1
+#if 0
     
     char aux[30] = {0};
     char oi[30] = {"ola mundo"};

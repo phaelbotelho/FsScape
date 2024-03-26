@@ -90,6 +90,8 @@ typedef union {
 /* ------------------------------# DEFINES #--------------------------------- */
 #define FSSCAPE_SRAM_I2C_ADDR 0xDE
 #define FSSCAPE_SRAM_IDX_ADDR 0x20
+#define FSSCAPE_SRAM_IDX_SIZE 4 // Size in bytes.
+#define FSSCAPE_SRAM_IDX_CHK_ADDR (FSSCAPE_SRAM_IDX_ADDR + FSSCAPE_SRAM_IDX_SIZE)
 
 
 #ifdef	__cplusplus

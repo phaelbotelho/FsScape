@@ -9726,34 +9726,59 @@ void main(void)
 
     endereco_atual.ui32addr = 0;
     uint8_t teste[4];
-    uint32_t adressme = 0;
+    volatile uint32_t adressme = 0;
+    volatile uint32_t adressme2 = 0;
+    volatile uint32_t adressme3 = 0;
+    volatile uint32_t check1 = 0;
+    volatile uint32_t check2 = 0;
+    volatile uint32_t check3 = 0;
 
     oldtime = millis();
 
     printf("Sistema Iniciado\n");
-# 161 "main.c"
-    char aux[30] = {0};
-    char oi[30] = {"ola mundo"};
-
-    SPI2_Initialize();
-    SPI2_Open(SPI1_DEFAULT);
-
-    valor = AT45dbxx_Init();
-
-    printf("Memory Found with JEDECID: Total size:%iMbit, Page size: %iBytes, N. pages: %i, Shift: %i\n", AT45dbxx.FlashSize_MBit, AT45dbxx.PageSize, AT45dbxx.Pages, AT45dbxx.Shift);
 
 
+    I2C_HWini();
+    I2C_ModuleStart(400000UL);
+    bus_reset = I2C2_M_BusReset();
+    printf("Init i2c bus_reset: %i\n", bus_reset);
+
+
+    if(I2C2_M_Poll(0xDE) == 0)
+    {
+        printf("O sistema identificou a memoria SRAM!!!\n");
+    }
+    else
+    {
+        printf("Ha algo de errado com a memoria SRAM!!!\n");
+    }
+# 150 "main.c"
+    printf("Verificando o ponteiro de enderecamento...\n");
+    FsScape_get_index_SRAM(&adressme);
+    printf("O ponteiro encontrado foi: 0x%lX\n", adressme);
+
+    printf("Alterando o endereço para: 0x12564789\n");
+    adressme3 = 0x12564789;
+    FsScape_set_index_SRAM(adressme3);
+
+
+    printf("Verificando o novo ponteiro\n");
+    FsScape_get_index_SRAM(&adressme2);
+    printf("O ponteiro encontrado foi: 0x%lX\n", adressme2);
 
 
 
-    valor = AT45dbxx_ReadPage(valoresrx, 11, 0);
+    printf("Alterando o crc para: 0x45698712\n");
+    check1 = 0x45698712;
+    FsScape_set_index_crc_SRAM(check1);
 
-    sprintf(aux, "%s", valoresrx);
+    printf("Verificando o novo crc\n");
+    FsScape_get_index_crc_SRAM(&check2);
+    printf("O crc encontrado foi: 0x%lX\n", check2);
 
-    printf("Leitura de buffer: %s\n", aux);
-    printf("Fim do programa");
 
-
+    I2C_ModuleStop();
+# 201 "main.c"
     while(1)
     {
 
