@@ -1,8 +1,8 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"45 fsscape.c
-[; ;fsscape.c: 45: const FsScape_interface_style_tag FsScape_SRAM_interface_style = I2C;
-[c E586 0 1 2 3 .. ]
-[n E586 . I2C SPI SERIAL PARALLEL  ]
+"46 fsscape.c
+[; ;fsscape.c: 46: const FsScape_interface_style_tag FsScape_SRAM_interface_style = I2C;
+[c E596 0 1 2 3 .. ]
+[n E596 . I2C SPI SERIAL PARALLEL  ]
 "84 ./fsscape.h
 [; ;./fsscape.h: 84: typedef union {
 [u S12 `uc -> 4 `i `ul 1 ]
@@ -13,271 +13,281 @@ Version 4.0 HI-TECH Software Intermediate Code
 "65
 [; ;./my_i2c_pic18.h: 65: extern int16_t I2C_Mem_Write(uint8_t DevAddress, uint16_t MemAdress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
 [v _I2C_Mem_Write `(s ~T0 @X0 0 ef6`uc`us`us`*uc`us`ul ]
-"40 fsscape.c
-[; ;fsscape.c: 40: uint8_t FsScape_i2c_SRAM_addr = 0;
+"41 fsscape.c
+[; ;fsscape.c: 41: uint8_t FsScape_i2c_SRAM_addr = 0;
 [v _FsScape_i2c_SRAM_addr `uc ~T0 @X0 1 e ]
 [i _FsScape_i2c_SRAM_addr
 -> -> 0 `i `uc
 ]
-"41
-[; ;fsscape.c: 41: uint8_t FsScape_i2c_EEPROM_addr = 0;
+"42
+[; ;fsscape.c: 42: uint8_t FsScape_i2c_EEPROM_addr = 0;
 [v _FsScape_i2c_EEPROM_addr `uc ~T0 @X0 1 e ]
 [i _FsScape_i2c_EEPROM_addr
 -> -> 0 `i `uc
 ]
-"42
-[; ;fsscape.c: 42: uint8_t FsScape_i2c_FLASH_addr = 0;
+"43
+[; ;fsscape.c: 43: uint8_t FsScape_i2c_FLASH_addr = 0;
 [v _FsScape_i2c_FLASH_addr `uc ~T0 @X0 1 e ]
 [i _FsScape_i2c_FLASH_addr
 -> -> 0 `i `uc
 ]
-"45
-[; ;fsscape.c: 45: const FsScape_interface_style_tag FsScape_SRAM_interface_style = I2C;
-[v _FsScape_SRAM_interface_style `CE586 ~T0 @X0 1 e ]
-[i _FsScape_SRAM_interface_style
-. `E586 0
-]
 "46
-[; ;fsscape.c: 46: const FsScape_interface_style_tag FsScape_EEPROM_interface_style = I2C;
-[v _FsScape_EEPROM_interface_style `CE586 ~T0 @X0 1 e ]
-[i _FsScape_EEPROM_interface_style
-. `E586 0
+[; ;fsscape.c: 46: const FsScape_interface_style_tag FsScape_SRAM_interface_style = I2C;
+[v _FsScape_SRAM_interface_style `CE596 ~T0 @X0 1 e ]
+[i _FsScape_SRAM_interface_style
+. `E596 0
 ]
 "47
-[; ;fsscape.c: 47: const FsScape_interface_style_tag FsScape_FLASH_interface_style = SPI;
-[v _FsScape_FLASH_interface_style `CE586 ~T0 @X0 1 e ]
-[i _FsScape_FLASH_interface_style
-. `E586 1
+[; ;fsscape.c: 47: const FsScape_interface_style_tag FsScape_EEPROM_interface_style = I2C;
+[v _FsScape_EEPROM_interface_style `CE596 ~T0 @X0 1 e ]
+[i _FsScape_EEPROM_interface_style
+. `E596 0
 ]
-"49
-[; ;fsscape.c: 49: fsscape_SRAM_index_addr_tag fsscape_SRAM_index_addr;
+"48
+[; ;fsscape.c: 48: const FsScape_interface_style_tag FsScape_FLASH_interface_style = SPI;
+[v _FsScape_FLASH_interface_style `CE596 ~T0 @X0 1 e ]
+[i _FsScape_FLASH_interface_style
+. `E596 1
+]
+"50
+[; ;fsscape.c: 50: fsscape_SRAM_index_addr_tag fsscape_SRAM_index_addr;
 [v _fsscape_SRAM_index_addr `S12 ~T0 @X0 1 e ]
-"101
-[; ;fsscape.c: 101: int16_t FsScape_get_index_SRAM(uint32_t *address)
+"105
+[; ;fsscape.c: 105: int16_t FsScape_get_index_SRAM(uint32_t *address)
 [v _FsScape_get_index_SRAM `(s ~T0 @X0 1 ef1`*ul ]
-"102
-[; ;fsscape.c: 102: {
+"106
+[; ;fsscape.c: 106: {
 {
 [e :U _FsScape_get_index_SRAM ]
-"101
-[; ;fsscape.c: 101: int16_t FsScape_get_index_SRAM(uint32_t *address)
+"105
+[; ;fsscape.c: 105: int16_t FsScape_get_index_SRAM(uint32_t *address)
 [v _address `*ul ~T0 @X0 1 r1 ]
-"102
-[; ;fsscape.c: 102: {
+"106
+[; ;fsscape.c: 106: {
 [f ]
-"103
-[; ;fsscape.c: 103:     volatile uint32_t *data = address;
+"107
+[; ;fsscape.c: 107:     volatile uint32_t *data = address;
 [v _data `*Vul ~T0 @X0 1 a ]
 [e = _data -> _address `*Vul ]
-"104
-[; ;fsscape.c: 104:     int16_t value = 0;
+"108
+[; ;fsscape.c: 108:     int16_t value = 0;
 [v _value `s ~T0 @X0 1 a ]
 [e = _value -> -> 0 `i `s ]
-"105
-[; ;fsscape.c: 105:     uint8_t _address[4];
-[v __address `uc ~T0 @X0 -> 4 `i a ]
-"107
-[; ;fsscape.c: 107:     value = I2C_Mem_Read(0xDE, 0x20, 1, _address, 4, 0);
-[e = _value ( _I2C_Mem_Read (4 , , , , , -> -> 222 `i `uc -> -> 32 `i `us -> -> 1 `i `us &U __address -> -> 4 `i `us -> -> -> 0 `i `l `ul ]
 "109
-[; ;fsscape.c: 109:     if(value == 0)
-[e $ ! == -> _value `i -> 0 `i 14  ]
-"110
-[; ;fsscape.c: 110:     {
-{
-"112
-[; ;fsscape.c: 112:         *address = ((uint32_t)_address[3] << 24) | ((uint32_t)_address[2] << 16) | ((uint32_t)_address[1] << 8) | _address[0];
-[e = *U _address | | | << -> *U + &U __address * -> -> -> 3 `i `ui `ux -> -> # *U &U __address `ui `ux `ul -> 24 `i << -> *U + &U __address * -> -> -> 2 `i `ui `ux -> -> # *U &U __address `ui `ux `ul -> 16 `i << -> *U + &U __address * -> -> -> 1 `i `ui `ux -> -> # *U &U __address `ui `ux `ul -> 8 `i -> *U + &U __address * -> -> -> 0 `i `ui `ux -> -> # *U &U __address `ui `ux `ul ]
+[; ;fsscape.c: 109:     uint8_t _address[4];
+[v __address `uc ~T0 @X0 -> 4 `i a ]
+"111
+[; ;fsscape.c: 111:     value = I2C_Mem_Read(0xDE, 0x20, 1, _address, 4, 0);
+[e = _value ( _I2C_Mem_Read (4 , , , , , -> -> 222 `i `uc -> -> 32 `i `us -> -> 1 `i `us &U __address -> -> 4 `i `us -> -> -> 0 `i `l `ul ]
 "113
-[; ;fsscape.c: 113:     }
+[; ;fsscape.c: 113:     if(value == 0)
+[e $ ! == -> _value `i -> 0 `i 14  ]
+"114
+[; ;fsscape.c: 114:     {
+{
+"116
+[; ;fsscape.c: 116:         *address = ((uint32_t)_address[3] << 24) | ((uint32_t)_address[2] << 16) | ((uint32_t)_address[1] << 8) | _address[0];
+[e = *U _address | | | << -> *U + &U __address * -> -> -> 3 `i `ui `ux -> -> # *U &U __address `ui `ux `ul -> 24 `i << -> *U + &U __address * -> -> -> 2 `i `ui `ux -> -> # *U &U __address `ui `ux `ul -> 16 `i << -> *U + &U __address * -> -> -> 1 `i `ui `ux -> -> # *U &U __address `ui `ux `ul -> 8 `i -> *U + &U __address * -> -> -> 0 `i `ui `ux -> -> # *U &U __address `ui `ux `ul ]
+"117
+[; ;fsscape.c: 117:     }
 }
 [e :U 14 ]
-"115
-[; ;fsscape.c: 115:     return value;
+"119
+[; ;fsscape.c: 119:     return value;
 [e ) _value ]
 [e $UE 13  ]
-"116
-[; ;fsscape.c: 116: }
+"120
+[; ;fsscape.c: 120: }
 [e :UE 13 ]
 }
-"118
-[; ;fsscape.c: 118: int16_t FsScape_set_index_SRAM(uint32_t address_value)
+"122
+[; ;fsscape.c: 122: int16_t FsScape_set_index_SRAM(uint32_t address_value)
 [v _FsScape_set_index_SRAM `(s ~T0 @X0 1 ef1`ul ]
-"119
-[; ;fsscape.c: 119: {
+"123
+[; ;fsscape.c: 123: {
 {
 [e :U _FsScape_set_index_SRAM ]
-"118
-[; ;fsscape.c: 118: int16_t FsScape_set_index_SRAM(uint32_t address_value)
-[v _address_value `ul ~T0 @X0 1 r1 ]
-"119
-[; ;fsscape.c: 119: {
-[f ]
-"120
-[; ;fsscape.c: 120:     uint8_t _address[4];
-[v __address `uc ~T0 @X0 -> 4 `i a ]
 "122
-[; ;fsscape.c: 122:     _address[0] = (uint8_t)(address_value);
-[e = *U + &U __address * -> -> -> 0 `i `ui `ux -> -> # *U &U __address `ui `ux -> _address_value `uc ]
+[; ;fsscape.c: 122: int16_t FsScape_set_index_SRAM(uint32_t address_value)
+[v _address_value `ul ~T0 @X0 1 r1 ]
 "123
-[; ;fsscape.c: 123:     _address[1] = (uint8_t)(address_value >> 8);
-[e = *U + &U __address * -> -> -> 1 `i `ui `ux -> -> # *U &U __address `ui `ux -> >> _address_value -> 8 `i `uc ]
+[; ;fsscape.c: 123: {
+[f ]
 "124
-[; ;fsscape.c: 124:     _address[2] = (uint8_t)(address_value >> 16);
-[e = *U + &U __address * -> -> -> 2 `i `ui `ux -> -> # *U &U __address `ui `ux -> >> _address_value -> 16 `i `uc ]
-"125
-[; ;fsscape.c: 125:     _address[3] = (uint8_t)(address_value >> 24);
-[e = *U + &U __address * -> -> -> 3 `i `ui `ux -> -> # *U &U __address `ui `ux -> >> _address_value -> 24 `i `uc ]
+[; ;fsscape.c: 124:     uint8_t _address[4];
+[v __address `uc ~T0 @X0 -> 4 `i a ]
+"126
+[; ;fsscape.c: 126:     _address[0] = (uint8_t)(address_value);
+[e = *U + &U __address * -> -> -> 0 `i `ui `ux -> -> # *U &U __address `ui `ux -> _address_value `uc ]
 "127
-[; ;fsscape.c: 127:     return I2C_Mem_Write(0xDE, 0x20, 1, _address, 4, 0);
+[; ;fsscape.c: 127:     _address[1] = (uint8_t)(address_value >> 8);
+[e = *U + &U __address * -> -> -> 1 `i `ui `ux -> -> # *U &U __address `ui `ux -> >> _address_value -> 8 `i `uc ]
+"128
+[; ;fsscape.c: 128:     _address[2] = (uint8_t)(address_value >> 16);
+[e = *U + &U __address * -> -> -> 2 `i `ui `ux -> -> # *U &U __address `ui `ux -> >> _address_value -> 16 `i `uc ]
+"129
+[; ;fsscape.c: 129:     _address[3] = (uint8_t)(address_value >> 24);
+[e = *U + &U __address * -> -> -> 3 `i `ui `ux -> -> # *U &U __address `ui `ux -> >> _address_value -> 24 `i `uc ]
+"131
+[; ;fsscape.c: 131:     return I2C_Mem_Write(0xDE, 0x20, 1, _address, 4, 0);
 [e ) ( _I2C_Mem_Write (4 , , , , , -> -> 222 `i `uc -> -> 32 `i `us -> -> 1 `i `us &U __address -> -> 4 `i `us -> -> -> 0 `i `l `ul ]
 [e $UE 15  ]
-"128
-[; ;fsscape.c: 128: }
+"132
+[; ;fsscape.c: 132: }
 [e :UE 15 ]
 }
-"130
-[; ;fsscape.c: 130: int16_t FsScape_get_index_addr_SRAM()
+"134
+[; ;fsscape.c: 134: int16_t FsScape_get_index_addr_SRAM()
 [v _FsScape_get_index_addr_SRAM `(s ~T0 @X0 1 ef ]
-"131
-[; ;fsscape.c: 131: {
+"135
+[; ;fsscape.c: 135: {
 {
 [e :U _FsScape_get_index_addr_SRAM ]
 [f ]
-"133
-[; ;fsscape.c: 133: }
+"137
+[; ;fsscape.c: 137: }
 [e :UE 16 ]
 }
-"135
-[; ;fsscape.c: 135: int16_t FsScape_set_index_addr_SRAM(uint8_t address_value)
+"139
+[; ;fsscape.c: 139: int16_t FsScape_set_index_addr_SRAM(uint8_t address_value)
 [v _FsScape_set_index_addr_SRAM `(s ~T0 @X0 1 ef1`uc ]
-"136
-[; ;fsscape.c: 136: {
+"140
+[; ;fsscape.c: 140: {
 {
 [e :U _FsScape_set_index_addr_SRAM ]
-"135
-[; ;fsscape.c: 135: int16_t FsScape_set_index_addr_SRAM(uint8_t address_value)
+"139
+[; ;fsscape.c: 139: int16_t FsScape_set_index_addr_SRAM(uint8_t address_value)
 [v _address_value `uc ~T0 @X0 1 r1 ]
-"136
-[; ;fsscape.c: 136: {
-[f ]
-"138
-[; ;fsscape.c: 138: }
-[e :UE 17 ]
-}
 "140
-[; ;fsscape.c: 140: int16_t FsScape_get_index_crc_SRAM(uint32_t *crc)
-[v _FsScape_get_index_crc_SRAM `(s ~T0 @X0 1 ef1`*ul ]
-"141
-[; ;fsscape.c: 141: {
-{
-[e :U _FsScape_get_index_crc_SRAM ]
-"140
-[; ;fsscape.c: 140: int16_t FsScape_get_index_crc_SRAM(uint32_t *crc)
-[v _crc `*ul ~T0 @X0 1 r1 ]
-"141
-[; ;fsscape.c: 141: {
+[; ;fsscape.c: 140: {
 [f ]
 "142
-[; ;fsscape.c: 142:     volatile uint32_t *data = crc;
+[; ;fsscape.c: 142: }
+[e :UE 17 ]
+}
+"144
+[; ;fsscape.c: 144: int16_t FsScape_get_index_crc_SRAM(uint32_t *crc)
+[v _FsScape_get_index_crc_SRAM `(s ~T0 @X0 1 ef1`*ul ]
+"145
+[; ;fsscape.c: 145: {
+{
+[e :U _FsScape_get_index_crc_SRAM ]
+"144
+[; ;fsscape.c: 144: int16_t FsScape_get_index_crc_SRAM(uint32_t *crc)
+[v _crc `*ul ~T0 @X0 1 r1 ]
+"145
+[; ;fsscape.c: 145: {
+[f ]
+"146
+[; ;fsscape.c: 146:     volatile uint32_t *data = crc;
 [v _data `*Vul ~T0 @X0 1 a ]
 [e = _data -> _crc `*Vul ]
-"143
-[; ;fsscape.c: 143:     int16_t value = 0;
+"147
+[; ;fsscape.c: 147:     int16_t value = 0;
 [v _value `s ~T0 @X0 1 a ]
 [e = _value -> -> 0 `i `s ]
-"144
-[; ;fsscape.c: 144:     uint8_t _address[4];
-[v __address `uc ~T0 @X0 -> 4 `i a ]
-"146
-[; ;fsscape.c: 146:     value = I2C_Mem_Read(0xDE, (0x20 + 4), 1, _address, 4, 0);
-[e = _value ( _I2C_Mem_Read (4 , , , , , -> -> 222 `i `uc -> + -> 32 `i -> 4 `i `us -> -> 1 `i `us &U __address -> -> 4 `i `us -> -> -> 0 `i `l `ul ]
 "148
-[; ;fsscape.c: 148:     if(value == 0)
-[e $ ! == -> _value `i -> 0 `i 19  ]
-"149
-[; ;fsscape.c: 149:     {
-{
-"151
-[; ;fsscape.c: 151:         *crc = ((uint32_t)_address[3] << 24) | ((uint32_t)_address[2] << 16) | ((uint32_t)_address[1] << 8) | _address[0];
-[e = *U _crc | | | << -> *U + &U __address * -> -> -> 3 `i `ui `ux -> -> # *U &U __address `ui `ux `ul -> 24 `i << -> *U + &U __address * -> -> -> 2 `i `ui `ux -> -> # *U &U __address `ui `ux `ul -> 16 `i << -> *U + &U __address * -> -> -> 1 `i `ui `ux -> -> # *U &U __address `ui `ux `ul -> 8 `i -> *U + &U __address * -> -> -> 0 `i `ui `ux -> -> # *U &U __address `ui `ux `ul ]
+[; ;fsscape.c: 148:     uint8_t _address[4];
+[v __address `uc ~T0 @X0 -> 4 `i a ]
+"150
+[; ;fsscape.c: 150:     value = I2C_Mem_Read(0xDE, (0x20 + 4), 1, _address, 4, 0);
+[e = _value ( _I2C_Mem_Read (4 , , , , , -> -> 222 `i `uc -> + -> 32 `i -> 4 `i `us -> -> 1 `i `us &U __address -> -> 4 `i `us -> -> -> 0 `i `l `ul ]
 "152
-[; ;fsscape.c: 152:     }
+[; ;fsscape.c: 152:     if(value == 0)
+[e $ ! == -> _value `i -> 0 `i 19  ]
+"153
+[; ;fsscape.c: 153:     {
+{
+"155
+[; ;fsscape.c: 155:         *crc = ((uint32_t)_address[3] << 24) | ((uint32_t)_address[2] << 16) | ((uint32_t)_address[1] << 8) | _address[0];
+[e = *U _crc | | | << -> *U + &U __address * -> -> -> 3 `i `ui `ux -> -> # *U &U __address `ui `ux `ul -> 24 `i << -> *U + &U __address * -> -> -> 2 `i `ui `ux -> -> # *U &U __address `ui `ux `ul -> 16 `i << -> *U + &U __address * -> -> -> 1 `i `ui `ux -> -> # *U &U __address `ui `ux `ul -> 8 `i -> *U + &U __address * -> -> -> 0 `i `ui `ux -> -> # *U &U __address `ui `ux `ul ]
+"156
+[; ;fsscape.c: 156:     }
 }
 [e :U 19 ]
-"154
-[; ;fsscape.c: 154:     return value;
+"158
+[; ;fsscape.c: 158:     return value;
 [e ) _value ]
 [e $UE 18  ]
-"155
-[; ;fsscape.c: 155: }
+"159
+[; ;fsscape.c: 159: }
 [e :UE 18 ]
 }
-"157
-[; ;fsscape.c: 157: int16_t FsScape_set_index_crc_SRAM(uint32_t crc_value)
+"161
+[; ;fsscape.c: 161: int16_t FsScape_set_index_crc_SRAM(uint32_t crc_value)
 [v _FsScape_set_index_crc_SRAM `(s ~T0 @X0 1 ef1`ul ]
-"158
-[; ;fsscape.c: 158: {
+"162
+[; ;fsscape.c: 162: {
 {
 [e :U _FsScape_set_index_crc_SRAM ]
-"157
-[; ;fsscape.c: 157: int16_t FsScape_set_index_crc_SRAM(uint32_t crc_value)
-[v _crc_value `ul ~T0 @X0 1 r1 ]
-"158
-[; ;fsscape.c: 158: {
-[f ]
-"159
-[; ;fsscape.c: 159:     uint8_t _address[4];
-[v __address `uc ~T0 @X0 -> 4 `i a ]
 "161
-[; ;fsscape.c: 161:     _address[0] = (uint8_t)(crc_value);
-[e = *U + &U __address * -> -> -> 0 `i `ui `ux -> -> # *U &U __address `ui `ux -> _crc_value `uc ]
+[; ;fsscape.c: 161: int16_t FsScape_set_index_crc_SRAM(uint32_t crc_value)
+[v _crc_value `ul ~T0 @X0 1 r1 ]
 "162
-[; ;fsscape.c: 162:     _address[1] = (uint8_t)(crc_value >> 8);
-[e = *U + &U __address * -> -> -> 1 `i `ui `ux -> -> # *U &U __address `ui `ux -> >> _crc_value -> 8 `i `uc ]
+[; ;fsscape.c: 162: {
+[f ]
 "163
-[; ;fsscape.c: 163:     _address[2] = (uint8_t)(crc_value >> 16);
-[e = *U + &U __address * -> -> -> 2 `i `ui `ux -> -> # *U &U __address `ui `ux -> >> _crc_value -> 16 `i `uc ]
-"164
-[; ;fsscape.c: 164:     _address[3] = (uint8_t)(crc_value >> 24);
-[e = *U + &U __address * -> -> -> 3 `i `ui `ux -> -> # *U &U __address `ui `ux -> >> _crc_value -> 24 `i `uc ]
+[; ;fsscape.c: 163:     uint8_t _address[4];
+[v __address `uc ~T0 @X0 -> 4 `i a ]
+"165
+[; ;fsscape.c: 165:     _address[0] = (uint8_t)(crc_value);
+[e = *U + &U __address * -> -> -> 0 `i `ui `ux -> -> # *U &U __address `ui `ux -> _crc_value `uc ]
 "166
-[; ;fsscape.c: 166:     return I2C_Mem_Write(0xDE, (0x20 + 4), 1, _address, 4, 0);
+[; ;fsscape.c: 166:     _address[1] = (uint8_t)(crc_value >> 8);
+[e = *U + &U __address * -> -> -> 1 `i `ui `ux -> -> # *U &U __address `ui `ux -> >> _crc_value -> 8 `i `uc ]
+"167
+[; ;fsscape.c: 167:     _address[2] = (uint8_t)(crc_value >> 16);
+[e = *U + &U __address * -> -> -> 2 `i `ui `ux -> -> # *U &U __address `ui `ux -> >> _crc_value -> 16 `i `uc ]
+"168
+[; ;fsscape.c: 168:     _address[3] = (uint8_t)(crc_value >> 24);
+[e = *U + &U __address * -> -> -> 3 `i `ui `ux -> -> # *U &U __address `ui `ux -> >> _crc_value -> 24 `i `uc ]
+"170
+[; ;fsscape.c: 170:     return I2C_Mem_Write(0xDE, (0x20 + 4), 1, _address, 4, 0);
 [e ) ( _I2C_Mem_Write (4 , , , , , -> -> 222 `i `uc -> + -> 32 `i -> 4 `i `us -> -> 1 `i `us &U __address -> -> 4 `i `us -> -> -> 0 `i `l `ul ]
 [e $UE 20  ]
-"167
-[; ;fsscape.c: 167: }
+"171
+[; ;fsscape.c: 171: }
 [e :UE 20 ]
 }
-"169
-[; ;fsscape.c: 169: int16_t FsScape_check_index_crc(uint32_t address_value)
-[v _FsScape_check_index_crc `(s ~T0 @X0 1 ef1`ul ]
-"170
-[; ;fsscape.c: 170: {
+"173
+[; ;fsscape.c: 173: uint32_t FsScape_check_index_crc(uint32_t crc_value)
+[v _FsScape_check_index_crc `(ul ~T0 @X0 1 ef1`ul ]
+"174
+[; ;fsscape.c: 174: {
 {
 [e :U _FsScape_check_index_crc ]
-"169
-[; ;fsscape.c: 169: int16_t FsScape_check_index_crc(uint32_t address_value)
-[v _address_value `ul ~T0 @X0 1 r1 ]
-"170
-[; ;fsscape.c: 170: {
-[f ]
-"171
-[; ;fsscape.c: 171:     uint8_t _address[4];
-[v __address `uc ~T0 @X0 -> 4 `i a ]
 "173
-[; ;fsscape.c: 173:     _address[0] = (uint8_t)(address_value);
-[e = *U + &U __address * -> -> -> 0 `i `ui `ux -> -> # *U &U __address `ui `ux -> _address_value `uc ]
+[; ;fsscape.c: 173: uint32_t FsScape_check_index_crc(uint32_t crc_value)
+[v _crc_value `ul ~T0 @X0 1 r1 ]
 "174
-[; ;fsscape.c: 174:     _address[1] = (uint8_t)(address_value >> 8);
-[e = *U + &U __address * -> -> -> 1 `i `ui `ux -> -> # *U &U __address `ui `ux -> >> _address_value -> 8 `i `uc ]
-"175
-[; ;fsscape.c: 175:     _address[2] = (uint8_t)(address_value >> 16);
-[e = *U + &U __address * -> -> -> 2 `i `ui `ux -> -> # *U &U __address `ui `ux -> >> _address_value -> 16 `i `uc ]
-"176
-[; ;fsscape.c: 176:     _address[3] = (uint8_t)(address_value >> 24);
-[e = *U + &U __address * -> -> -> 3 `i `ui `ux -> -> # *U &U __address `ui `ux -> >> _address_value -> 24 `i `uc ]
-"178
-[; ;fsscape.c: 178: }
+[; ;fsscape.c: 174: {
+[f ]
+"183
+[; ;fsscape.c: 183:     return 0;
+[e ) -> -> -> 0 `i `l `ul ]
+[e $UE 21  ]
+"184
+[; ;fsscape.c: 184: }
 [e :UE 21 ]
+}
+"186
+[; ;fsscape.c: 186: uint32_t olameu_mundo(uint32_t crc_value)
+[v _olameu_mundo `(ul ~T0 @X0 1 ef1`ul ]
+"187
+[; ;fsscape.c: 187: {
+{
+[e :U _olameu_mundo ]
+"186
+[; ;fsscape.c: 186: uint32_t olameu_mundo(uint32_t crc_value)
+[v _crc_value `ul ~T0 @X0 1 r1 ]
+"187
+[; ;fsscape.c: 187: {
+[f ]
+"196
+[; ;fsscape.c: 196:     return 0;
+[e ) -> -> -> 0 `i `l `ul ]
+[e $UE 22  ]
+"197
+[; ;fsscape.c: 197: }
+[e :UE 22 ]
 }

@@ -1,0 +1,112 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"46 crc32.c
+[; ;crc32.c: 46: uint32_t calculate_crc32(uint32_t state, uint8_t data)
+[v _calculate_crc32 `(ul ~T0 @X0 1 ef2`ul`uc ]
+"47
+[; ;crc32.c: 47: {
+{
+[e :U _calculate_crc32 ]
+"46
+[; ;crc32.c: 46: uint32_t calculate_crc32(uint32_t state, uint8_t data)
+[v _state `ul ~T0 @X0 1 r1 ]
+[v _data `uc ~T0 @X0 1 r2 ]
+"47
+[; ;crc32.c: 47: {
+[f ]
+"48
+[; ;crc32.c: 48:     uint32_t crc = state;
+[v _crc `ul ~T0 @X0 1 a ]
+[e = _crc _state ]
+"49
+[; ;crc32.c: 49:     uint16_t i = 0, j = 0;
+[v _i `us ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `us ]
+[v _j `us ~T0 @X0 1 a ]
+[e = _j -> -> 0 `i `us ]
+"51
+[; ;crc32.c: 51:     for(j = 0; j < 8; j++)
+{
+[e = _j -> -> 0 `i `us ]
+[e $ < -> _j `ui -> -> 8 `i `ui 2  ]
+[e $U 3  ]
+[e :U 2 ]
+"52
+[; ;crc32.c: 52:     {
+{
+"53
+[; ;crc32.c: 53:         uint32_t b = (data^crc)&1;
+[v _b `ul ~T0 @X0 1 a ]
+[e = _b & ^ -> _data `ul _crc -> -> -> 1 `i `l `ul ]
+"54
+[; ;crc32.c: 54:         crc >>= 1;
+[e =>> _crc -> -> 1 `i `ul ]
+"55
+[; ;crc32.c: 55:         if(b) crc = crc^0xEDB88320;
+[e $ ! != _b -> -> -> 0 `i `l `ul 5  ]
+[e = _crc ^ _crc -> 3988292384 `ul ]
+[e :U 5 ]
+"56
+[; ;crc32.c: 56:         data >>= 1;
+[e =>> _data -> -> 1 `i `uc ]
+"57
+[; ;crc32.c: 57:     }
+}
+[e ++ _j -> -> 1 `i `us ]
+[e $ < -> _j `ui -> -> 8 `i `ui 2  ]
+[e :U 3 ]
+}
+"59
+[; ;crc32.c: 59:     return crc;
+[e ) _crc ]
+[e $UE 1  ]
+"60
+[; ;crc32.c: 60: }
+[e :UE 1 ]
+}
+"64
+[; ;crc32.c: 64: uint32_t calculate_crc32_buffer(const uint8_t *buffer, uint8_t size)
+[v _calculate_crc32_buffer `(ul ~T0 @X0 1 ef2`*Cuc`uc ]
+"65
+[; ;crc32.c: 65: {
+{
+[e :U _calculate_crc32_buffer ]
+"64
+[; ;crc32.c: 64: uint32_t calculate_crc32_buffer(const uint8_t *buffer, uint8_t size)
+[v _buffer `*Cuc ~T0 @X0 1 r1 ]
+[v _size `uc ~T0 @X0 1 r2 ]
+"65
+[; ;crc32.c: 65: {
+[f ]
+"66
+[; ;crc32.c: 66:     uint32_t crc = 0xFFFFFFFF;
+[v _crc `ul ~T0 @X0 1 a ]
+[e = _crc -> 4294967295 `ul ]
+"68
+[; ;crc32.c: 68:     for(uint8_t i = 0; i < size; ++i)
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $U 10  ]
+[e :U 7 ]
+"69
+[; ;crc32.c: 69:     {
+{
+"70
+[; ;crc32.c: 70:         crc = calculate_crc32(crc, buffer[i]);
+[e = _crc ( _calculate_crc32 (2 , _crc *U + _buffer * -> _i `ux -> -> # *U _buffer `ui `ux ]
+"71
+[; ;crc32.c: 71:     }
+}
+[e =+ _i -> -> 1 `i `uc ]
+[e :U 10 ]
+[e $ < -> _i `i -> _size `i 7  ]
+[e :U 8 ]
+}
+"73
+[; ;crc32.c: 73:     return crc ^ 0xFFFFFFFF;
+[e ) ^ _crc -> 4294967295 `ul ]
+[e $UE 6  ]
+"74
+[; ;crc32.c: 74: }
+[e :UE 6 ]
+}

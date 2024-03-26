@@ -360,6 +360,9 @@ typedef union {
     uint8_t ui8addr[4];
     uint32_t ui32addr;
 }fsscape_SRAM_index_addr_tag;
+# 96 "./fsscape.h"
+uint32_t olameu_mundo(uint32_t crc_value);
+uint32_t FsScape_check_index_crc(uint32_t crc_value);
 # 20 "fsscape.c" 2
 
 # 1 "./my_i2c_pic18.h" 1
@@ -387,6 +390,12 @@ extern void I2C2_M_ClearBus();
 extern int16_t I2C_Mem_Write(uint8_t DevAddress, uint16_t MemAdress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
 extern int16_t I2C_Mem_Read(uint8_t DevAddress, uint16_t MemAdress, uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
 # 21 "fsscape.c" 2
+
+# 1 "./crc32.h" 1
+# 21 "./crc32.h"
+uint32_t calculate_crc32(uint32_t state, uint8_t data);
+uint32_t calculate_crc32_buffer(const uint8_t *buffer, uint8_t size);
+# 22 "fsscape.c" 2
 
 
 
@@ -427,6 +436,9 @@ int16_t FsScape_get_index_addr_SRAM();
 int16_t FsScape_set_index_addr_SRAM(uint8_t address_value);
 int16_t FsScape_get_index_crc_SRAM(uint32_t *crc);
 int16_t FsScape_set_index_crc_SRAM(uint32_t crc_value);
+uint32_t FsScape_check_index_crc(uint32_t crc_value);
+uint32_t olameu_mundo(uint32_t crc_value);
+
 
 
 int16_t FsScape_get_index_EEPROM(fsscape_Address_tag *address);
@@ -440,7 +452,7 @@ int16_t FsScape_get_index_addr_FLASH(fsscape_Address_tag *address);
 int16_t FsScape_set_index_addr_FLASH(fsscape_Address_tag address_value);
 
 int16_t FsScape_get_index_auto(fsscape_Address_tag *address);
-# 101 "fsscape.c"
+# 105 "fsscape.c"
 int16_t FsScape_get_index_SRAM(uint32_t *address)
 {
     volatile uint32_t *data = address;
@@ -509,13 +521,14 @@ int16_t FsScape_set_index_crc_SRAM(uint32_t crc_value)
     return I2C_Mem_Write(0xDE, (0x20 + 4), 1, _address, 4, 0);
 }
 
-int16_t FsScape_check_index_crc(uint32_t address_value)
+uint32_t FsScape_check_index_crc(uint32_t crc_value)
 {
-    uint8_t _address[4];
+# 183 "fsscape.c"
+    return 0;
+}
 
-    _address[0] = (uint8_t)(address_value);
-    _address[1] = (uint8_t)(address_value >> 8);
-    _address[2] = (uint8_t)(address_value >> 16);
-    _address[3] = (uint8_t)(address_value >> 24);
-
+uint32_t olameu_mundo(uint32_t crc_value)
+{
+# 196 "fsscape.c"
+    return 0;
 }

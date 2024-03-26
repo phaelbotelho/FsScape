@@ -19,6 +19,7 @@
 /* --------------------------# LOCAL INCLUDES #------------------------------ */
 #include "fsscape.h"
 #include "my_i2c_pic18.h"
+#include "crc32.h"
 /* -------------------------------------------------------------------------- */
 
 
@@ -58,6 +59,9 @@ int16_t FsScape_get_index_addr_SRAM();
 int16_t FsScape_set_index_addr_SRAM(uint8_t address_value);
 int16_t FsScape_get_index_crc_SRAM(uint32_t *crc);
 int16_t FsScape_set_index_crc_SRAM(uint32_t crc_value);
+uint32_t FsScape_check_index_crc(uint32_t crc_value);
+uint32_t olameu_mundo(uint32_t crc_value);
+
 
 // Interact with the EEPROM
 int16_t FsScape_get_index_EEPROM(fsscape_Address_tag *address);
@@ -166,7 +170,17 @@ int16_t FsScape_set_index_crc_SRAM(uint32_t crc_value)
     return I2C_Mem_Write(FSSCAPE_SRAM_I2C_ADDR, FSSCAPE_SRAM_IDX_CHK_ADDR, 1, _address, 4, 0);
 }
 
-int16_t FsScape_check_index_crc(uint32_t address_value)
+uint32_t FsScape_check_index_crc(uint32_t crc_value)
 {
+    uint8_t _address[4];
+    volatile uint32_t crc_computed;
     
+    _address[3] = (uint8_t)(crc_value);
+    _address[2] = (uint8_t)(crc_value >> 8);
+    _address[1] = (uint8_t)(crc_value >> 16);
+    _address[0] = (uint8_t)(crc_value >> 24);
+    
+    crc_computed = calculate_crc32_buffer(_address, 4);
+    
+    return crc_computed;
 }

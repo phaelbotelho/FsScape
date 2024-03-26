@@ -93,6 +93,7 @@ typedef union {
 #define FSSCAPE_SRAM_IDX_SIZE 4 // Size in bytes.
 #define FSSCAPE_SRAM_IDX_CHK_ADDR (FSSCAPE_SRAM_IDX_ADDR + FSSCAPE_SRAM_IDX_SIZE)
 
+uint32_t FsScape_check_index_crc(uint32_t crc_value);
 
 #ifdef	__cplusplus
 }

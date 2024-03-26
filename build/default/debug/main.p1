@@ -33,7 +33,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "21 ./millis.h
 [; ;./millis.h: 21: void increment_interrupt();
 [v _increment_interrupt `(v ~T0 @X0 0 e? ]
-[v F6392 `(v ~T0 @X0 0 tf ]
+[v F6396 `(v ~T0 @X0 0 tf ]
 "15037 C:/Users/Raphael/.mchp_packs/Microchip/PIC18F-K_DFP/1.13.292/xc8\pic\include\proc\pic18f26k22.h
 [; ;C:/Users/Raphael/.mchp_packs/Microchip/PIC18F-K_DFP/1.13.292/xc8\pic\include\proc\pic18f26k22.h: 15037:     struct {
 [s S728 :1 `uc 1 ]
@@ -110,18 +110,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "51
 [; ;./my_i2c_pic18.h: 51: extern int16_t I2C2_M_Poll(uint8_t);
 [v _I2C2_M_Poll `(s ~T0 @X0 0 ef1`uc ]
-"151 main.c
-[; ;main.c: 151:     FsScape_get_index_SRAM(&adressme);
+"152 main.c
+[; ;main.c: 152:     FsScape_get_index_SRAM(&adressme);
 [v _FsScape_get_index_SRAM `(i ~T0 @X0 0 e? ]
-"156
-[; ;main.c: 156:     FsScape_set_index_SRAM(adressme3);
+"157
+[; ;main.c: 157:     FsScape_set_index_SRAM(adressme3);
 [v _FsScape_set_index_SRAM `(i ~T0 @X0 0 e? ]
-"167
-[; ;main.c: 167:     FsScape_set_index_crc_SRAM(check1);
+"168
+[; ;main.c: 168:     FsScape_set_index_crc_SRAM(check1);
 [v _FsScape_set_index_crc_SRAM `(i ~T0 @X0 0 e? ]
-"170
-[; ;main.c: 170:     FsScape_get_index_crc_SRAM(&check2);
+"171
+[; ;main.c: 171:     FsScape_get_index_crc_SRAM(&check2);
 [v _FsScape_get_index_crc_SRAM `(i ~T0 @X0 0 e? ]
+"97 ./fsscape.h
+[; ;./fsscape.h: 97: uint32_t FsScape_check_index_crc(uint32_t crc_value);
+[v _FsScape_check_index_crc `(ul ~T0 @X0 0 ef1`ul ]
 "47 ./my_i2c_pic18.h
 [; ;./my_i2c_pic18.h: 47: void I2C_ModuleStop();
 [v _I2C_ModuleStop `(v ~T0 @X0 0 e? ]
@@ -872,8 +875,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [e :U _main ]
 [f ]
-[v F6383 `uc ~T0 @X0 -> 11 `i s ]
-[i F6383
+[v F6387 `uc ~T0 @X0 -> 11 `i s ]
+[i F6387
 :U ..
 "64
 [; ;main.c: 64:     char valorestx[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k'};
@@ -891,9 +894,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 [v _valorestx `uc ~T0 @X0 -> 11 `i a ]
-[e = _valorestx F6383 ]
-[v F6385 `uc ~T0 @X0 -> 254 `i s ]
-[i F6385
+[e = _valorestx F6387 ]
+[v F6389 `uc ~T0 @X0 -> 254 `i s ]
+[i F6389
 :U ..
 "65
 [; ;main.c: 65:     uint8_t valoresrx[254] = {0};
@@ -901,7 +904,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 [v _valoresrx `uc ~T0 @X0 -> 254 `i a ]
-[e = _valoresrx F6385 ]
+[e = _valoresrx F6389 ]
 "66
 [; ;main.c: 66:     volatile uint8_t valor = 0;
 [v _valor `Vuc ~T0 @X0 1 a ]
@@ -933,7 +936,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 843 ]
 "76
 [; ;main.c: 76:     TMR1_SetInterruptHandler(increment_interrupt);
-[e ( _TMR1_SetInterruptHandler (1 -> &U _increment_interrupt `*F6392 ]
+[e ( _TMR1_SetInterruptHandler (1 -> &U _increment_interrupt `*F6396 ]
 "80
 [; ;main.c: 80:     RCONbits.SBOREN = 0;
 [e = . . _RCONbits 5 6 -> -> 0 `i `uc ]
@@ -979,112 +982,128 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 110:     volatile uint32_t check3 = 0;
 [v _check3 `Vul ~T0 @X0 1 a ]
 [e = _check3 -> -> -> 0 `i `l `ul ]
-"112
-[; ;main.c: 112:     oldtime = millis();
+"111
+[; ;main.c: 111:     volatile uint32_t check4 = 0;
+[v _check4 `Vul ~T0 @X0 1 a ]
+[e = _check4 -> -> -> 0 `i `l `ul ]
+"113
+[; ;main.c: 113:     oldtime = millis();
 [e = _oldtime ( _millis ..  ]
-"114
-[; ;main.c: 114:     printf("Sistema Iniciado\n");
+"115
+[; ;main.c: 115:     printf("Sistema Iniciado\n");
 [e ( _printf :s 1C ]
-"117
-[; ;main.c: 117:     I2C_HWini();
-[e ( _I2C_HWini ..  ]
 "118
-[; ;main.c: 118:     I2C_ModuleStart(400000UL);
-[e ( _I2C_ModuleStart (1 -> 400000 `ul ]
+[; ;main.c: 118:     I2C_HWini();
+[e ( _I2C_HWini ..  ]
 "119
-[; ;main.c: 119:     bus_reset = I2C2_M_BusReset();
-[e = _bus_reset ( _I2C2_M_BusReset ..  ]
+[; ;main.c: 119:     I2C_ModuleStart(400000UL);
+[e ( _I2C_ModuleStart (1 -> 400000 `ul ]
 "120
-[; ;main.c: 120:     printf("Init i2c bus_reset: %i\n", bus_reset);
+[; ;main.c: 120:     bus_reset = I2C2_M_BusReset();
+[e = _bus_reset ( _I2C2_M_BusReset ..  ]
+"121
+[; ;main.c: 121:     printf("Init i2c bus_reset: %i\n", bus_reset);
 [e ( _printf , (. :s 2C -> _bus_reset `i ]
-"123
-[; ;main.c: 123:     if(I2C2_M_Poll(0xDE) == 0)
-[e $ ! == -> ( _I2C2_M_Poll (1 -> -> 222 `i `uc `i -> 0 `i 845  ]
 "124
-[; ;main.c: 124:     {
-{
+[; ;main.c: 124:     if(I2C2_M_Poll(0xDE) == 0)
+[e $ ! == -> ( _I2C2_M_Poll (1 -> -> 222 `i `uc `i -> 0 `i 845  ]
 "125
-[; ;main.c: 125:         printf("O sistema identificou a memoria SRAM!!!\n");
-[e ( _printf :s 3C ]
+[; ;main.c: 125:     {
+{
 "126
-[; ;main.c: 126:     }
+[; ;main.c: 126:         printf("O sistema identificou a memoria SRAM!!!\n");
+[e ( _printf :s 3C ]
+"127
+[; ;main.c: 127:     }
 }
 [e $U 846  ]
-"127
-[; ;main.c: 127:     else
-[e :U 845 ]
 "128
-[; ;main.c: 128:     {
-{
+[; ;main.c: 128:     else
+[e :U 845 ]
 "129
-[; ;main.c: 129:         printf("Ha algo de errado com a memoria SRAM!!!\n");
-[e ( _printf :s 4C ]
+[; ;main.c: 129:     {
+{
 "130
-[; ;main.c: 130:     }
+[; ;main.c: 130:         printf("Ha algo de errado com a memoria SRAM!!!\n");
+[e ( _printf :s 4C ]
+"131
+[; ;main.c: 131:     }
 }
 [e :U 846 ]
-"150
-[; ;main.c: 150:     printf("Verificando o ponteiro de enderecamento...\n");
-[e ( _printf :s 5C ]
 "151
-[; ;main.c: 151:     FsScape_get_index_SRAM(&adressme);
-[e ( _FsScape_get_index_SRAM &U _adressme ]
+[; ;main.c: 151:     printf("Verificando o ponteiro de enderecamento...\n");
+[e ( _printf :s 5C ]
 "152
-[; ;main.c: 152:     printf("O ponteiro encontrado foi: 0x%lX\n", adressme);
+[; ;main.c: 152:     FsScape_get_index_SRAM(&adressme);
+[e ( _FsScape_get_index_SRAM &U _adressme ]
+"153
+[; ;main.c: 153:     printf("O ponteiro encontrado foi: 0x%lX\n", adressme);
 [e ( _printf , (. :s 6C _adressme ]
-"154
-[; ;main.c: 154:     printf("Alterando o endereço para: 0x12564789\n");
-[e ( _printf :s 7C ]
 "155
-[; ;main.c: 155:     adressme3 = 0x12564789;
-[e = _adressme3 -> -> 307644297 `l `ul ]
+[; ;main.c: 155:     printf("Alterando o endere<E7>o para: 0x12564789\n");
+[e ( _printf :s 7C ]
 "156
-[; ;main.c: 156:     FsScape_set_index_SRAM(adressme3);
+[; ;main.c: 156:     adressme3 = 0x12564789;
+[e = _adressme3 -> -> 307644297 `l `ul ]
+"157
+[; ;main.c: 157:     FsScape_set_index_SRAM(adressme3);
 [e ( _FsScape_set_index_SRAM _adressme3 ]
-"159
-[; ;main.c: 159:     printf("Verificando o novo ponteiro\n");
-[e ( _printf :s 8C ]
 "160
-[; ;main.c: 160:     FsScape_get_index_SRAM(&adressme2);
-[e ( _FsScape_get_index_SRAM &U _adressme2 ]
+[; ;main.c: 160:     printf("Verificando o novo ponteiro\n");
+[e ( _printf :s 8C ]
 "161
-[; ;main.c: 161:     printf("O ponteiro encontrado foi: 0x%lX\n", adressme2);
+[; ;main.c: 161:     FsScape_get_index_SRAM(&adressme2);
+[e ( _FsScape_get_index_SRAM &U _adressme2 ]
+"162
+[; ;main.c: 162:     printf("O ponteiro encontrado foi: 0x%lX\n", adressme2);
 [e ( _printf , (. :s 9C _adressme2 ]
-"165
-[; ;main.c: 165:     printf("Alterando o crc para: 0x45698712\n");
-[e ( _printf :s 10C ]
 "166
-[; ;main.c: 166:     check1 = 0x45698712;
-[e = _check1 -> -> 1164543762 `l `ul ]
+[; ;main.c: 166:     printf("Alterando o crc para: 0x12564789\n");
+[e ( _printf :s 10C ]
 "167
-[; ;main.c: 167:     FsScape_set_index_crc_SRAM(check1);
+[; ;main.c: 167:     check1 = 0x12564789;
+[e = _check1 -> -> 307644297 `l `ul ]
+"168
+[; ;main.c: 168:     FsScape_set_index_crc_SRAM(check1);
 [e ( _FsScape_set_index_crc_SRAM _check1 ]
-"169
-[; ;main.c: 169:     printf("Verificando o novo crc\n");
-[e ( _printf :s 11C ]
 "170
-[; ;main.c: 170:     FsScape_get_index_crc_SRAM(&check2);
-[e ( _FsScape_get_index_crc_SRAM &U _check2 ]
+[; ;main.c: 170:     printf("Verificando o novo crc\n");
+[e ( _printf :s 11C ]
 "171
-[; ;main.c: 171:     printf("O crc encontrado foi: 0x%lX\n", check2);
+[; ;main.c: 171:     FsScape_get_index_crc_SRAM(&check2);
+[e ( _FsScape_get_index_crc_SRAM &U _check2 ]
+"172
+[; ;main.c: 172:     printf("O crc encontrado foi: 0x%lX\n", check2);
 [e ( _printf , (. :s 12C _check2 ]
 "174
-[; ;main.c: 174:     I2C_ModuleStop();
+[; ;main.c: 174:     check3 = 0x12564789;
+[e = _check3 -> -> 307644297 `l `ul ]
+"175
+[; ;main.c: 175:     printf("Calculando o crc...\n");
+[e ( _printf :s 13C ]
+"176
+[; ;main.c: 176:     check4 = FsScape_check_index_crc(check3);
+[e = _check4 ( _FsScape_check_index_crc (1 _check3 ]
+"177
+[; ;main.c: 177:     printf("O crc calculado foi: 0x%lX\n", check4);
+[e ( _printf , (. :s 14C _check4 ]
+"179
+[; ;main.c: 179:     I2C_ModuleStop();
 [e ( _I2C_ModuleStop ..  ]
-"201
-[; ;main.c: 201:     while(1)
+"206
+[; ;main.c: 206:     while(1)
 [e :U 848 ]
-"202
-[; ;main.c: 202:     {
+"207
+[; ;main.c: 207:     {
 {
-"204
-[; ;main.c: 204:     }
+"209
+[; ;main.c: 209:     }
 }
 [e :U 847 ]
 [e $U 848  ]
 [e :U 849 ]
-"205
-[; ;main.c: 205: }
+"210
+[; ;main.c: 210: }
 [e :UE 841 ]
 }
 [p f _printf 10485904 ]
@@ -1095,8 +1114,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [a 6C 79 32 112 111 110 116 101 105 114 111 32 101 110 99 111 110 116 114 97 100 111 32 102 111 105 58 32 48 120 37 108 88 10 0 ]
 [a 9C 79 32 112 111 110 116 101 105 114 111 32 101 110 99 111 110 116 114 97 100 111 32 102 111 105 58 32 48 120 37 108 88 10 0 ]
 [a 12C 79 32 99 114 99 32 101 110 99 111 110 116 114 97 100 111 32 102 111 105 58 32 48 120 37 108 88 10 0 ]
-[a 7C 65 108 116 101 114 97 110 100 111 32 111 32 101 110 100 101 114 101 18446744073709551591 111 32 112 97 114 97 58 32 48 120 49 50 53 54 52 55 56 57 10 0 ]
-[a 10C 65 108 116 101 114 97 110 100 111 32 111 32 99 114 99 32 112 97 114 97 58 32 48 120 52 53 54 57 56 55 49 50 10 0 ]
+[a 14C 79 32 99 114 99 32 99 97 108 99 117 108 97 100 111 32 102 111 105 58 32 48 120 37 108 88 10 0 ]
+[a 7C 65 108 116 101 114 97 110 100 111 32 111 32 101 110 100 101 114 101 60 69 55 62 111 32 112 97 114 97 58 32 48 120 49 50 53 54 52 55 56 57 10 0 ]
+[a 10C 65 108 116 101 114 97 110 100 111 32 111 32 99 114 99 32 112 97 114 97 58 32 48 120 49 50 53 54 52 55 56 57 10 0 ]
 [a 5C 86 101 114 105 102 105 99 97 110 100 111 32 111 32 112 111 110 116 101 105 114 111 32 100 101 32 101 110 100 101 114 101 99 97 109 101 110 116 111 46 46 46 10 0 ]
+[a 13C 67 97 108 99 117 108 97 110 100 111 32 111 32 99 114 99 46 46 46 10 0 ]
 [a 3C 79 32 115 105 115 116 101 109 97 32 105 100 101 110 116 105 102 105 99 111 117 32 97 32 109 101 109 111 114 105 97 32 83 82 65 77 33 33 33 10 0 ]
 [a 4C 72 97 32 97 108 103 111 32 100 101 32 101 114 114 97 100 111 32 99 111 109 32 97 32 109 101 109 111 114 105 97 32 83 82 65 77 33 33 33 10 0 ]

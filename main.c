@@ -108,6 +108,7 @@ void main(void)
     volatile uint32_t check1 = 0;
     volatile uint32_t check2 = 0;
     volatile uint32_t check3 = 0;
+    volatile uint32_t check4 = 0;
     
     oldtime = millis();
     
@@ -151,7 +152,7 @@ void main(void)
     FsScape_get_index_SRAM(&adressme);
     printf("O ponteiro encontrado foi: 0x%lX\n", adressme);
     
-    printf("Alterando o endereço para: 0x12564789\n");
+    printf("Alterando o endere<E7>o para: 0x12564789\n");
     adressme3 = 0x12564789;
     FsScape_set_index_SRAM(adressme3);
     
@@ -160,8 +161,6 @@ void main(void)
     FsScape_get_index_SRAM(&adressme2);
     printf("O ponteiro encontrado foi: 0x%lX\n", adressme2);
     
-    
-    
     printf("Alterando o crc para: 0x12564789\n");
     check1 = 0x12564789;
     FsScape_set_index_crc_SRAM(check1);
@@ -169,6 +168,11 @@ void main(void)
     printf("Verificando o novo crc\n");
     FsScape_get_index_crc_SRAM(&check2);
     printf("O crc encontrado foi: 0x%lX\n", check2);
+    
+    check3 = 0x12564789;
+    printf("Calculando o crc...\n");
+    check4 = FsScape_check_index_crc(check3);
+    printf("O crc calculado foi: 0x%lX\n", check4);
     
     
     
