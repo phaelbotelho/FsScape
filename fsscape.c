@@ -54,8 +54,11 @@ fsscape_SRAM_index_addr_tag fsscape_SRAM_index_addr;
 // Interact with the SRAM
 int16_t FsScape_get_index_SRAM(uint32_t *address);
 int16_t FsScape_set_index_SRAM(uint32_t address_value);
-int8_t FsScape_get_index_addr_SRAM();
+int16_t FsScape_get_index_addr_SRAM();
 int16_t FsScape_set_index_addr_SRAM(uint8_t address_value);
+int16_t FsScape_get_index_crc_SRAM(uint32_t *crc);
+int16_t FsScape_set_index_crc_SRAM(uint32_t crc_value);
+
 // Interact with the EEPROM
 int16_t FsScape_get_index_EEPROM(fsscape_Address_tag *address);
 int16_t FsScape_set_index_EEPROM(fsscape_Address_tag address_value);
@@ -97,12 +100,17 @@ void FsScape_set_spi_addr_FLASH(uint8_t *CS_PIN, uint8_t CS_PIN_BIT);
 
 int16_t FsScape_get_index_SRAM(uint32_t *address)
 {
+    volatile uint32_t *data = address;
     int16_t value = 0;
     uint8_t _address[4];
     
     value = I2C_Mem_Read(FSSCAPE_SRAM_I2C_ADDR, FSSCAPE_SRAM_IDX_ADDR, 1, _address, 4, 0);
     
-    address = _address[3] | (_address[2] << 8 ) | (_address[1] << 16) | (_address[0] << 24);
+    if(value == I2C_OK)
+    {
+        // Calcula o índice usando os dados lidos
+        *address = ((uint32_t)_address[3] << 24) | ((uint32_t)_address[2] << 16) | ((uint32_t)_address[1] << 8) | _address[0];
+    }
     
     return value;    
 }
@@ -119,12 +127,46 @@ int16_t FsScape_set_index_SRAM(uint32_t address_value)
     return I2C_Mem_Write(FSSCAPE_SRAM_I2C_ADDR, FSSCAPE_SRAM_IDX_ADDR, 1, _address, 4, 0);
 }
 
-int8_t FsScape_get_index_addr_SRAM()
+int16_t FsScape_get_index_addr_SRAM()
 {
     
 }
 
 int16_t FsScape_set_index_addr_SRAM(uint8_t address_value)
+{
+    
+}
+
+int16_t FsScape_get_index_crc_SRAM(uint32_t *crc)
+{
+    volatile uint32_t *data = crc;
+    int16_t value = 0;
+    uint8_t _address[4];
+    
+    value = I2C_Mem_Read(FSSCAPE_SRAM_I2C_ADDR, FSSCAPE_SRAM_IDX_CHK_ADDR, 1, _address, 4, 0);
+    
+    if(value == I2C_OK)
+    {
+        // Calcula o índice usando os dados lidos
+        *crc = ((uint32_t)_address[3] << 24) | ((uint32_t)_address[2] << 16) | ((uint32_t)_address[1] << 8) | _address[0];
+    }
+    
+    return value;   
+}
+
+int16_t FsScape_set_index_crc_SRAM(uint32_t crc_value)
+{
+    uint8_t _address[4];
+    
+    _address[0] = (uint8_t)(crc_value);
+    _address[1] = (uint8_t)(crc_value >> 8);
+    _address[2] = (uint8_t)(crc_value >> 16);
+    _address[3] = (uint8_t)(crc_value >> 24);
+    
+    return I2C_Mem_Write(FSSCAPE_SRAM_I2C_ADDR, FSSCAPE_SRAM_IDX_CHK_ADDR, 1, _address, 4, 0);
+}
+
+int16_t FsScape_check_index_crc(uint32_t address_value)
 {
     
 }
